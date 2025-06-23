@@ -1,0 +1,113 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { NAV_ITEMS } from '../../utils/constants';
+import { mobileMenuOpen, mobileMenuClose } from '../../utils/gsapAnimations';
+import './Header.css';
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    const menu = document.querySelector('.mobile-nav');
+    
+    if (isMobileMenuOpen) {
+      mobileMenuClose(menu);
+    } else {
+      mobileMenuOpen(menu);
+    }
+    
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const scrollToSection = (sectionId) => {
+    // Only scroll to sections that exist on the home page
+    const homeSections = ['hero', 'welcome', 'research'];
+    
+    if (location.pathname === '/' && sectionId && homeSections.includes(sectionId)) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="container">
+        <div className="header-content">
+          <Link to="/" className="logo">
+            <div className="logo-icon">
+              <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="20" stroke="currentColor" strokeWidth="2"/>
+                <path d="M15 25h20M25 15v20" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="20" cy="20" r="2" fill="currentColor"/>
+                <circle cx="30" cy="30" r="2" fill="currentColor"/>
+                <path d="M20 30l10-10" stroke="currentColor" strokeWidth="1"/>
+              </svg>
+            </div>
+          </Link>
+
+          <nav className="desktop-nav">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                className={`nav-link ${location.pathname === item.href ? 'active' : ''}`}
+                onClick={() => {
+                  // Only try to scroll if we're staying on home page and section exists
+                  if (item.href === '/' || (location.pathname === '/' && item.section)) {
+                    scrollToSection(item.section);
+                  }
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+            <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div className="mobile-nav">
+        <div className="mobile-nav-content">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.label}
+              to={item.href}
+              className="nav-item"
+              onClick={() => {
+                toggleMobileMenu();
+                // Only try to scroll if we're staying on home page and section exists
+                if (item.href === '/' || (location.pathname === '/' && item.section)) {
+                  scrollToSection(item.section);
+                }
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
