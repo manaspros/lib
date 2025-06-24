@@ -5,13 +5,15 @@ import ExpandableCard from '../ExpandableCard/ExpandableCard';
 import './People.css';
 
 const People = () => {
-  const sectionRef = useRef(null);
-  const [teamData, setTeamData] = useState({
-    director: null,
-    researchers: [],
+  const sectionRef = useRef(null);  const [teamData, setTeamData] = useState({
+    professor: [],
+    postdoc: [],
     phd: [],
+    juniorResearcher: [],
     masters: [],
-    undergraduate: [],
+    webmaster: [],
+    alumni: [],
+    graduateStudent: [],
     others: []
   });
   const [loading, setLoading] = useState(true);
@@ -79,54 +81,59 @@ const People = () => {
           <p className="section-subtitle">
             Meet the brilliant minds driving innovation in robotics research
           </p>
-        </div>        {/* Director Section */}
-        {teamData.director && (
+        </div>        {/* Professor Section */}
+        {teamData.professor && teamData.professor.length > 0 && (
           <div className="director-section">
-            <div className="director-card">
-              <div className="director-image">
-                <img src={teamData.director.image} alt={teamData.director.name} />
-                <div className="image-overlay">
-                  <div className="social-links">
-                    <a href={`mailto:${teamData.director.email}`} className="social-link">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                      </svg>
-                    </a>
-                    {teamData.director.website && (
-                      <a href={teamData.director.website} className="social-link">
+            <h3 className="team-category-title">Professor</h3>
+            {teamData.professor.map((person, index) => (
+              <div key={index} className="director-card">
+                <div className="director-image">
+                  <img src={person.image} alt={person.name} />
+                  <div className="image-overlay">
+                    <div className="social-links">
+                      <a href={`mailto:${person.email}`} className="social-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                          <polyline points="22,6 12,13 2,6"/>
                         </svg>
                       </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="director-info">
-                <h3 className="person-name">{teamData.director.name}</h3>
-                <p className="person-title">{teamData.director.title}</p>
-                <p className="person-bio">{teamData.director.bio}</p>
-                {teamData.director.research && teamData.director.research.length > 0 && (
-                  <div className="research-interests">
-                    <h4>Research Interests:</h4>
-                    <div className="interest-tags">
-                      {teamData.director.research.map((interest, index) => (
-                        <span key={index} className="interest-tag">{interest}</span>
-                      ))}
+                      {person.website && (
+                        <a href={person.website} className="social-link" target="_blank" rel="noopener noreferrer">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                          </svg>
+                        </a>
+                      )}
                     </div>
                   </div>
-                )}
+                </div>
+                <div className="director-info">
+                  <h3 className="person-name">{person.name}</h3>
+                  <p className="person-title">{person.title}</p>
+                  <p className="person-bio">{person.bio || person.postAffiliation || `${person.title} with expertise in ${person.research.join(', ')}.`}</p>
+                  {person.research && person.research.length > 0 && (
+                    <div className="research-interests">
+                      <h4>Research Interests:</h4>
+                      <div className="interest-tags">
+                        {person.research.map((interest, resIndex) => (
+                          <span key={resIndex} className="interest-tag">{interest}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        )}        {/* Research Team */}
-        {teamData.researchers && teamData.researchers.length > 0 && (
+        )}
+
+        {/* Post-doctoral Researchers */}
+        {teamData.postdoc && teamData.postdoc.length > 0 && (
           <div className="team-section">
-            <h3 className="team-category-title">Research Scientists</h3>
+            <h3 className="team-category-title">Post-doctoral Researchers</h3>
             <div className="team-grid">
-              {teamData.researchers.map((person, index) => (
+              {teamData.postdoc.map((person, index) => (
                 <div key={index} className="person-card">
                   <div className="person-image">
                     <img src={person.image} alt={person.name} />
@@ -158,7 +165,9 @@ const People = () => {
               ))}
             </div>
           </div>
-        )}        {/* PhD Students */}
+        )}
+
+        {/* PhD Students */}
         {teamData.phd && teamData.phd.length > 0 && (
           <div className="team-section">
             <h3 className="team-category-title">PhD Students</h3>
@@ -167,7 +176,7 @@ const People = () => {
                 <div key={index} className="person-card">
                   <div className="person-image">
                     <img src={person.image} alt={person.name} />
-                    <div className="year-badge">{person.year}</div>
+                    {person.year && <div className="year-badge">{person.year}</div>}
                   </div>
                   <div className="person-info">
                     <h4 className="person-name">{person.name}</h4>
@@ -186,10 +195,41 @@ const People = () => {
               ))}
             </div>
           </div>
-        )}        {/* Masters Students */}
+        )}
+
+        {/* Junior Research Fellows */}
+        {teamData.juniorResearcher && teamData.juniorResearcher.length > 0 && (
+          <div className="team-section">
+            <h3 className="team-category-title">Junior Research Fellows</h3>
+            <div className="team-grid">
+              {teamData.juniorResearcher.map((person, index) => (
+                <div key={index} className="person-card">
+                  <div className="person-image">
+                    <img src={person.image} alt={person.name} />
+                  </div>
+                  <div className="person-info">
+                    <h4 className="person-name">{person.name}</h4>
+                    <p className="person-title">{person.title}</p>
+                    {person.research && person.research.length > 0 && (
+                      <div className="research-interests">
+                        <div className="interest-tags">
+                          {person.research.map((interest, resIndex) => (
+                            <span key={resIndex} className="interest-tag">{interest}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Masters Students */}
         {teamData.masters && teamData.masters.length > 0 && (
           <div className="team-section">
-            <h3 className="team-category-title">Masters Students</h3>
+            <h3 className="team-category-title">Master Students</h3>
             <div className="team-grid">
               {teamData.masters.map((person, index) => (
                 <div key={index} className="person-card">
@@ -213,12 +253,14 @@ const People = () => {
               ))}
             </div>
           </div>
-        )}        {/* Undergraduate Students */}
-        {teamData.undergraduate && teamData.undergraduate.length > 0 && (
+        )}
+
+        {/* Web Masters */}
+        {teamData.webmaster && teamData.webmaster.length > 0 && (
           <div className="team-section">
-            <h3 className="team-category-title">Undergraduate Students</h3>
+            <h3 className="team-category-title">Web Masters</h3>
             <div className="team-grid">
-              {teamData.undergraduate.map((person, index) => (
+              {teamData.webmaster.map((person, index) => (
                 <div key={index} className="person-card">
                   <div className="person-image">
                     <img src={person.image} alt={person.name} />
@@ -240,7 +282,70 @@ const People = () => {
               ))}
             </div>
           </div>
-        )}        {/* Other Team Members */}
+        )}
+
+        {/* Graduate Students */}
+        {teamData.graduateStudent && teamData.graduateStudent.length > 0 && (
+          <div className="team-section">
+            <h3 className="team-category-title">Graduate Students</h3>
+            <div className="team-grid">
+              {teamData.graduateStudent.map((person, index) => (
+                <div key={index} className="person-card">
+                  <div className="person-image">
+                    <img src={person.image} alt={person.name} />
+                  </div>
+                  <div className="person-info">
+                    <h4 className="person-name">{person.name}</h4>
+                    <p className="person-title">{person.title}</p>
+                    {person.research && person.research.length > 0 && (
+                      <div className="research-interests">
+                        <div className="interest-tags">
+                          {person.research.map((interest, resIndex) => (
+                            <span key={resIndex} className="interest-tag">{interest}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Alumni */}
+        {teamData.alumni && teamData.alumni.length > 0 && (
+          <div className="team-section">
+            <h3 className="team-category-title">Alumni</h3>
+            <div className="team-grid">
+              {teamData.alumni.map((person, index) => (
+                <div key={index} className="person-card">
+                  <div className="person-image">
+                    <img src={person.image} alt={person.name} />
+                  </div>
+                  <div className="person-info">
+                    <h4 className="person-name">{person.name}</h4>
+                    <p className="person-title">{person.title}</p>
+                    {person.postAffiliation && (
+                      <p className="person-affiliation">{person.postAffiliation}</p>
+                    )}
+                    {person.research && person.research.length > 0 && (
+                      <div className="research-interests">
+                        <div className="interest-tags">
+                          {person.research.map((interest, resIndex) => (
+                            <span key={resIndex} className="interest-tag">{interest}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Other Team Members */}
         {teamData.others && teamData.others.length > 0 && (
           <div className="team-section">
             <h3 className="team-category-title">Other Team Members</h3>

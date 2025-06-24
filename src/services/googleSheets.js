@@ -10,7 +10,7 @@ const API_KEY = import.meta.env.VITE_GOOGLE_SHEETS_API_KEY;
  * @param {string} range - The range to fetch (e.g., 'A1:Z100')
  * @returns {Promise<Array>} Array of row data
  */
-export const fetchSheetData = async (range = 'A:N') => {
+export const fetchSheetData = async (range = 'A:Z') => {
   try {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}!${range}?key=${API_KEY}`;
     
@@ -35,7 +35,17 @@ export const fetchSheetData = async (range = 'A:N') => {
  */
 export const transformSheetData = (rawData) => {
   if (!rawData || rawData.length === 0) {
-    return { director: null, researchers: [], phd: [], masters: [], undergraduate: [] };
+    return { 
+      professor: [], 
+      postdoc: [], 
+      phd: [], 
+      juniorResearcher: [], 
+      masters: [], 
+      webmaster: [], 
+      alumni: [], 
+      graduateStudent: [], 
+      others: [] 
+    };
   }
 
   // First row is headers
@@ -71,6 +81,23 @@ export const transformSheetData = (rawData) => {
     if (!researchString) return [];
     return researchString.split(/[,;]/).map(item => item.trim()).filter(item => item);
   };
+
+  // Helper function to validate and process image URL
+  const processImageUrl = (imageUrl) => {
+    if (!imageUrl) return '/api/placeholder/300/300';
+    
+    // If it's a Google Drive link, convert to direct image URL
+    if (imageUrl.includes('drive.google.com')) {
+      const fileIdMatch = imageUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+      if (fileIdMatch) {
+        return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+      }
+    }
+    
+    // Return the URL as is if it's already a direct image URL
+    return imageUrl || '/api/placeholder/300/300';
+  };
+
   // Helper function to build education info
   const buildEducation = (row, eduIndex, instIndex, yearIndex) => {
     const education = getCellValue(row, eduIndex);
@@ -112,17 +139,21 @@ export const transformSheetData = (rawData) => {
   const eduColumns = getEducationColumns(headers);
 
   const transformedData = {
-    director: null,
-    researchers: [],
+    professor: [],
+    postdoc: [],
     phd: [],
+    juniorResearcher: [],
     masters: [],
-    undergraduate: [],
+    webmaster: [],
+    alumni: [],
+    graduateStudent: [],
     others: []
   };
+
   rows.forEach((row) => {
     if (!row || row.length === 0) return;
 
-    const title = getCellValue(row, headerMap.title).toLowerCase();
+    const title = getCellValue(row, headerMap.title).toLowerCase().trim();
     const name = getCellValue(row, headerMap.name);
     
     if (!name) return; // Skip rows without names
@@ -130,7 +161,7 @@ export const transformSheetData = (rawData) => {
     const person = {
       name,
       title: getCellValue(row, headerMap.title),
-      image: getCellValue(row, headerMap.photo) || '/api/placeholder/300/300',
+      image: processImageUrl(getCellValue(row, headerMap.photo)),
       research: parseResearch(getCellValue(row, headerMap.research)),
       email: getCellValue(row, headerMap.email),
       postAffiliation: getCellValue(row, headerMap.postAffiliation),
@@ -141,24 +172,30 @@ export const transformSheetData = (rawData) => {
       }
     };
 
-    // Categorize based on title
-    if (title.includes('director') || title.includes('principal investigator') || title.includes('pi')) {
-      transformedData.director = {
+    // Categorize based on exact title matches
+    if (title === 'professor') {
+      transformedData.professor.push({
         ...person,
         bio: person.postAffiliation || `${person.title} with expertise in ${person.research.join(', ')}.`,
         website: '' // Add website if available in sheet
-      };
-    } else if (title.includes('professor') || title.includes('scientist') || title.includes('researcher')) {
-      transformedData.researchers.push(person);
-    } else if (title.includes('phd') || title.includes('doctoral')) {
+      });
+    } else if (title === 'post-doctoral researcher') {
+      transformedData.postdoc.push(person);
+    } else if (title === 'ph.d') {
       transformedData.phd.push({
         ...person,
         year: person.education.phd?.year || 'Current'
       });
-    } else if (title.includes('master') || title.includes('mtech') || title.includes('ms')) {
+    } else if (title === 'junior research fellow') {
+      transformedData.juniorResearcher.push(person);
+    } else if (title === 'master student') {
       transformedData.masters.push(person);
-    } else if (title.includes('undergraduate') || title.includes('btech') || title.includes('be')) {
-      transformedData.undergraduate.push(person);
+    } else if (title === 'web master') {
+      transformedData.webmaster.push(person);
+    } else if (title === 'alumni') {
+      transformedData.alumni.push(person);
+    } else if (title === 'graduate student') {
+      transformedData.graduateStudent.push(person);
     } else {
       transformedData.others.push(person);
     }
@@ -183,9 +220,10 @@ export const getTeamData = async () => {
     const transformedData = transformSheetData(rawData);
     
     // If no data was retrieved, use fallback
-    if (!transformedData.director && 
-        transformedData.researchers.length === 0 && 
-        transformedData.phd.length === 0) {
+    if (transformedData.professor.length === 0 && 
+        transformedData.postdoc.length === 0 && 
+        transformedData.phd.length === 0 &&
+        transformedData.masters.length === 0) {
       console.warn('No data retrieved from Google Sheets, using fallback data');
       return FALLBACK_TEAM_DATA;
     }

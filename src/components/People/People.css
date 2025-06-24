@@ -288,6 +288,14 @@
   margin-bottom: 1rem;
 }
 
+.person-affiliation {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
 /* Join Us Section */
 .join-us-section {
   background: rgba(255, 255, 255, 0.03);
