@@ -18,12 +18,12 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="footer-section">
             <div className="footer-logo">
-              <h3>RoboticsLab</h3>
-              <div className="logo-icon">🤖</div>
+              <h3>BIRD Lab</h3>
+              <div className="logo-icon">🦋</div>
             </div>
             <p className="footer-description">
-              Advancing the frontiers of robotics through innovative research, 
-              cutting-edge technology, and collaborative partnerships.
+              Advancing bio-inspired robotics through innovative research, 
+              nature-inspired design, and collaborative partnerships.
             </p>
             <div className="footer-social">
               <a href={CONTACT_INFO.social.twitter} target="_blank" rel="noopener noreferrer">
@@ -66,11 +66,11 @@ const Footer = () => {
           <div className="footer-section">
             <h4>Research Areas</h4>
             <ul className="footer-links">
-              <li><a href="/research#autonomous">Autonomous Systems</a></li>
-              <li><a href="/research#ml">Machine Learning & AI</a></li>
-              <li><a href="/research#bio">Bio-inspired Robotics</a></li>
-              <li><a href="/research#vision">Computer Vision</a></li>
-              <li><a href="/research#control">Control Systems</a></li>
+              <li><a href="/research#bio-mechanisms">Bio-inspired Mechanisms</a></li>
+              <li><a href="/research#wearable">Wearable & Collaborative Robotics</a></li>
+              <li><a href="/research#reconfigurable">Reconfigurable and Growing Robotics</a></li>
+              <li><a href="/research#tele-robotics">Tele-Robotics and Haptics</a></li>
+              <li><a href="/research#applied-ai">Applied AI in Robotics</a></li>
             </ul>
           </div>
 
@@ -106,7 +106,7 @@ const Footer = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <div className="copyright">
-              <p>&copy; {currentYear} Advanced Robotics Laboratory. All rights reserved.</p>
+              <p>&copy; {currentYear} Bio-Inspired Robotics Design Lab (BIRD Lab). All rights reserved.</p>
             </div>
             <div className="footer-bottom-links">
               <a href="/privacy">Privacy Policy</a>

@@ -50,7 +50,7 @@ const Hero = () => {
     <section className="hero" id="hero" ref={heroRef}>
       <div className="hero-background">
         <div className="hero-image-bg">
-          <img src={heroImage} alt="Robotics Background" className="bg-image" />
+          <img src={heroImage} alt="Bio-Inspired Robotics Background" className="bg-image" />
           <div className="bg-overlay"></div>
           <div className="bg-gradient"></div>
         </div>
@@ -89,19 +89,19 @@ const Hero = () => {
           <div className="hero-text">
             <div className="hero-badge">
               <span className="badge-icon">🚀</span>
-              <span>Cutting-Edge Research Lab</span>
+              <span>Bio-Inspired Robotics Design Lab</span>
             </div>
             <h1 className="hero-title">
-              Future of <span className="gradient-text">Robotics</span> 
-              <br />& <span className="gradient-text">Artificial Intelligence</span>
+              Bio-Inspired <span className="gradient-text">Robotics</span> 
+              <br />Design <span className="gradient-text">Laboratory</span>
             </h1>
             <p className="hero-subtitle">
-              Pioneering breakthroughs in autonomous systems, machine learning, and bio-inspired robotics. 
-              We're shaping tomorrow's technology through innovative research and collaborative excellence.
+              Pioneering the future through nature-inspired robotics research. From bio-inspired mechanisms 
+              to collaborative systems, we're developing the next generation of adaptive robotics technology.
             </p>
             <div className="hero-actions">
               <button className="btn-primary" onClick={scrollToWelcome}>
-                <span>Discover Our Research</span>
+                <span>Explore Our Research</span>
                 <span className="btn-icon">→</span>
               </button>
               <button className="btn-secondary" onClick={scrollToResearch}>
@@ -109,6 +109,7 @@ const Hero = () => {
                 <span>View Projects</span>
               </button>
             </div>
+            
           </div>
 
           <div className="hero-visual">
@@ -117,7 +118,7 @@ const Hero = () => {
                 <div className="image-frame">
                   <img 
                     src={heroImage} 
-                    alt="Advanced Robotics System" 
+                    alt="Bio-Inspired Robotics Systems" 
                     className="hero-main-image"
                   />
                   <div className="image-glow"></div>
@@ -126,20 +127,20 @@ const Hero = () => {
                 
                 <div className="floating-elements">
                   <div className="floating-card card-1">
-                    <div className="card-icon">🤖</div>
-                    <span>AI Systems</span>
+                    <div className="card-icon">🦋</div>
+                    <span>Bio-Inspired</span>
                   </div>
                   <div className="floating-card card-2">
-                    <div className="card-icon">🧠</div>
-                    <span>Deep Learning</span>
+                    <div className="card-icon">🤝</div>
+                    <span>Collaborative</span>
                   </div>
                   <div className="floating-card card-3">
-                    <div className="card-icon">⚡</div>
-                    <span>Automation</span>
+                    <div className="card-icon">🔄</div>
+                    <span>Reconfigurable</span>
                   </div>
                   <div className="floating-card card-4">
-                    <div className="card-icon">🔬</div>
-                    <span>Research</span>
+                    <div className="card-icon">🎮</div>
+                    <span>Tele-Robotics</span>
                   </div>
                 </div>
                 
@@ -175,7 +176,7 @@ const Hero = () => {
         <div className="scroll-arrow">
           <span>↓</span>
         </div>
-        <span className="scroll-text">Explore Our Innovation</span>
+        <span className="scroll-text">Discover Our Innovation</span>
       </div>
     </section>
   );

@@ -16,9 +16,9 @@ export const TEAM_DATA = {
     name: "Dr. Sarah Chen",
     title: "Principal Investigator & Lab Director",
     image: "/api/placeholder/300/300",
-    bio: "Leading expert in autonomous robotics with 15+ years of experience in bio-inspired systems and machine learning.",
-    research: ["Autonomous Systems", "Bio-inspired Robotics", "Machine Learning"],
-    email: "s.chen@roboticslab.edu",
+    bio: "Leading expert in bio-inspired robotics with 15+ years of experience in autonomous systems, machine learning, and bio-inspired design methodologies.",
+    research: ["Bio-inspired Mechanisms", "Wearable & Collaborative Robotics", "Reconfigurable and Growing Robotics"],
+    email: "s.chen@birdlab.edu",
     website: "https://example.com/sarah-chen"
   },
   researchers: [
@@ -26,15 +26,15 @@ export const TEAM_DATA = {
       name: "Dr. Michael Rodriguez",
       title: "Senior Research Scientist",
       image: "/api/placeholder/300/300",
-      research: ["Computer Vision", "Deep Learning", "Perception Systems"],
-      email: "m.rodriguez@roboticslab.edu"
+      research: ["Tele-Robotics and Haptics", "Applied AI in Robotics", "Bio-inspired Vision Systems"],
+      email: "m.rodriguez@birdlab.edu"
     },
     {
       name: "Dr. Emily Wang",
       title: "Research Scientist",
       image: "/api/placeholder/300/300",
-      research: ["Control Systems", "Motion Planning", "Optimization"],
-      email: "e.wang@roboticslab.edu"
+      research: ["Reconfigurable and Growing Robotics", "Bio-inspired Control Systems", "Soft Robotics"],
+      email: "e.wang@birdlab.edu"
     }
   ],
   phd: [
@@ -42,44 +42,50 @@ export const TEAM_DATA = {
       name: "Alex Thompson",
       title: "PhD Student",
       image: "/api/placeholder/300/300",
-      research: ["Swarm Robotics", "Distributed Systems"],
+      research: ["Wearable Robotics", "Bio-inspired Locomotion"],
       year: "3rd Year"
     },
     {
       name: "Priya Patel",
       title: "PhD Student", 
       image: "/api/placeholder/300/300",
-      research: ["Human-Robot Interaction", "Social Robotics"],
+      research: ["Collaborative Robotics", "Bio-inspired Navigation"],
       year: "2nd Year"
     }
   ]
 };
 
-// Research areas
+// Research areas - Updated to match BIRD Lab focus
 export const RESEARCH_AREAS = [
   {
-    title: "Autonomous Systems",
-    description: "Developing intelligent robots capable of independent decision-making and navigation in complex environments.",
-    icon: "🤖",
-    technologies: ["ROS", "SLAM", "Path Planning", "Sensor Fusion"]
-  },
-  {
-    title: "Machine Learning & AI",
-    description: "Implementing advanced ML algorithms for robot learning, adaptation, and intelligent behavior.",
-    icon: "🧠",
-    technologies: ["Deep Learning", "Reinforcement Learning", "Computer Vision", "NLP"]
-  },
-  {
-    title: "Bio-inspired Robotics",
-    description: "Creating robots that mimic biological systems for enhanced mobility and functionality.",
+    title: "Bio-inspired Mechanisms",
+    description: "Developing robotic systems that mimic biological structures and behaviors for enhanced functionality and adaptability.",
     icon: "🦋",
-    technologies: ["Biomechanics", "Soft Robotics", "Morphology", "Evolutionary Algorithms"]
+    technologies: ["Biomimetics", "Morphological Design", "Adaptive Structures", "Nature-Inspired Materials"]
   },
   {
-    title: "Computer Vision",
-    description: "Advanced visual perception systems for object recognition, tracking, and scene understanding.",
-    icon: "👁️",
-    technologies: ["Image Processing", "3D Vision", "Object Detection", "LIDAR"]
+    title: "Wearable & Collaborative Robotics",
+    description: "Creating wearable robotic systems and collaborative robots that work seamlessly with humans.",
+    icon: "🤝",
+    technologies: ["Human-Robot Interaction", "Wearable Systems", "Collaborative Control", "Assistive Robotics"]
+  },
+  {
+    title: "Reconfigurable and Growing Robotics",
+    description: "Designing modular and self-reconfiguring robots that can adapt their structure and grow over time.",
+    icon: "🔄",
+    technologies: ["Modular Robotics", "Self-Assembly", "Adaptive Architecture", "Growth Algorithms"]
+  },
+  {
+    title: "Tele-Robotics and Haptics",
+    description: "Advancing remote robotic control systems with tactile feedback for precise manipulation tasks.",
+    icon: "🎮",
+    technologies: ["Haptic Feedback", "Remote Control", "Force Sensing", "Teleoperation"]
+  },
+  {
+    title: "Applied AI in Robotics",
+    description: "Implementing artificial intelligence algorithms to enhance robotic decision-making and autonomy.",
+    icon: "🧠",
+    technologies: ["Machine Learning", "Neural Networks", "Reinforcement Learning", "Computer Vision"]
   }
 ];
 
@@ -145,22 +151,22 @@ export const GALLERY_ITEMS = [
   }
 ];
 
-// Contact information
+// Contact information - Updated for BIRD Lab
 export const CONTACT_INFO = {
   address: {
-    building: "Engineering Building, Room 301",
+    building: "Bio-Inspired Robotics Design Lab",
     street: "123 University Avenue",
     city: "Tech City, TC 12345",
     country: "United States"
   },
   phone: "+1 (555) 123-4567",
-  email: "info@roboticslab.edu",
+  email: "info@birdlab.edu",
   officeHours: "Monday - Friday: 9:00 AM - 5:00 PM",
   social: {
-    twitter: "https://twitter.com/roboticslab",
-    linkedin: "https://linkedin.com/company/roboticslab",
-    github: "https://github.com/roboticslab",
-    youtube: "https://youtube.com/roboticslab"
+    twitter: "https://twitter.com/birdlab",
+    linkedin: "https://linkedin.com/company/birdlab",
+    github: "https://github.com/birdlab",
+    youtube: "https://youtube.com/birdlab"
   }
 };
 
