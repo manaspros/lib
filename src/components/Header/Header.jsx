@@ -49,13 +49,32 @@ const Header = () => {
           <Link to="/" className="logo">
             <div className="logo-icon">
               <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="25" cy="25" r="20" stroke="currentColor" strokeWidth="2"/>
-                <path d="M15 25h20M25 15v20" stroke="currentColor" strokeWidth="2"/>
-                <circle cx="20" cy="20" r="2" fill="currentColor"/>
-                <circle cx="30" cy="30" r="2" fill="currentColor"/>
-                <path d="M20 30l10-10" stroke="currentColor" strokeWidth="1"/>
+                <defs>
+                  <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#646cff"/>
+                    <stop offset="100%" stopColor="#00ffff"/>
+                  </linearGradient>
+                </defs>
+                {/* Robot head */}
+                <rect x="15" y="12" width="20" height="18" rx="4" stroke="url(#logoGradient)" strokeWidth="2" fill="none"/>
+                {/* Eyes */}
+                <circle cx="21" cy="19" r="2" fill="url(#logoGradient)"/>
+                <circle cx="29" cy="19" r="2" fill="url(#logoGradient)"/>
+                {/* Antenna */}
+                <line x1="25" y1="12" x2="25" y2="8" stroke="url(#logoGradient)" strokeWidth="2"/>
+                <circle cx="25" cy="6" r="2" fill="url(#logoGradient)"/>
+                {/* Body */}
+                <rect x="18" y="30" width="14" height="12" rx="2" stroke="url(#logoGradient)" strokeWidth="2" fill="none"/>
+                {/* Arms */}
+                <line x1="15" y1="33" x2="10" y2="33" stroke="url(#logoGradient)" strokeWidth="2"/>
+                <line x1="35" y1="33" x2="40" y2="33" stroke="url(#logoGradient)" strokeWidth="2"/>
+                <circle cx="8" cy="33" r="2" fill="url(#logoGradient)"/>
+                <circle cx="42" cy="33" r="2" fill="url(#logoGradient)"/>
+                {/* Connection lines */}
+                <line x1="25" y1="30" x2="25" y2="30" stroke="url(#logoGradient)" strokeWidth="1"/>
               </svg>
             </div>
+            <span className="logo-text">RoboLab</span>
           </Link>
 
           <nav className="desktop-nav">

@@ -25,7 +25,6 @@ function HomePage() {
     <>
       <Hero />
       <Welcome />
-      <Research />
     </>
   );
 }

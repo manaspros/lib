@@ -1,61 +1,36 @@
-/* Global Styles and Design System */
-
-/* CSS Variables for consistent theming */
+/* Global Styles */
 :root {
-  /* Primary Colors */
+  /* Color Palette */
   --primary: #646cff;
   --secondary: #00ffff;
-  --accent: #ff6b9d;
+  --accent: #7c3aed;
   
-  /* Background Colors */
+  /* Backgrounds */
   --background-dark: #0a0a0a;
   --background-secondary: #1a1a2e;
-  --background-tertiary: #16213e;
+  --background-tertiary: #0f0f1e;
   
   /* Text Colors */
   --text-primary: #ffffff;
-  --text-secondary: #b8bcc8;
-  --text-muted: #8b92a3;
+  --text-secondary: #a0a0a0;
+  --text-muted: #6b7280;
   
-  /* UI Colors */
+  /* Borders */
   --border: rgba(255, 255, 255, 0.1);
-  --glass: rgba(255, 255, 255, 0.05);
+  --border-light: rgba(255, 255, 255, 0.05);
   
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 20px rgba(100, 108, 255, 0.3);
-  
-  /* Spacing */
-  --container-max-width: 1200px;
-  --section-padding: 5rem 0;
-  
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   
   /* Transitions */
-  --transition-fast: 0.2s ease;
+  --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
-  
-  /* Border Radius */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
 }
 
-/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -64,76 +39,101 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: var(--background-dark);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-body.loading {
   opacity: 0;
 }
 
-/* App Container */
 .App {
   min-height: 100vh;
-  position: relative;
-  background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-secondary) 50%, var(--background-tertiary) 100%);
+  overflow-x: hidden;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--text-primary);
-}
-
-h1 { font-size: var(--font-size-5xl); }
-h2 { font-size: var(--font-size-4xl); }
-h3 { font-size: var(--font-size-3xl); }
-h4 { font-size: var(--font-size-2xl); }
-h5 { font-size: var(--font-size-xl); }
-h6 { font-size: var(--font-size-lg); }
-
-p {
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-}
-
-a {
-  color: var(--primary);
-  text-decoration: none;
-  transition: color var(--transition-normal);
-}
-
-a:hover {
-  color: var(--secondary);
-}
-
-/* Layout Components */
-.container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
+/* Global Section Styles */
 .section {
-  padding: var(--section-padding);
   position: relative;
+  z-index: 1;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* Common animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+/* Smooth scrolling enhancements */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
 .section-title {
   font-size: var(--font-size-4xl);
   font-weight: 700;
