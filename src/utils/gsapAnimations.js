@@ -15,7 +15,7 @@ export const initPageAnimations = () => {
   const tl = gsap.timeline();
   
   tl.set('body', { opacity: 1 })
-    .from('.header', { y: -100, opacity: 0, duration: 0.8 })
+    .from('.header', { y: -120, opacity: 0, duration: 1, ease: "power3.out" })
     .from('.hero-content > *', { 
       y: 50, 
       opacity: 0, 

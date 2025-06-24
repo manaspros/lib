@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import './ExpandableCard.css';
 
