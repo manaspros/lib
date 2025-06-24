@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { staggerAnimation, animateCounter } from '../../utils/gsapAnimations';
+import FeaturesSection from '../ui/FeaturesSection';
 import './Welcome.css';
 
 const Welcome = () => {
@@ -76,6 +77,8 @@ const Welcome = () => {
               </p>
             </div>
           </div>
+
+          <FeaturesSection />
 
           <div className="lab-highlights">
             <div className="highlight-grid">

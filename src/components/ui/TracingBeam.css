@@ -1,0 +1,92 @@
+.tracing-beam-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  max-width: 64rem;
+}
+
+.tracing-beam-indicator {
+  position: sticky;
+  top: 50vh;
+  left: 0;
+  z-index: 10;
+  width: 20px;
+  height: 20px;
+  margin-right: 2rem;
+  flex-shrink: 0;
+}
+
+.tracing-beam-dot-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(+50%);
+  z-index: 20;
+}
+
+.tracing-beam-dot {
+  width: 8px;
+  height: 8px;
+  background: #4facfe;
+  border: 2px solid #4facfe;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+  transition: all 0.3s ease;
+}
+
+.tracing-beam-svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.tracing-beam-animated-path {
+  filter: drop-shadow(0 0 6px rgba(79, 172, 254, 0.6));
+}
+
+.tracing-beam-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tracing-beam-indicator {
+    margin-right: 1rem;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .tracing-beam-dot {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .tracing-beam-svg {
+    width: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tracing-beam-indicator {
+    margin-right: 0.75rem;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .tracing-beam-dot {
+    width: 5px;
+    height: 5px;
+    border-width: 1px;
+  }
+  
+  .tracing-beam-svg {
+    width: 14px;
+  }
+}

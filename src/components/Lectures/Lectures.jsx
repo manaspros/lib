@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TracingBeam } from '../ui/TracingBeam';
 import './Lectures.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -181,86 +182,84 @@ const Lectures = () => {
           </div>
         </div>
 
-        {/* Lectures Timeline */}
-        <div ref={lecturesRef} className="lectures-timeline">
-          {filteredLectures.map((lecture, index) => (
-            <div
-              key={lecture.id}
-              ref={el => cardsRef.current[index] = el}
-              className={`lecture-card ${lecture.status}`}
-            >
-              <div className="lecture-indicator">
-                <div 
-                  className="indicator-dot"
-                  style={{ backgroundColor: getStatusColor(lecture.status) }}
-                ></div>
-              </div>
+        {/* Lectures Timeline with TracingBeam */}
+        <TracingBeam className="lectures-tracing-beam">
+          <div ref={lecturesRef} className="lectures-timeline-content">
+            {filteredLectures.map((lecture, index) => (
+              <div
+                key={lecture.id}
+                ref={el => cardsRef.current[index] = el}
+                className={`lecture-item ${lecture.status}`}
+              >
+                <div className="lecture-badge">
+                  <span className="lecture-type-badge">
+                    {getTypeIcon(lecture.type)} {lecture.type.charAt(0).toUpperCase() + lecture.type.slice(1)}
+                  </span>
+                  <span 
+                    className={`lecture-status-badge ${lecture.status}`}
+                  >
+                    {lecture.status.charAt(0).toUpperCase() + lecture.status.slice(1)}
+                  </span>
+                </div>
 
-              <div className="lecture-content">
-                <div className="lecture-header">
-                  <div className="lecture-meta">
-                    <span className="lecture-type">
-                      {getTypeIcon(lecture.type)} {lecture.type.charAt(0).toUpperCase() + lecture.type.slice(1)}
-                    </span>
-                    <span 
-                      className={`lecture-status ${lecture.status}`}
-                    >
-                      {lecture.status.charAt(0).toUpperCase() + lecture.status.slice(1)}
-                    </span>
+                <div className="lecture-content-card">
+                  <div className="lecture-header">
+                    <div className="lecture-date-time">
+                      <div className="lecture-date">{formatDate(lecture.date)}</div>
+                      <div className="lecture-time">{lecture.time}</div>
+                    </div>
                   </div>
-                  <div className="lecture-date-time">
-                    <div className="lecture-date">{formatDate(lecture.date)}</div>
-                    <div className="lecture-time">{lecture.time}</div>
-                  </div>
-                </div>
 
-                <h3 className="lecture-title">{lecture.title}</h3>
-                
-                <div className="lecture-speaker">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                  </svg>
-                  {lecture.speaker}
-                </div>
-
-                <div className="lecture-location">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                  </svg>
-                  {lecture.location}
-                </div>
-
-                <p className="lecture-description">{lecture.description}</p>
-
-                <div className="lecture-actions">
-                  {lecture.status === 'upcoming' && lecture.registration && (
-                    <button
-                      onClick={() => handleRegister(lecture.registration)}
-                      className="action-btn register-btn"
-                    >
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                      </svg>
-                      Register
-                    </button>
-                  )}
+                  <h3 className="lecture-title">{lecture.title}</h3>
                   
-                  {lecture.status === 'past' && lecture.videoUrl && (
-                    <button
-                      onClick={() => handleWatchVideo(lecture.videoUrl)}
-                      className="action-btn video-btn"
-                    >
+                  <div className="lecture-meta-info">
+                    <div className="lecture-speaker">
                       <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z"/>
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                       </svg>
-                      Watch Recording
-                    </button>
-                  )}
+                      {lecture.speaker}
+                    </div>
+
+                    <div className="lecture-location">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                      </svg>
+                      {lecture.location}
+                    </div>
+                  </div>
+
+                  <p className="lecture-description">{lecture.description}</p>
+
+                  <div className="lecture-actions">
+                    {lecture.status === 'upcoming' && lecture.registration && (
+                      <button
+                        onClick={() => handleRegister(lecture.registration)}
+                        className="action-btn register-btn"
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        Register
+                      </button>
+                    )}
+                    
+                    {lecture.status === 'past' && lecture.videoUrl && (
+                      <button
+                        onClick={() => handleWatchVideo(lecture.videoUrl)}
+                        className="action-btn video-btn"
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Watch Recording
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </TracingBeam>
 
         {filteredLectures.length === 0 && (
           <div className="no-results">
