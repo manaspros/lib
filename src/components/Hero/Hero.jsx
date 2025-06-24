@@ -99,20 +99,6 @@ const Hero = () => {
               Pioneering breakthroughs in autonomous systems, machine learning, and bio-inspired robotics. 
               We're shaping tomorrow's technology through innovative research and collaborative excellence.
             </p>
-            <div className="hero-stats">
-              <div className="stat">
-                <span className="stat-number">15+</span>
-                <span className="stat-label">Years Experience</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">50+</span>
-                <span className="stat-label">Research Papers</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">25+</span>
-                <span className="stat-label">Active Projects</span>
-              </div>
-            </div>
             <div className="hero-actions">
               <button className="btn-primary" onClick={scrollToWelcome}>
                 <span>Discover Our Research</span>

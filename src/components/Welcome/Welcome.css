@@ -1,5 +1,5 @@
 .welcome {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f1e 100%);
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #0f0f1e 100%);
   position: relative;
   padding: 120px 0;
 }
@@ -14,8 +14,8 @@
   background: 
     radial-gradient(circle at 20% 30%, rgba(100, 108, 255, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
-    url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23646cff" fill-opacity="0.04"><circle cx="30" cy="30" r="15"/></g></svg>') repeat;
-  opacity: 0.6;
+    linear-gradient(45deg, transparent 30%, rgba(100, 108, 255, 0.05) 50%, transparent 70%);
+  opacity: 0.8;
   pointer-events: none;
 }
 
@@ -31,15 +31,16 @@
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #646cff 0%, #00ffff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 40px rgba(100, 108, 255, 0.3);
 }
 
 .section-subtitle {
   font-size: 1.2rem;
-  color: #a0a0a0;
+  color: rgba(255, 255, 255, 0.8);
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
@@ -59,14 +60,14 @@
 
 .welcome-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(100, 108, 255, 0.2);
   border-radius: 20px;
   padding: 2.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
   transition: all 0.4s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
 }
 
 .welcome-card::before {
@@ -76,7 +77,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(100, 108, 255, 0.1), transparent);
   transition: left 0.6s ease;
 }
 
@@ -86,8 +87,8 @@
 
 .welcome-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(100, 108, 255, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(100, 108, 255, 0.6);
+  box-shadow: 0 20px 40px rgba(100, 108, 255, 0.2);
 }
 
 .card-icon {
@@ -119,22 +120,22 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .welcome-card p {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
   margin-bottom: 0;
 }
 
 .lab-highlights {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(100, 108, 255, 0.2);
   border-radius: 20px;
   padding: 3rem;
   margin-bottom: 4rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
 }
@@ -166,7 +167,7 @@
 .highlight-item:hover {
   background: rgba(100, 108, 255, 0.1);
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.3);
 }
 
 .highlight-number {
@@ -185,7 +186,7 @@
 }
 
 .highlight-label {
-  color: #a0a0a0;
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -194,10 +195,10 @@
 
 .affiliation {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(100, 108, 255, 0.2);
   border-radius: 20px;
   padding: 2.5rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
 }
 
 .affiliation-content {
@@ -221,7 +222,7 @@
 }
 
 .institution-info p {
-  color: #a0a0a0;
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 1rem;
 }
 
