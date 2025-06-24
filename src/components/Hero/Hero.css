@@ -159,7 +159,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 100px;
+  gap: 50px;
   position: relative;
   z-index: 2;
 }
@@ -356,8 +356,8 @@
 
 .main-image-container {
   position: relative;
-  width: 450px;
-  height: 450px;
+  width: 800px;
+  height: 800px;
 }
 
 .image-frame {
@@ -435,10 +435,12 @@
 /* Floating Cards */
 .floating-elements {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 30px;
+  left: 140px;
+  right:0px;
+  bottom:0px;
+  width: 70%;
+  height: 80%;
   pointer-events: none;
 }
 
@@ -447,16 +449,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.50rem 1rem;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(80px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
+  border-radius: 80px;
   color: white;
   font-size: 0.9rem;
   font-weight: 600;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   animation: floatCard 6s ease-in-out infinite;
+  width:200px;
+  height:150px;
 }
 
 .card-icon {
@@ -504,8 +508,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 550px;
-  height: 550px;
+  width: 700px;
+  height: 700px;
   pointer-events: none;
 }
 
@@ -519,26 +523,26 @@
 }
 
 .orbit-1 {
-  width: 350px;
-  height: 350px;
+  width: 150px;
+  height: 150px;
   animation: rotateOrbit 25s linear infinite;
 }
 
 .orbit-2 {
-  width: 420px;
-  height: 420px;
+  width: 250px;
+  height: 250px;
   animation: rotateOrbit 35s linear infinite reverse;
 }
 
 .orbit-3 {
-  width: 490px;
-  height: 490px;
+  width: 350px;
+  height: 350px;
   animation: rotateOrbit 45s linear infinite;
 }
 
 .orbit-4 {
-  width: 300px;
-  height: 300px;
+  width: 450px;
+  height: 450px;
   animation: rotateOrbit 20s linear infinite reverse;
 }
 

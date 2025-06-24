@@ -89,11 +89,14 @@ const Hero = () => {
           <div className="hero-text">
             <div className="hero-badge">
               <span className="badge-icon">🚀</span>
-              <span>Bio-Inspired Robotics Design Lab</span>
+              <span>Next-Gen BIRD Lab</span>
             </div>
             <h1 className="hero-title">
-              Bio-Inspired <span className="gradient-text">Robotics</span> 
-              <br />Design <span className="gradient-text">Laboratory</span>
+              B<span className="gradient-text">io</span> 
+              <br />I<span className="gradient-text">nspired</span>
+              <br/>R<span className="gradient-text">obotics</span>
+              <br/>D<span className="gradient-text">esign</span>
+              <br/>Laboratory
             </h1>
             <p className="hero-subtitle">
               Pioneering the future through nature-inspired robotics research. From bio-inspired mechanisms 
