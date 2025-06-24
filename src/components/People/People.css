@@ -386,6 +386,24 @@
   filter: drop-shadow(0 0 20px rgba(100, 108, 255, 0.3));
 }
 
+/* Expandable Section */
+.expandable-section {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-description {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .director-card {

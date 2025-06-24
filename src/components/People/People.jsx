@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { staggerAnimation } from '../../utils/gsapAnimations';
 import { TEAM_DATA } from '../../utils/constants';
+import ExpandableCard from '../ExpandableCard/ExpandableCard';
 import './People.css';
 
 const People = () => {
@@ -122,6 +123,16 @@ const People = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* New Expandable Team Profiles Section */}
+        <div className="team-section expandable-section">
+          <h3 className="team-category-title">Detailed Team Profiles</h3>
+          <p className="section-description">
+            Click on any team member to explore their detailed research background, 
+            publications, and achievements.
+          </p>
+          <ExpandableCard cards={[...TEAM_DATA.researchers, ...TEAM_DATA.phd]} />
         </div>
 
         {/* Join Us Section */}
