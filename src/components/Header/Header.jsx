@@ -55,26 +55,21 @@ const Header = () => {
                     <stop offset="100%" stopColor="#00ffff"/>
                   </linearGradient>
                 </defs>
-                {/* Robot head */}
-                <rect x="15" y="12" width="20" height="18" rx="4" stroke="url(#logoGradient)" strokeWidth="2" fill="none"/>
-                {/* Eyes */}
-                <circle cx="21" cy="19" r="2" fill="url(#logoGradient)"/>
-                <circle cx="29" cy="19" r="2" fill="url(#logoGradient)"/>
-                {/* Antenna */}
-                <line x1="25" y1="12" x2="25" y2="8" stroke="url(#logoGradient)" strokeWidth="2"/>
-                <circle cx="25" cy="6" r="2" fill="url(#logoGradient)"/>
+                {/* Bird-inspired robot design */}
+                <path d="M25 8 L15 15 Q25 20 35 15 Z" stroke="url(#logoGradient)" strokeWidth="2" fill="url(#logoGradient)" fillOpacity="0.3"/>
+                {/* Wings */}
+                <path d="M15 15 Q10 18 12 25 Q15 20 20 18" stroke="url(#logoGradient)" strokeWidth="1.5" fill="none"/>
+                <path d="M35 15 Q40 18 38 25 Q35 20 30 18" stroke="url(#logoGradient)" strokeWidth="1.5" fill="none"/>
                 {/* Body */}
-                <rect x="18" y="30" width="14" height="12" rx="2" stroke="url(#logoGradient)" strokeWidth="2" fill="none"/>
-                {/* Arms */}
-                <line x1="15" y1="33" x2="10" y2="33" stroke="url(#logoGradient)" strokeWidth="2"/>
-                <line x1="35" y1="33" x2="40" y2="33" stroke="url(#logoGradient)" strokeWidth="2"/>
-                <circle cx="8" cy="33" r="2" fill="url(#logoGradient)"/>
-                <circle cx="42" cy="33" r="2" fill="url(#logoGradient)"/>
-                {/* Connection lines */}
-                <line x1="25" y1="30" x2="25" y2="30" stroke="url(#logoGradient)" strokeWidth="1"/>
+                <ellipse cx="25" cy="30" rx="8" ry="12" stroke="url(#logoGradient)" strokeWidth="2" fill="none"/>
+                {/* Tech elements */}
+                <circle cx="20" cy="12" r="1.5" fill="url(#logoGradient)"/>
+                <circle cx="30" cy="12" r="1.5" fill="url(#logoGradient)"/>
+                <line x1="25" y1="25" x2="25" y2="35" stroke="url(#logoGradient)" strokeWidth="1"/>
+                <circle cx="25" cy="36" r="2" fill="url(#logoGradient)"/>
               </svg>
             </div>
-            <span className="logo-text">RoboLab</span>
+            <span className="logo-text">BIRD Lab</span>
           </Link>
 
           <nav className="desktop-nav">

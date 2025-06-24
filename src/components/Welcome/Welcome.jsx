@@ -24,9 +24,10 @@ const Welcome = () => {
     <section id="welcome" className="section welcome" ref={sectionRef}>
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Welcome to Our Laboratory</h2>
+          <h2 className="section-title">Welcome to BIRD Lab</h2>
           <p className="section-subtitle">
-            Leading the advancement of robotics and autonomous systems through innovative research and cutting-edge technology
+            Leading the advancement of bio-inspired robotics through innovative research, 
+            nature-inspired design, and cutting-edge technology solutions
           </p>
         </div>
 
@@ -43,8 +44,8 @@ const Welcome = () => {
               </div>
               <h3>Our Mission</h3>
               <p>
-                To push the boundaries of robotics research and develop autonomous systems that can 
-                solve real-world challenges while advancing scientific understanding in the field.
+                To advance bio-inspired robotics research and develop adaptive systems that learn 
+                from nature to solve real-world challenges through innovative design and collaboration.
               </p>
             </div>
 
@@ -58,8 +59,8 @@ const Welcome = () => {
               </div>
               <h3>Our Vision</h3>
               <p>
-                To be a globally recognized center of excellence in robotics research, fostering 
-                innovation and training the next generation of robotics engineers and researchers.
+                To be a globally recognized center of excellence in bio-inspired robotics, fostering 
+                innovation in wearable, collaborative, and reconfigurable robotic systems.
               </p>
             </div>
 
@@ -72,8 +73,8 @@ const Welcome = () => {
               </div>
               <h3>Our Values</h3>
               <p>
-                Innovation, collaboration, excellence, and ethical responsibility guide our research 
-                efforts and shape our contributions to the robotics community.
+                Bio-inspiration, innovation, collaboration, and ethical responsibility guide our research 
+                in developing nature-inspired solutions for tomorrow's challenges.
               </p>
             </div>
           </div>
@@ -125,11 +126,11 @@ const Welcome = () => {
                 </svg>
               </div>
               <div className="institution-info">
-                <h4>Institute of Technology</h4>
-                <p>Department of Robotics and Autonomous Systems</p>
+                <h4>Bio-Inspired Robotics Design Lab</h4>
+                <p>Department of Robotics and Bio-Engineering</p>
                 <div className="accreditation">
                   <span className="badge">ABET Accredited</span>
-                  <span className="badge">Research Excellence</span>
+                  <span className="badge">Bio-Robotics Excellence</span>
                 </div>
               </div>
             </div>
