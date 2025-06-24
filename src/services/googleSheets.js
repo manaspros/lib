@@ -51,7 +51,6 @@ export const transformSheetData = (rawData) => {
   // First row is headers
   const headers = rawData[0];
   const rows = rawData.slice(1);
-
   // Map headers to indices for easier access
   const headerMap = {
     title: headers.indexOf('Title'),
@@ -61,14 +60,13 @@ export const transformSheetData = (rawData) => {
     email: headers.indexOf('Email'),
     postAffiliation: headers.indexOf('Post & Current Affiliation'),
     phdEducation: headers.indexOf('Education (PhD)'),
-    phdInstitution: headers.indexOf('Institutaion'), // Note: keeping original spelling from sheet
-    phdYear: headers.indexOf('Year'),
+    phdInstitution: headers.indexOf('Education (PhD)') + 1, // Next column after PhD
+    phdYear: headers.indexOf('Education (PhD)') + 2, // Two columns after PhD
     mtechEducation: headers.indexOf('Education (MTech/MS)'),
-    mtechInstitution: headers.indexOf('Institutaion'), // This might be a different column
-    mtechYear: headers.indexOf('Year'), // This might be a different column
+    mtechInstitution: headers.indexOf('Education (MTech/MS)') + 1, // Next column after MTech
+    mtechYear: headers.indexOf('Education (MTech/MS)') + 2, // Two columns after MTech
     btechEducation: headers.indexOf('Education (BTech/BE)'),
-    btechInstitution: headers.indexOf('Institutaion'), // This might be a different column
-    btechYear: headers.indexOf('Year') // This might be a different column
+    btechInstitution: headers.indexOf('Education (BTech/BE)') + 1 // Next column after BTech
   };
 
   // Helper function to safely get cell value
@@ -80,25 +78,41 @@ export const transformSheetData = (rawData) => {
   const parseResearch = (researchString) => {
     if (!researchString) return [];
     return researchString.split(/[,;]/).map(item => item.trim()).filter(item => item);
-  };
-
-  // Helper function to validate and process image URL
-  const processImageUrl = (imageUrl) => {
-    if (!imageUrl) return '/api/placeholder/300/300';
-    
-    // If it's a Google Drive link, convert to direct image URL
-    if (imageUrl.includes('drive.google.com')) {
-      const fileIdMatch = imageUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-      if (fileIdMatch) {
-        return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
-      }
+  };  // Helper function to validate and process image URL
+  const processImageUrl = (imageUrl, personName) => {
+    // Always use local assets instead of Google Sheets images
+    if (personName) {
+      // Create a standardized filename from the person's name
+      const filename = personName
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/gi, '')
+        .replace(/\s+/g, '-')
+        .trim();
+      
+      // Try common image extensions
+      const possiblePaths = [
+        `/src/assets/team/${filename}.jpg`,
+        `/src/assets/team/${filename}.jpeg`,
+        `/src/assets/team/${filename}.png`,
+        `/src/assets/team/${filename}.webp`,
+        `/src/assets/people/${filename}.jpg`,
+        `/src/assets/people/${filename}.jpeg`,
+        `/src/assets/people/${filename}.png`,
+        `/src/assets/people/${filename}.webp`,
+        `/src/assets/${filename}.jpg`,
+        `/src/assets/${filename}.jpeg`,
+        `/src/assets/${filename}.png`,
+        `/src/assets/${filename}.webp`
+      ];
+      
+      // Return the first possible path (we'll handle fallbacks in the component)
+      return possiblePaths[0];
     }
     
-    // Return the URL as is if it's already a direct image URL
-    return imageUrl || '/api/placeholder/300/300';
+    // Fallback to placeholder if no name provided
+    return '/api/placeholder/300/300';
   };
-
-  // Helper function to build education info
+  // Helper function to build education info using the correct column mapping
   const buildEducation = (row, eduIndex, instIndex, yearIndex) => {
     const education = getCellValue(row, eduIndex);
     const institution = getCellValue(row, instIndex);
@@ -109,34 +123,6 @@ export const transformSheetData = (rawData) => {
     }
     return null;
   };
-
-  // Correct column mapping for education (assuming the sheet has these columns in order)
-  const getEducationColumns = (headers) => {
-    // Find education-related columns
-    const phdIndex = headers.findIndex(h => h && h.toLowerCase().includes('phd'));
-    const mastersIndex = headers.findIndex(h => h && (h.toLowerCase().includes('mtech') || h.toLowerCase().includes('ms')));
-    const bachelorsIndex = headers.findIndex(h => h && (h.toLowerCase().includes('btech') || h.toLowerCase().includes('be')));
-    
-    return {
-      phd: {
-        education: phdIndex,
-        institution: phdIndex > -1 ? phdIndex + 1 : -1,
-        year: phdIndex > -1 ? phdIndex + 2 : -1
-      },
-      masters: {
-        education: mastersIndex,
-        institution: mastersIndex > -1 ? mastersIndex + 1 : -1,
-        year: mastersIndex > -1 ? mastersIndex + 2 : -1
-      },
-      bachelors: {
-        education: bachelorsIndex,
-        institution: bachelorsIndex > -1 ? bachelorsIndex + 1 : -1,
-        year: bachelorsIndex > -1 ? bachelorsIndex + 2 : -1
-      }
-    };
-  };
-
-  const eduColumns = getEducationColumns(headers);
 
   const transformedData = {
     professor: [],
@@ -155,20 +141,22 @@ export const transformSheetData = (rawData) => {
 
     const title = getCellValue(row, headerMap.title).toLowerCase().trim();
     const name = getCellValue(row, headerMap.name);
+    const photoValue = getCellValue(row, headerMap.photo);
     
     if (!name) return; // Skip rows without names
 
     const person = {
       name,
       title: getCellValue(row, headerMap.title),
-      image: processImageUrl(getCellValue(row, headerMap.photo)),
+      image: processImageUrl(photoValue, name),
+      Photo: processImageUrl(photoValue, name), // Add both for compatibility
       research: parseResearch(getCellValue(row, headerMap.research)),
       email: getCellValue(row, headerMap.email),
       postAffiliation: getCellValue(row, headerMap.postAffiliation),
       education: {
-        phd: buildEducation(row, eduColumns.phd.education, eduColumns.phd.institution, eduColumns.phd.year),
-        masters: buildEducation(row, eduColumns.masters.education, eduColumns.masters.institution, eduColumns.masters.year),
-        bachelors: buildEducation(row, eduColumns.bachelors.education, eduColumns.bachelors.institution, eduColumns.bachelors.year)
+        phd: buildEducation(row, headerMap.phdEducation, headerMap.phdInstitution, headerMap.phdYear),
+        masters: buildEducation(row, headerMap.mtechEducation, headerMap.mtechInstitution, headerMap.mtechYear),
+        bachelors: buildEducation(row, headerMap.btechEducation, headerMap.btechInstitution, -1) // No year column for BTech
       }
     };
 
@@ -234,3 +222,4 @@ export const getTeamData = async () => {
     return FALLBACK_TEAM_DATA;
   }
 };
+
