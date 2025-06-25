@@ -385,24 +385,18 @@ const ExpandableCard = ({ cards }) => {
               </motion.div>
               
               <div className="card-info">
-                <div className="card-header">
-                  <motion.h3
-                    layoutId={`title-${card.name}`}
-                    className="card-title"
-                  >
-                    {card.name}
-                  </motion.h3>
-                  <motion.button
-                    layoutId={`description-${card.title}`}
-                    className="card-title-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // Could add specific functionality here if needed
-                    }}
-                  >
-                    {card.title}
-                  </motion.button>
-                </div>
+                <motion.h3
+                  layoutId={`title-${card.name}`}
+                  className="card-title"
+                >
+                  {card.name}
+                </motion.h3>
+                <motion.p
+                  layoutId={`description-${card.title}`}
+                  className="card-subtitle"
+                >
+                  {card.title}
+                </motion.p>
                 
                 {card.postAffiliation && (
                   <div className="card-affiliation">

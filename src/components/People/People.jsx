@@ -125,7 +125,7 @@ const People = () => {
 
           {/* Masters Students */}
           {teamData.masters && teamData.masters.length > 0 && (
-            <div className="team-section">
+            <div className="team-section masters-section">
               <h3 className="team-category-title">Master Students</h3>
               <div className="team-grid-horizontal">
                 <ExpandableCard cards={teamData.masters} />
@@ -135,7 +135,7 @@ const People = () => {
 
           {/* Graduate Students */}
           {teamData.graduateStudent && teamData.graduateStudent.length > 0 && (
-            <div className="team-section">
+            <div className="team-section graduateStudent-section">
               <h3 className="team-category-title">Graduate Students</h3>
               <div className="team-grid-horizontal">
                 <ExpandableCard cards={teamData.graduateStudent} />
@@ -145,7 +145,7 @@ const People = () => {
 
           {/* Web Masters */}
           {teamData.webmaster && teamData.webmaster.length > 0 && (
-            <div className="team-section">
+            <div className="team-section webmaster-section">
               <h3 className="team-category-title">Web Masters</h3>
               <div className="team-grid-horizontal">
                 <ExpandableCard cards={teamData.webmaster} />
@@ -155,7 +155,7 @@ const People = () => {
 
           {/* Other Team Members */}
           {teamData.others && teamData.others.length > 0 && (
-            <div className="team-section">
+            <div className="team-section others-section">
               <h3 className="team-category-title">Other Team Members</h3>
               <div className="team-grid-horizontal">
                 <ExpandableCard cards={teamData.others} />
