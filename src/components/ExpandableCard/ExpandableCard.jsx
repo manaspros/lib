@@ -51,16 +51,27 @@ const ExpandableCard = ({ cards }) => {
   useOutsideClick(ref, () => setActive(null));
 
   const getImageSrc = (card) => {
-    return card.image || card.Photo || '/api/placeholder/300/300';
+    // Prioritize the image field, then Photo field, then fallback
+    const imageUrl = card.image || card.Photo;
+    
+    if (imageUrl && imageUrl !== '/api/placeholder/300/300') {
+      return imageUrl;
+    }
+    
+    // Fallback to a more specific placeholder or default image
+    return 'https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Photo';
   };
 
   const getCardBio = (card) => {
-    if (card.bio) return card.bio;
+    // Show only a brief preview in the card
+    if (card.postAffiliation && card.research && card.research.length > 0) {
+      return `${card.postAffiliation} • ${card.research[0]}${card.research.length > 1 ? ' and more' : ''}`;
+    }
     if (card.postAffiliation) return card.postAffiliation;
     if (card.research && card.research.length > 0) {
-      return `Specializes in ${card.research.slice(0, 2).join(', ')}${card.research.length > 2 ? ' and other research areas' : ''}.`;
+      return card.research[0] + (card.research.length > 1 ? ' and more' : '');
     }
-    return `${card.title} with expertise in various research areas.`;
+    return `${card.title} with expertise in research`;
   };
 
   const formatEducation = (education) => {
@@ -72,7 +83,6 @@ const ExpandableCard = ({ cards }) => {
       if (typeof degree === 'object' && degree !== null) {
         const parts = [];
         if (degree.degree) parts.push(degree.degree);
-        if (degree.field) parts.push(`in ${degree.field}`);
         if (degree.institution) parts.push(`from ${degree.institution}`);
         if (degree.year) parts.push(`(${degree.year})`);
         return parts.length > 0 ? parts.join(' ') : null;
@@ -85,6 +95,18 @@ const ExpandableCard = ({ cards }) => {
       masters: formatDegree(education.masters),
       bachelors: formatDegree(education.bachelors)
     };
+  };
+
+  const getHighestEducation = (education) => {
+    const formatted = formatEducation(education);
+    if (!formatted) return null;
+    
+    // Return the highest degree available
+    if (formatted.phd) return { type: 'PhD', details: formatted.phd };
+    if (formatted.masters) return { type: 'Masters', details: formatted.masters };
+    if (formatted.bachelors) return { type: 'Bachelors', details: formatted.bachelors };
+    
+    return null;
   };
 
   return (
@@ -129,6 +151,9 @@ const ExpandableCard = ({ cards }) => {
                   src={getImageSrc(active)}
                   alt={active.name}
                   className="modal-image"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x300/e2e8f0/64748b?text=Photo+Not+Available';
+                  }}
                 />
                 <div className="modal-image-overlay">
                   <div className="image-gradient"></div>
@@ -350,6 +375,9 @@ const ExpandableCard = ({ cards }) => {
                   src={getImageSrc(card)}
                   alt={card.name}
                   className="card-image"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/280x280/e2e8f0/64748b?text=Photo+Not+Available';
+                  }}
                 />
                 <div className="card-image-overlay">
                   <div className="view-profile-hint">Click to view profile</div>
@@ -357,44 +385,46 @@ const ExpandableCard = ({ cards }) => {
               </motion.div>
               
               <div className="card-info">
-                <motion.h3
-                  layoutId={`title-${card.name}`}
-                  className="card-title"
-                >
-                  {card.name}
-                </motion.h3>
-                <motion.p
-                  layoutId={`description-${card.title}`}
-                  className="card-subtitle"
-                >
-                  {card.title}
-                </motion.p>
+                <div className="card-header">
+                  <motion.h3
+                    layoutId={`title-${card.name}`}
+                    className="card-title"
+                  >
+                    {card.name}
+                  </motion.h3>
+                  <motion.button
+                    layoutId={`description-${card.title}`}
+                    className="card-title-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Could add specific functionality here if needed
+                    }}
+                  >
+                    {card.title}
+                  </motion.button>
+                </div>
                 
-                {card.email && (
-                  <div className="card-email">
-                    <svg className="email-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                {card.postAffiliation && (
+                  <div className="card-affiliation">
+                    <svg className="affiliation-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h2M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    <span>{card.email}</span>
+                    <span>{card.postAffiliation}</span>
                   </div>
                 )}
                 
-                <div className="card-description">
-                  <p className="card-bio">
-                    {getCardBio(card)}
-                  </p>
-                </div>
-                
                 {card.research && card.research.length > 0 && (
                   <div className="card-research-preview">
-                    <div className="research-label">Research Areas:</div>
-                    <div className="research-tags-container">
-                      {card.research.slice(0, 3).map((interest, idx) => (
-                        <span key={idx} className="research-preview-tag">{interest}</span>
-                      ))}
-                      {card.research.length > 3 && (
-                        <span className="more-tag">+{card.research.length - 3} more</span>
-                      )}
+                    <div className="research-inline-container">
+                      <div className="research-label">Research:</div>
+                      <div className="research-tags-container">
+                        {card.research.slice(0, 2).map((interest, idx) => (
+                          <span key={idx} className="research-preview-tag">{interest}</span>
+                        ))}
+                        {card.research.length > 2 && (
+                          <span className="more-tag">+{card.research.length - 2} more</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -402,22 +432,26 @@ const ExpandableCard = ({ cards }) => {
                 {card.education && (
                   <div className="card-education-preview">
                     {(() => {
-                      const formattedEducation = formatEducation(card.education);
-                      const hasEducation = formattedEducation && (formattedEducation.phd || formattedEducation.masters || formattedEducation.bachelors);
+                      const highestEducation = getHighestEducation(card.education);
                       
-                      if (!hasEducation) return null;
+                      if (!highestEducation) return null;
                       
-                      const highestDegree = formattedEducation.phd || formattedEducation.masters || formattedEducation.bachelors;
                       return (
                         <div className="education-preview">
                           <svg className="education-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                           </svg>
-                          <span className="education-text">{highestDegree}</span>
+                          <span className="education-text">{highestEducation.details}</span>
                         </div>
                       );
                     })()}
+                  </div>
+                )}
+                
+                {card.email && (
+                  <div className="card-email">
+                    <span>{card.email}</span>
                   </div>
                 )}
               </div>
