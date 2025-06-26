@@ -101,13 +101,16 @@ export const transformSheetData = (rawData) => {
 
     console.log(`Processing image for ${personName}: ${filename}`);
     
-    // Try common image extensions in assets folder
-    const possiblePaths = [
-      `/src/assets/${filename}.png`
-    ];
-    
-    // Return the first possible path (fallback handling will be done in component)
-    return possiblePaths[0];
+    // For Vite, we need to import the image or use a dynamic import
+    // For now, we'll create the path that works with Vite's asset handling
+    // The assets will need to be moved to public folder or properly imported
+    try {
+      // Try to construct the path for assets in public folder
+      return `/assets/${filename}.png`;
+    } catch (error) {
+      console.warn(`Image not found for ${personName}, using placeholder`);
+      return '/api/placeholder/300/300';
+    }
   };
 
   // Helper function to build education info
