@@ -88,18 +88,26 @@ export const transformSheetData = (rawData) => {
     return researchString.split(/[,;]/).map(item => item.trim()).filter(item => item);
   };
 
-  // Helper function to process image URL
+  // Helper function to process image URL from local assets
   const processImageUrl = (imageUrl, personName) => {
-    if (personName) {
-      const filename = personName
-        .toLowerCase()
-        .replace(/[^a-z0-9\s]/gi, '')
-        .replace(/\s+/g, '-')
-        .trim();
-      
-      return `/src/assets/team/${filename}.jpg`;
-    }
-    return '/api/placeholder/300/300';
+    if (!personName) return '/api/placeholder/300/300';
+    
+    // Create a standardized filename from the person's name
+    const filename = personName
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/gi, '')
+      .replace(/\s+/g, '-')
+      .trim();
+
+    console.log(`Processing image for ${personName}: ${filename}`);
+    
+    // Try common image extensions in assets folder
+    const possiblePaths = [
+      `/src/assets/${filename}.png`
+    ];
+    
+    // Return the first possible path (fallback handling will be done in component)
+    return possiblePaths[0];
   };
 
   // Helper function to build education info

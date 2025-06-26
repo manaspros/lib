@@ -1,6 +1,6 @@
 /* People Section */
 .people {
-  padding: 6rem 0;
+  padding: 8rem 0 6rem 0; /* Added more top padding */
   background: var(--bg-secondary);
   position: relative;
   overflow: hidden;
@@ -324,43 +324,21 @@
   margin: 0 auto;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .team-grid-horizontal .card-list {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    max-width: 1000px;
-  }
-}
-
-@media (max-width: 768px) {
-  .team-grid-horizontal .card-list {
-    grid-template-columns: 1fr;
-    max-width: 600px;
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .team-grid-horizontal .card-list {
-    max-width: 100%;
-    padding: 0 1rem;
-    gap: 1rem;
-  }
-}
-
 /* Loading and Error States */
 .loading-spinner {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 200px;
+  min-height: 300px;
+  width: 100%;
+  margin: 2rem 0;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--border);
-  border-top: 3px solid var(--primary);
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border);
+  border-top: 4px solid var(--primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -375,6 +353,12 @@
   text-align: center;
   font-size: 1.1rem;
   margin: 2rem 0;
+  padding: 2rem;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
 /* Join Us Section */
@@ -460,7 +444,7 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .people {
-    padding: 4rem 0;
+    padding: 6rem 0 4rem 0; /* Adjusted for mobile */
   }
   
   .people .container {
@@ -509,6 +493,10 @@
 }
 
 @media (max-width: 480px) {
+  .people {
+    padding: 5rem 0 2rem 0; /* Further adjusted for small screens */
+  }
+  
   .section-title {
     font-size: 2rem;
   }
@@ -553,11 +541,6 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 2rem;
-  position: relative;
-  display: inline-block;
-  text-align: center;
-}
   margin-bottom: 2rem;
   position: relative;
   display: inline-block;

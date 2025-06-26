@@ -30,6 +30,7 @@ const CloseIcon = () => {
 const ExpandableCard = ({ cards }) => {
   const [active, setActive] = useState(null);
   const ref = useRef(null);
+  const [imageErrors, setImageErrors] = useState({});
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -51,15 +52,29 @@ const ExpandableCard = ({ cards }) => {
   useOutsideClick(ref, () => setActive(null));
 
   const getImageSrc = (card) => {
-    // Prioritize the image field, then Photo field, then fallback
+    const cardKey = card.name;
+    
+    // If we've had an error with this card's image, use placeholder
+    if (imageErrors[cardKey]) {
+      return 'https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Photo';
+    }
+    
+    // Use the processed image URL from the card data
     const imageUrl = card.image || card.Photo;
     
     if (imageUrl && imageUrl !== '/api/placeholder/300/300') {
       return imageUrl;
     }
     
-    // Fallback to a more specific placeholder or default image
+    // Fallback to placeholder
     return 'https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Photo';
+  };
+
+  const handleImageError = (cardName) => {
+    setImageErrors(prev => ({
+      ...prev,
+      [cardName]: true
+    }));
   };
 
   const getCardBio = (card) => {
@@ -151,9 +166,7 @@ const ExpandableCard = ({ cards }) => {
                   src={getImageSrc(active)}
                   alt={active.name}
                   className="modal-image"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/300x300/e2e8f0/64748b?text=Photo+Not+Available';
-                  }}
+                  onError={() => handleImageError(active.name)}
                 />
                 <div className="modal-image-overlay">
                   <div className="image-gradient"></div>
@@ -375,9 +388,7 @@ const ExpandableCard = ({ cards }) => {
                   src={getImageSrc(card)}
                   alt={card.name}
                   className="card-image"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/280x280/e2e8f0/64748b?text=Photo+Not+Available';
-                  }}
+                  onError={() => handleImageError(card.name)}
                 />
                 <div className="card-image-overlay">
                   <div className="view-profile-hint">Click to view profile</div>

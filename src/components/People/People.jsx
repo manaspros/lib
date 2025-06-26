@@ -51,10 +51,15 @@ const People = () => {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">Our Team</h2>
-            <p className="section-subtitle">Loading team information...</p>
+            <p className="section-subtitle">
+              Meet the brilliant minds driving innovation in robotics research
+            </p>
           </div>
           <div className="loading-spinner">
             <div className="spinner"></div>
+          </div>
+          <div style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: '1rem' }}>
+            Loading team information...
           </div>
         </div>
       </section>
@@ -67,7 +72,27 @@ const People = () => {
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">Our Team</h2>
-            <p className="section-subtitle error-message">{error}</p>
+            <p className="section-subtitle">
+              Meet the brilliant minds driving innovation in robotics research
+            </p>
+          </div>
+          <div className="error-message">
+            <h3 style={{ margin: '0 0 1rem 0', color: '#ff6b6b' }}>Unable to Load Team Data</h3>
+            <p style={{ margin: '0 0 1rem 0' }}>{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              style={{
+                background: 'var(--primary)',
+                color: 'white',
+                border: 'none',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '500'
+              }}
+            >
+              Try Again
+            </button>
           </div>
         </div>
       </section>

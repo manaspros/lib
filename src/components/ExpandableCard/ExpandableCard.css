@@ -13,7 +13,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .modal-container {
@@ -25,7 +25,7 @@
   display: flex;
   items-center: center;
   justify-content: center;
-  z-index: 1001;
+  z-index: 10001;
   padding: 2rem;
 }
 
@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1002;
+  z-index: 10002;
   transition: all 0.2s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -59,11 +59,11 @@
 
 .modal-content {
   background: white;
-  border-radius: 24px;
+  border-radius: 20px;
   overflow: hidden;
-  max-width: 800px;
+  max-width: 600px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -71,7 +71,7 @@
 
 .modal-image-container {
   position: relative;
-  height: 300px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -91,14 +91,14 @@
 }
 
 .modal-body {
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   gap: 1rem;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .modal-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: #1a1a1a;
   margin: 0 0 0.5rem 0;
@@ -115,14 +115,14 @@
 }
 
 .modal-subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--primary, #2563eb);
   font-weight: 500;
   margin: 0 0 0.5rem 0;
 }
 
 .modal-affiliation {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #666;
   font-style: italic;
   margin: 0;
@@ -161,13 +161,13 @@
 
 .modal-details {
   border-top: 1px solid #e5e7eb;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
 }
 
 .person-details {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .bio-section,
@@ -183,17 +183,17 @@
 .education-section h4,
 .publications-section h4,
 .achievements-section h4 {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #1a1a1a;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.75rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .person-bio {
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: #4b5563;
   margin: 0;
@@ -202,15 +202,15 @@
 .research-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .research-tag {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: linear-gradient(135deg, var(--primary, #2563eb), var(--accent, #3b82f6));
   color: white;
-  border-radius: 20px;
-  font-size: 0.85rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: default;
   transition: transform 0.2s ease;
@@ -228,25 +228,25 @@
 
 .education-item {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: flex-start;
-  padding: 1rem;
+  padding: 0.75rem;
   background: #f8fafc;
-  border-radius: 12px;
-  border-left: 4px solid var(--primary, #2563eb);
+  border-radius: 10px;
+  border-left: 3px solid var(--primary, #2563eb);
 }
 
 .degree-type {
   font-weight: 600;
   color: var(--primary, #2563eb);
-  min-width: 80px;
-  font-size: 0.9rem;
+  min-width: 70px;
+  font-size: 0.85rem;
 }
 
 .degree-details {
   color: #4b5563;
-  line-height: 1.5;
-  font-size: 0.95rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
 }
 
 .publications-list,
@@ -260,8 +260,8 @@
 .achievement-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 0.75rem;
   background: #f8fafc;
   border-radius: 8px;
   transition: background-color 0.2s ease;
@@ -273,8 +273,8 @@
 }
 
 .achievement-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: var(--accent, #10b981);
   flex-shrink: 0;
   margin-top: 2px;
@@ -282,8 +282,8 @@
 
 .publication-text,
 .achievement-text {
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.4;
   color: #4b5563;
 }
 
@@ -855,4 +855,181 @@
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
   }
+}
+
+/* Mobile adjustments for uniform height sections */
+@media (max-width: 1024px) {
+  .modal-content {
+    max-width: 550px;
+    max-height: 90vh;
+  }
+  
+  .modal-image-container {
+    height: 180px;
+  }
+  
+  .modal-body {
+    padding: 1.25rem;
+  }
+  
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: 280px;
+    height: 280px;
+    max-height: 280px;
+  }
+  
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+  
+  .modal-image-container {
+    height: 160px;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .modal-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: 240px;
+    height: 240px;
+    max-height: 240px;
+  }
+  
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: 240px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 580px) {
+  .modal-content {
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+  
+  .modal-image-container {
+    height: 140px;
+  }
+  
+  .modal-body {
+    padding: 0.75rem;
+  }
+  
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: auto;
+    height: auto;
+    max-height: none;
+  }
+  
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: auto;
+    height: auto;
+  }
+}
+
+/* Uniform height for specific sections */
+.masters-section .expandable-card-item,
+.alumni-section .expandable-card-item,
+.graduateStudent-section .expandable-card-item,
+.webmaster-section .expandable-card-item,
+.others-section .expandable-card-item {
+  min-height: 320px;
+  height: 320px;
+  max-height: 320px;
+}
+
+/* Ensure card info fills available space uniformly */
+.masters-section .card-info,
+.alumni-section .card-info,
+.graduateStudent-section .card-info,
+.webmaster-section .card-info,
+.others-section .card-info {
+  min-height: 320px;
+  height: 320px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* Adjust card bio to fit within uniform height */
+.masters-section .card-bio,
+.alumni-section .card-bio,
+.graduateStudent-section .card-bio,
+.webmaster-section .card-bio,
+.others-section .card-bio {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Ensure research preview fits within height */
+.masters-section .card-research-preview,
+.alumni-section .card-research-preview,
+.graduateStudent-section .card-research-preview,
+.webmaster-section .card-research-preview,
+.others-section .card-research-preview {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Adjust education preview spacing */
+.masters-section .card-education-preview,
+.alumni-section .card-education-preview,
+.graduateStudent-section .card-education-preview,
+.webmaster-section .card-education-preview,
+.others-section .card-education-preview {
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Ensure email section stays at bottom */
+.masters-section .card-email,
+.alumni-section .card-email,
+.graduateStudent-section .card-email,
+.webmaster-section .card-email,
+.others-section .card-email {
+  margin-top: auto;
+  flex-shrink: 0;
 }
