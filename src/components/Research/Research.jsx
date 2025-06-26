@@ -1,10 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { staggerAnimation } from '../../utils/gsapAnimations';
 import { RESEARCH_AREAS } from '../../utils/constants';
+import ResearchModal from '../ResearchModal/ResearchModal';
 import './Research.css';
 
 const Research = () => {
   const sectionRef = useRef(null);
+  const [selectedResearchArea, setSelectedResearchArea] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (area) => {
+    setSelectedResearchArea(area);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedResearchArea(null);
+  };
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -62,7 +75,7 @@ const Research = () => {
               </div>
               
               <div className="card-footer">
-                <button className="learn-more-btn">
+                <button className="learn-more-btn" onClick={() => openModal(area)}>
                   Learn More
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -136,6 +149,13 @@ const Research = () => {
           </div>
         </div>
       </div>
+      
+      {/* Research Modal */}
+      <ResearchModal 
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        researchArea={selectedResearchArea}
+      />
     </section>
   );
 };

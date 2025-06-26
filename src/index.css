@@ -206,3 +206,22 @@ button:active {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(var(--accent), var(--secondary));
 }
+
+/* Global Z-Index Management - Ensure modals are always on top */
+.modal-overlay,
+.research-modal-overlay,
+[class*="modal-backdrop"] {
+  z-index: 50000 !important;
+}
+
+.modal-container,
+.research-modal,
+[class*="modal-container"] {
+  z-index: 50001 !important;
+}
+
+.modal-close-btn,
+.modal-close,
+[class*="modal-close"] {
+  z-index: 50002 !important;
+}
