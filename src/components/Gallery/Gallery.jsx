@@ -360,7 +360,7 @@ const Gallery = () => {
     <section id="gallery" className="gallery-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Gallery</h2>
+          <h2 className="section-title">Collaboration</h2>
           <p className="section-subtitle">
             Explore our laboratory, projects, and research in action
           </p>
