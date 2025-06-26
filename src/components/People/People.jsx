@@ -1,18 +1,103 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { staggerAnimation } from '../../utils/gsapAnimations';
-import { TEAM_DATA } from '../../utils/constants';
+import { getTeamData } from '../../services/googleSheets';
 import ExpandableCard from '../ExpandableCard/ExpandableCard';
 import './People.css';
 
 const People = () => {
   const sectionRef = useRef(null);
+  const [teamData, setTeamData] = useState({
+    professor: [],
+    postdoc: [],
+    phd: [],
+    juniorResearcher: [],
+    masters: [],
+    webmaster: [],
+    alumni: [],
+    graduateStudent: [],
+    others: []
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (sectionRef.current) {
-      const cards = sectionRef.current.querySelectorAll('.person-card');
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await getTeamData();
+        setTeamData(data);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch team data:', err);
+        setError('Failed to load team data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (sectionRef.current && !loading) {
+      const cards = sectionRef.current.querySelectorAll('.expandable-card-item');
       staggerAnimation(cards);
     }
-  }, []);
+  }, [loading, teamData]);
+
+  if (loading) {
+    return (
+      <section id="people" className="section people" ref={sectionRef}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Our Team</h2>
+            <p className="section-subtitle">
+              Meet the brilliant minds driving innovation in robotics research
+            </p>
+          </div>
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+          </div>
+          <div style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: '1rem' }}>
+            Loading team information...
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="people" className="section people" ref={sectionRef}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Our Team</h2>
+            <p className="section-subtitle">
+              Meet the brilliant minds driving innovation in robotics research
+            </p>
+          </div>
+          <div className="error-message">
+            <h3 style={{ margin: '0 0 1rem 0', color: '#ff6b6b' }}>Unable to Load Team Data</h3>
+            <p style={{ margin: '0 0 1rem 0' }}>{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              style={{
+                background: 'var(--primary)',
+                color: 'white',
+                border: 'none',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '500'
+              }}
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="people" className="section people" ref={sectionRef}>
@@ -24,115 +109,94 @@ const People = () => {
           </p>
         </div>
 
-        {/* Director Section */}
-        <div className="director-section">
-          <div className="director-card">
-            <div className="director-image">
-              <img src={TEAM_DATA.director.image} alt={TEAM_DATA.director.name} />
-              <div className="image-overlay">
-                <div className="social-links">
-                  <a href={`mailto:${TEAM_DATA.director.email}`} className="social-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                  </a>
-                  {TEAM_DATA.director.website && (
-                    <a href={TEAM_DATA.director.website} className="social-link">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                      </svg>
-                    </a>
-                  )}
-                </div>
+        <div className="team-sections-container">
+          {/* Professor Section */}
+          {teamData.professor && teamData.professor.length > 0 && (
+            <div className="team-section professor-section">
+              <h3 className="team-category-title">Professor</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.professor} />
               </div>
             </div>
-            <div className="director-info">
-              <h3 className="person-name">{TEAM_DATA.director.name}</h3>
-              <p className="person-title">{TEAM_DATA.director.title}</p>
-              <p className="person-bio">{TEAM_DATA.director.bio}</p>
-              <div className="research-interests">
-                <h4>Research Interests:</h4>
-                <div className="interest-tags">
-                  {TEAM_DATA.director.research.map((interest, index) => (
-                    <span key={index} className="interest-tag">{interest}</span>
-                  ))}
-                </div>
+          )}
+
+          {/* Post-doctoral Researchers */}
+          {teamData.postdoc && teamData.postdoc.length > 0 && (
+            <div className="team-section">
+              <h3 className="team-category-title">Post-doctoral Researchers</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.postdoc} />
               </div>
             </div>
-          </div>
-        </div>
+          )}
 
-        {/* Research Team */}
-        <div className="team-section">
-          <h3 className="team-category-title">Research Scientists</h3>
-          <div className="team-grid">
-            {TEAM_DATA.researchers.map((person, index) => (
-              <div key={index} className="person-card">
-                <div className="person-image">
-                  <img src={person.image} alt={person.name} />
-                  <div className="image-overlay">
-                    <div className="social-links">
-                      <a href={`mailto:${person.email}`} className="social-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                          <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="person-info">
-                  <h4 className="person-name">{person.name}</h4>
-                  <p className="person-title">{person.title}</p>
-                  <div className="research-interests">
-                    <div className="interest-tags">
-                      {person.research.map((interest, resIndex) => (
-                        <span key={resIndex} className="interest-tag">{interest}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+          {/* PhD Students */}
+          {teamData.phd && teamData.phd.length > 0 && (
+            <div className="team-section">
+              <h3 className="team-category-title">PhD Students</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.phd} />
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* PhD Students */}
-        <div className="team-section">
-          <h3 className="team-category-title">PhD Students</h3>
-          <div className="team-grid">
-            {TEAM_DATA.phd.map((person, index) => (
-              <div key={index} className="person-card">
-                <div className="person-image">
-                  <img src={person.image} alt={person.name} />
-                  <div className="year-badge">{person.year}</div>
-                </div>
-                <div className="person-info">
-                  <h4 className="person-name">{person.name}</h4>
-                  <p className="person-title">{person.title}</p>
-                  <div className="research-interests">
-                    <div className="interest-tags">
-                      {person.research.map((interest, resIndex) => (
-                        <span key={resIndex} className="interest-tag">{interest}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+            </div>
+          )}        {/* Junior Research Fellows */}
+          {teamData.juniorResearcher && teamData.juniorResearcher.length > 0 && (
+            <div className="team-section">
+              <h3 className="team-category-title">Junior Research Fellows</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.juniorResearcher} />
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          )}
 
-        {/* New Expandable Team Profiles Section */}
-        <div className="team-section expandable-section">
-          <h3 className="team-category-title">Detailed Team Profiles</h3>
-          <p className="section-description">
-            Click on any team member to explore their detailed research background, 
-            publications, and achievements.
-          </p>
-          <ExpandableCard cards={[...TEAM_DATA.researchers, ...TEAM_DATA.phd]} />
+          {/* Masters Students */}
+          {teamData.masters && teamData.masters.length > 0 && (
+            <div className="team-section masters-section">
+              <h3 className="team-category-title">Master Students</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.masters} />
+              </div>
+            </div>
+          )}
+
+          {/* Graduate Students */}
+          {teamData.graduateStudent && teamData.graduateStudent.length > 0 && (
+            <div className="team-section graduateStudent-section">
+              <h3 className="team-category-title">Graduate Students</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.graduateStudent} />
+              </div>
+            </div>
+          )}
+
+          {/* Web Masters */}
+          {teamData.webmaster && teamData.webmaster.length > 0 && (
+            <div className="team-section webmaster-section">
+              <h3 className="team-category-title">Web Masters</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.webmaster} />
+              </div>
+            </div>
+          )}
+
+          {/* Other Team Members */}
+          {teamData.others && teamData.others.length > 0 && (
+            <div className="team-section others-section">
+              <h3 className="team-category-title">Other Team Members</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.others} />
+              </div>
+            </div>
+          )}
+
+          {/* Alumni */}
+          {teamData.alumni && teamData.alumni.length > 0 && (
+            <div className="team-section alumni-section">
+              <h3 className="team-category-title">Alumni</h3>
+              <div className="team-grid-horizontal">
+                <ExpandableCard cards={teamData.alumni} />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Join Us Section */}

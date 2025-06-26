@@ -1,45 +1,92 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { PUBLICATIONS } from '../../utils/constants';
+import googleScholarService from '../../services/scholarPublications';
 import './Publications.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Publications = () => {
-  const [publications] = useState(PUBLICATIONS);
-  const [filteredPubs, setFilteredPubs] = useState(PUBLICATIONS);
+  const [publications, setPublications] = useState([]);
+  const [filteredPubs, setFilteredPubs] = useState([]);
   const [selectedYear, setSelectedYear] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    totalCitations: 0,
+    hIndex: 0,
+    i10Index: 0,
+    journalCount: 0,
+    conferenceCount: 0
+  });
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [cacheInfo, setCacheInfo] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(10); // Show 10 by default (was missing before)
   const pubsRef = useRef(null);
   const cardsRef = useRef([]);
 
   useEffect(() => {
-    // Filter publications
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [pubs, pubStats] = await Promise.all([
+          googleScholarService.getPublications('3KZSSEIAAAAJ'),
+          googleScholarService.getStats()
+        ]);
+        setPublications(pubs);
+        setStats(pubStats);
+        setFilteredPubs(pubs);
+        setCacheInfo(googleScholarService.getCacheInfo());
+        setLastUpdated(new Date().toLocaleString());
+      } catch {
+        setPublications([]);
+        setFilteredPubs([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  const handleRefresh = async () => {
+    setLoading(true);
+    try {
+      const pubs = await googleScholarService.refreshData('3KZSSEIAAAAJ');
+      const pubStats = await googleScholarService.getStats();
+      setPublications(pubs);
+      setStats(pubStats);
+      setFilteredPubs(pubs);
+      setCacheInfo(googleScholarService.getCacheInfo());
+      setLastUpdated(new Date().toLocaleString());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     let filtered = publications;
-
     if (selectedYear !== 'all') {
-      filtered = filtered.filter(pub => pub.year.toString() === selectedYear);
+      filtered = filtered.filter(pub => pub.year && pub.year.toString() === selectedYear);
     }
-
     if (selectedType !== 'all') {
-      filtered = filtered.filter(pub => pub.type.toLowerCase() === selectedType);
+      filtered = filtered.filter(pub => pub.type && pub.type.toLowerCase() === selectedType);
     }
-
     if (searchTerm) {
-      filtered = filtered.filter(pub => 
-        pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.authors.some(author => author.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        pub.venue.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(pub =>
+        (pub.title && pub.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (typeof pub.authors === 'string'
+          ? pub.authors.toLowerCase().includes(searchTerm.toLowerCase())
+          : Array.isArray(pub.authors)
+            ? pub.authors.some(author => author.toLowerCase().includes(searchTerm.toLowerCase()))
+            : false) ||
+        (pub.journal && pub.journal.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-
     setFilteredPubs(filtered);
   }, [publications, selectedYear, selectedType, searchTerm]);
 
   useEffect(() => {
-    // GSAP animations
     if (cardsRef.current.length > 0) {
       gsap.fromTo(cardsRef.current,
         { y: 50, opacity: 0 },
@@ -60,25 +107,29 @@ const Publications = () => {
   }, [filteredPubs]);
 
   const getUniqueYears = () => {
-    const years = publications.map(pub => pub.year);
+    const years = publications.map(pub => pub.year).filter(Boolean);
     return [...new Set(years)].sort((a, b) => b - a);
   };
 
   const getUniqueTypes = () => {
-    const types = publications.map(pub => pub.type.toLowerCase());
+    const types = publications.map(pub => (pub.type || "Other").toLowerCase());
     return [...new Set(types)];
   };
 
   const handleDownload = (pdfUrl) => {
-    // In a real implementation, this would handle PDF downloads
-    window.open(pdfUrl, '_blank');
+    if (pdfUrl) window.open(pdfUrl, '_blank');
   };
 
   const copyCitation = (publication) => {
-    const citation = `${publication.authors.join(', ')}. "${publication.title}." ${publication.venue}, ${publication.year}.`;
+    const citation = `${(typeof publication.authors === 'string'
+      ? publication.authors
+      : (publication.authors || []).join(', '))}. "${publication.title}." ${publication.journal || publication.venue}, ${publication.year}.`;
     navigator.clipboard.writeText(citation);
-    // You could add a toast notification here
   };
+
+  // Update displayed publications to support "Load More"
+  const displayedPubs = filteredPubs.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPubs.length;
 
   return (
     <section id="publications" className="publications-section">
@@ -88,6 +139,52 @@ const Publications = () => {
           <p className="section-subtitle">
             Our latest research contributions and academic publications
           </p>
+        </div>
+
+        {/* Metrics and refresh */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '2rem' }}>
+          <div className="publications-metrics2">
+            <div className="metrics-card2">
+              <div className="metric-item">
+                <span className="metric-number" data-value={stats.totalCitations || 0}>
+                  {isNaN(stats.totalCitations) ? '0' : stats.totalCitations}
+                </span>
+                <span className="metric-label">Total Citations</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-number" data-value={stats.hIndex}>{stats.hIndex}</span>
+                <span className="metric-label">H-index</span>
+              </div>
+              <div className="metric-item">
+                <span className="metric-number" data-value={stats.i10Index}>{stats.i10Index}</span>
+                <span className="metric-label">i10-index</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              className="refresh-btn"
+              onClick={handleRefresh}
+              disabled={loading}
+              style={{ marginRight: 8 }}
+              title="Refresh publications from Google Scholar"
+            >
+              <svg className={`refresh-icon ${loading ? 'spinning' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M4 4V9H4.58152M4.58152 9C5.80611 6.78392 8.18951 5.19621 11.0174 5.19621C15.0138 5.19621 18.25 8.43241 18.25 12.4288C18.25 16.4252 15.0138 19.6614 11.0174 19.6614C8.18951 19.6614 5.80611 18.0737 4.58152 15.8576M4.58152 9H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Refresh
+            </button>
+            {lastUpdated && (
+              <span style={{ fontSize: '0.95em', color: '#888' }}>
+                Last updated: {lastUpdated}
+                {cacheInfo && cacheInfo.hasCache && (
+                  <span style={{ color: cacheInfo.isValid ? '#0a0' : '#a00' }}>
+                    {cacheInfo.isValid ? ' (cached)' : ' (cache expired)'}
+                  </span>
+                )}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Filters and Search */}
@@ -134,14 +231,14 @@ const Publications = () => {
 
         {/* Publications Grid */}
         <div ref={pubsRef} className="publications-grid">
-          {filteredPubs.map((publication, index) => (
+          {displayedPubs.map((publication, index) => (
             <div
               key={`${publication.title}-${index}`}
               ref={el => cardsRef.current[index] = el}
               className="publication-card"
             >
               <div className="publication-header">
-                <span className={`publication-type ${publication.type.toLowerCase()}`}>
+                <span className={`publication-type ${publication.type ? publication.type.toLowerCase() : 'other'}`}>
                   {publication.type}
                 </span>
                 <span className="publication-year">{publication.year}</span>
@@ -150,10 +247,12 @@ const Publications = () => {
               <h3 className="publication-title">{publication.title}</h3>
               
               <div className="publication-authors">
-                {publication.authors.join(', ')}
+                {typeof publication.authors === 'string'
+                  ? publication.authors
+                  : (publication.authors || []).join(', ')}
               </div>
 
-              <div className="publication-venue">{publication.venue}</div>
+              <div className="publication-venue">{publication.journal || publication.venue}</div>
 
               {publication.abstract && (
                 <div className="publication-abstract">
@@ -163,7 +262,7 @@ const Publications = () => {
 
               <div className="publication-actions">
                 <button
-                  onClick={() => handleDownload(publication.pdf)}
+                  onClick={() => handleDownload(publication.pdf || publication.url)}
                   className="action-btn download-btn"
                 >
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -186,9 +285,24 @@ const Publications = () => {
           ))}
         </div>
 
-        {filteredPubs.length === 0 && (
+        {hasMore && (
+          <div className="load-more-controls" style={{ textAlign: 'center', margin: '2rem 0' }}>
+            <button className="load-more-btn" onClick={() => setVisibleCount(v => v + 10)}>
+              Load More Publications
+            </button>
+          </div>
+        )}
+
+        {filteredPubs.length === 0 && !loading && (
           <div className="no-results">
             <p>No publications found matching your criteria.</p>
+            <button className="refresh-btn" onClick={handleRefresh}>Try Again</button>
+          </div>
+        )}
+        {loading && (
+          <div className="loading-indicator" style={{ margin: '2rem 0' }}>
+            <div className="loading-spinner"></div>
+            <span>Loading publication data...</span>
           </div>
         )}
       </div>

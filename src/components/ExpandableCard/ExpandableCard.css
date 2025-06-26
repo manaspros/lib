@@ -1,146 +1,202 @@
 .expandable-card-container {
+  position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .modal-backdrop {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  height: 100vh;
-  width: 100vw;
-  z-index: 50;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
 }
 
 .modal-container {
   position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  z-index: 100;
-  padding: 1rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  items-center: center;
+  justify-content: center;
+  z-index: 10001;
+  padding: 2rem;
 }
 
 .modal-close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  height: 2.5rem;
-  width: 2.5rem;
   cursor: pointer;
-  z-index: 101;
+  z-index: 10002;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .modal-close-btn:hover {
-  background: var(--accent);
+  background: white;
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
 }
 
 .close-icon {
-  height: 1rem;
-  width: 1rem;
-  color: var(--text);
+  color: #333;
 }
 
 .modal-content {
-  width: 100%;
-  max-width: 600px;
-  height: fit-content;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 1.5rem;
+  background: white;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.modal-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
 }
 
 .modal-image {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
-  object-position: top;
+}
+
+.modal-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
 }
 
 .modal-body {
-  padding: 0;
+  padding: 1.5rem;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.modal-header-info {
+  flex: 1;
 }
 
 .modal-title {
+  font-size: 1.6rem;
   font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--text);
-  margin: 0;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
 }
 
 .modal-subtitle {
-  color: var(--text-muted);
-  margin: 0.25rem 0 0 0;
   font-size: 1rem;
+  color: var(--primary, #2563eb);
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+}
+
+.modal-affiliation {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
 }
 
 .modal-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
-  border-radius: 2rem;
-  font-weight: 600;
-  background: var(--primary);
+  background: var(--primary, #2563eb);
   color: white;
   text-decoration: none;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
   transition: all 0.2s ease;
-  display: inline-block;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .modal-cta-btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
+  background: var(--primary-dark, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .modal-details {
-  padding: 1.5rem;
-  position: relative;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
 }
 
-.modal-content-text {
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  line-height: 1.6;
-  max-height: 400px;
-  overflow-y: auto;
-  padding-bottom: 2rem;
+.person-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.person-details h4 {
-  color: var(--text);
+.bio-section,
+.research-section,
+.education-section,
+.publications-section,
+.achievements-section {
+  padding: 0;
+}
+
+.bio-section h4,
+.research-section h4,
+.education-section h4,
+.publications-section h4,
+.achievements-section h4 {
+  font-size: 1.1rem;
   font-weight: 600;
-  margin: 1.5rem 0 0.75rem 0;
-  font-size: 1rem;
+  color: #1a1a1a;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .person-bio {
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-}
-
-.research-tags, .publications-list, .achievements-list {
-  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
 }
 
 .research-tags {
@@ -150,170 +206,830 @@
 }
 
 .research-tag {
-  background: var(--accent);
-  color: var(--text);
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(135deg, var(--primary, #2563eb), var(--accent, #3b82f6));
+  color: white;
+  border-radius: 16px;
+  font-size: 0.8rem;
   font-weight: 500;
+  cursor: default;
+  transition: transform 0.2s ease;
 }
 
-.publications-list, .achievements-list {
-  list-style: none;
-  padding: 0;
+.research-tag:hover {
+  transform: scale(1.05);
 }
 
-.publications-list li, .achievements-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.875rem;
-}
-
-.publications-list li:last-child, .achievements-list li:last-child {
-  border-bottom: none;
-}
-
-.card-list {
+.education-details {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.education-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 10px;
+  border-left: 3px solid var(--primary, #2563eb);
+}
+
+.degree-type {
+  font-weight: 600;
+  color: var(--primary, #2563eb);
+  min-width: 70px;
+  font-size: 0.85rem;
+}
+
+.degree-details {
+  color: #4b5563;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}
+
+.publications-list,
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.publication-item,
+.achievement-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.publication-item:hover,
+.achievement-item:hover {
+  background: #f1f5f9;
+}
+
+.achievement-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--accent, #10b981);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.publication-text,
+.achievement-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #4b5563;
+}
+
+.show-more-publications {
+  text-align: center;
+  color: var(--primary, #2563eb);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  background: #f0f7ff;
+  border-radius: 8px;
+  border: 2px dashed var(--primary, #2563eb);
+}
+
+/* Card List Styles */
+.card-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
   width: 100%;
 }
 
 .expandable-card-item {
-  padding: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--background);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 16px;
+  padding: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex-direction: column;
-  gap: 1rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  min-height: 280px;
 }
 
 .expandable-card-item:hover {
-  background: var(--surface);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary, #2563eb);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .card-content {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-  width: 100%;
+  display: contents;
 }
 
 .card-image-container {
-  flex-shrink: 0;
+  position: relative;
+  height: 280px;
+  width: 280px;
+  overflow: hidden;
+  border-radius: 12px;
+  align-self: start;
 }
 
 .card-image {
-  height: 120px;
-  width: 120px;
-  border-radius: 0.75rem;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: top;
-  border: 2px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.expandable-card-item:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.expandable-card-item:hover .card-image-overlay {
+  opacity: 1;
+}
+
+.view-profile-hint {
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 1rem;
+  text-align: center;
 }
 
 .card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
   flex: 1;
+  min-height: 280px;
+  justify-content: flex-start;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .card-title {
-  font-weight: 600;
-  font-size: 1.25rem;
-  color: var(--text);
-  margin: 0 0 0.25rem 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.card-title-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.card-title-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, var(--primary-dark, #1d4ed8), var(--secondary));
 }
 
 .card-subtitle {
-  color: var(--text-muted);
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  color: var(--primary, #2563eb);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+  display: none; /* Hide since we're showing it as button */
 }
 
-.card-research-preview {
+.card-affiliation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent, #10b981);
+}
+
+.affiliation-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--accent, #10b981);
+  flex-shrink: 0;
+}
+
+.card-email {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.research-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.research-tags-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  flex: 1;
 }
 
 .research-preview-tag {
-  background: var(--accent);
-  color: var(--text);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  background: linear-gradient(135deg, rgba(100, 108, 255, 0.15), rgba(0, 255, 255, 0.15));
+  color: var(--primary);
+  border-radius: 12px;
+  font-size: 0.8rem;
   font-weight: 500;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
-.more-tag {
-  background: var(--primary);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.card-expand-btn {
-  padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
-  border-radius: 2rem;
-  font-weight: 600;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  align-self: flex-end;
-}
-
-.card-expand-btn:hover {
-  background: var(--primary);
+.research-preview-tag:hover {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
   transform: translateY(-1px);
 }
 
-@media (min-width: 768px) {
-  .expandable-card-item {
-    flex-direction: row;
-    align-items: center;
-  }
+.more-tag {
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
 
-  .card-expand-btn {
-    align-self: center;
-  }
+.card-education-preview {
+  margin-top: 0.5rem;
+}
 
-  .card-image {
-    height: 80px;
-    width: 80px;
-  }
+.education-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border-left: 3px solid var(--primary, #2563eb);
+}
 
-  .modal-image {
-    height: 350px;
+.education-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary, #2563eb);
+  flex-shrink: 0;
+}
+
+.education-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.card-expand-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.expandable-card-item:hover .card-expand-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-expand-btn:hover {
+  background: var(--primary-dark, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+/* Compact styling for sections with multiple cards per row */
+.masters-section .expandable-card-item,
+.alumni-section .expandable-card-item,
+.graduateStudent-section .expandable-card-item,
+.webmaster-section .expandable-card-item,
+.others-section .expandable-card-item {
+  min-height: 250px;
+}
+
+.masters-section .card-title,
+.alumni-section .card-title,
+.graduateStudent-section .card-title,
+.webmaster-section .card-title,
+.others-section .card-title {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.masters-section .card-title-btn,
+.alumni-section .card-title-btn,
+.graduateStudent-section .card-title-btn,
+.webmaster-section .card-title-btn,
+.others-section .card-title-btn {
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.masters-section .card-affiliation,
+.alumni-section .card-affiliation,
+.graduateStudent-section .card-affiliation,
+.webmaster-section .card-affiliation,
+.others-section .card-affiliation {
+  font-size: 0.85rem;
+  padding: 0.4rem;
+}
+
+.masters-section .research-label,
+.alumni-section .research-label,
+.graduateStudent-section .research-label,
+.webmaster-section .research-label,
+.others-section .research-label {
+  font-size: 0.75rem;
+}
+
+.masters-section .research-preview-tag,
+.alumni-section .research-preview-tag,
+.graduateStudent-section .research-preview-tag,
+.webmaster-section .research-preview-tag,
+.others-section .research-preview-tag {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.masters-section .more-tag,
+.alumni-section .more-tag,
+.graduateStudent-section .more-tag,
+.webmaster-section .more-tag,
+.others-section .more-tag {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.masters-section .education-text,
+.alumni-section .education-text,
+.graduateStudent-section .education-text,
+.webmaster-section .education-text,
+.others-section .education-text {
+  font-size: 0.85rem;
+}
+
+.masters-section .card-email,
+.alumni-section .card-email,
+.graduateStudent-section .card-email,
+.webmaster-section .card-email,
+.others-section .card-email {
+  font-size: 0.8rem;
+}
+
+.masters-section .card-expand-btn,
+.alumni-section .card-expand-btn,
+.graduateStudent-section .card-expand-btn,
+.webmaster-section .card-expand-btn,
+.others-section .card-expand-btn {
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Mobile adjustments for compact sections */
+@media (max-width: 1024px) {
+  .masters-section .card-title,
+  .alumni-section .card-title,
+  .graduateStudent-section .card-title,
+  .webmaster-section .card-title,
+  .others-section .card-title {
+    font-size: 1.2rem;
+  }
+  
+  .masters-section .card-title-btn,
+  .alumni-section .card-title-btn,
+  .graduateStudent-section .card-title-btn,
+  .webmaster-section .card-title-btn,
+  .others-section .card-title-btn {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
   }
 }
 
-@media (max-width: 640px) {
-  .modal-content {
-    margin: 1rem;
-    max-height: calc(100vh - 2rem);
+@media (max-width: 768px) {
+  .masters-section .card-title,
+  .alumni-section .card-title,
+  .graduateStudent-section .card-title,
+  .webmaster-section .card-title,
+  .others-section .card-title {
+    font-size: 1.1rem;
   }
+  
+  .masters-section .card-title-btn,
+  .alumni-section .card-title-btn,
+  .graduateStudent-section .card-title-btn,
+  .webmaster-section .card-title-btn,
+  .others-section .card-title-btn {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
 
-  .card-content {
+@media (max-width: 580px) {
+  .masters-section .card-title,
+  .alumni-section .card-title,
+  .graduateStudent-section .card-title,
+  .webmaster-section .card-title,
+  .others-section .card-title {
+    font-size: 1.2rem;
+  }
+}
+
+/* Expandable Card Container */
+.expandable-card-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  justify-items: center;
+  width: 100%;
+}
+
+/* Responsive grid for card list */
+@media (min-width: 768px) {
+  .card-list {
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1600px) {
+  .card-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card-research-preview {
+  margin-top: 0.5rem;
+}
+
+.research-inline-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.research-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.research-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+/* Card Header Styles */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.card-title-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.card-title-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, var(--primary-dark, #1d4ed8), var(--secondary));
+}
+
+.card-subtitle {
+  font-size: 1.1rem;
+  color: var(--primary, #2563eb);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+  display: none; /* Hide since we're showing it as button */
+}
+
+/* Responsive adjustments for card header */
+@media (max-width: 768px) {
+  .card-header {
+    gap: 0.75rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-title-btn {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .card-header {
     flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     text-align: center;
   }
-
-  .card-image {
-    height: 150px;
-    width: 150px;
+  
+  .card-title {
+    font-size: 1.4rem;
+    flex: none;
+  }
+  
+  .card-title-btn {
     align-self: center;
   }
+}
+
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-title-btn {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* Mobile adjustments for uniform height sections */
+@media (max-width: 1024px) {
+  .modal-content {
+    max-width: 550px;
+    max-height: 90vh;
+  }
+  
+  .modal-image-container {
+    height: 180px;
+  }
+  
+  .modal-body {
+    padding: 1.25rem;
+  }
+  
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: 280px;
+    height: 280px;
+    max-height: 280px;
+  }
+  
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+  
+  .modal-image-container {
+    height: 160px;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .modal-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: 240px;
+    height: 240px;
+    max-height: 240px;
+  }
+  
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: 240px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 580px) {
+  .modal-content {
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+  
+  .modal-image-container {
+    height: 140px;
+  }
+  
+  .modal-body {
+    padding: 0.75rem;
+  }
+  
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: auto;
+    height: auto;
+    max-height: none;
+  }
+  
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: auto;
+    height: auto;
+  }
+}
+
+/* Uniform height for specific sections */
+.masters-section .expandable-card-item,
+.alumni-section .expandable-card-item,
+.graduateStudent-section .expandable-card-item,
+.webmaster-section .expandable-card-item,
+.others-section .expandable-card-item {
+  min-height: 320px;
+  height: 320px;
+  max-height: 320px;
+}
+
+/* Ensure card info fills available space uniformly */
+.masters-section .card-info,
+.alumni-section .card-info,
+.graduateStudent-section .card-info,
+.webmaster-section .card-info,
+.others-section .card-info {
+  min-height: 320px;
+  height: 320px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* Adjust card bio to fit within uniform height */
+.masters-section .card-bio,
+.alumni-section .card-bio,
+.graduateStudent-section .card-bio,
+.webmaster-section .card-bio,
+.others-section .card-bio {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Ensure research preview fits within height */
+.masters-section .card-research-preview,
+.alumni-section .card-research-preview,
+.graduateStudent-section .card-research-preview,
+.webmaster-section .card-research-preview,
+.others-section .card-research-preview {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Adjust education preview spacing */
+.masters-section .card-education-preview,
+.alumni-section .card-education-preview,
+.graduateStudent-section .card-education-preview,
+.webmaster-section .card-education-preview,
+.others-section .card-education-preview {
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Ensure email section stays at bottom */
+.masters-section .card-email,
+.alumni-section .card-email,
+.graduateStudent-section .card-email,
+.webmaster-section .card-email,
+.others-section .card-email {
+  margin-top: auto;
+  flex-shrink: 0;
 }
