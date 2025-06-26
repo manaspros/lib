@@ -69,7 +69,7 @@ const Header = () => {
                 <circle cx="25" cy="36" r="2" fill="url(#logoGradient)"/>
               </svg>
             </div>
-            <span className="logo-text">BIRD Lab</span>
+            <span className="logo-text">BIRD</span>
           </Link>
 
           <nav className="desktop-nav">

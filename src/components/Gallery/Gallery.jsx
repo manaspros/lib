@@ -1,11 +1,294 @@
-import { useState, useEffect, useRef } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef, createContext, useContext } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GALLERY_CATEGORIES, GALLERY_ITEMS } from '../../utils/constants';
 import './Gallery.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const CarouselContext = createContext({
+  onCardClose: () => {},
+  currentIndex: 0,
+});
+
+function Carousel({ items, initialScroll = 0 }) {
+  const carouselRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = initialScroll;
+      checkScrollability();
+    }
+  }, [initialScroll]);
+
+  const checkScrollability = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
+  const handleCardClose = (index) => {
+    if (carouselRef.current) {
+      const cardWidth = window.innerWidth < 768 ? 230 : 384;
+      const gap = window.innerWidth < 768 ? 4 : 8;
+      const scrollPosition = (cardWidth + gap) * (index + 1);
+      carouselRef.current.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+      setCurrentIndex(index);
+    }
+  };
+
+  return (
+    <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
+      <div className="apple-carousel-container">
+        <div
+          className="apple-carousel-scroll"
+          ref={carouselRef}
+          onScroll={checkScrollability}
+        >
+          <div className="apple-carousel-track">
+            {items.map((item, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 * index, ease: "easeOut", once: true } }}
+                key={"card" + index}
+                className="apple-carousel-card-wrapper"
+              >
+                {item}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="apple-carousel-controls">
+          <button
+            className="apple-carousel-btn"
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+          >
+            {"<"}
+          </button>
+          <button
+            className="apple-carousel-btn"
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+          >
+            {">"}
+          </button>
+        </div>
+      </div>
+    </CarouselContext.Provider>
+  );
+}
+
+function BlurImage({ src, alt, className, ...rest }) {
+  const [isLoading, setLoading] = useState(true);
+  return (
+    <img
+      className={`apple-blur-img ${isLoading ? "apple-blur" : ""} ${className || ""}`}
+      onLoad={() => setLoading(false)}
+      src={src}
+      alt={alt || "Background of a beautiful view"}
+      loading="lazy"
+      decoding="async"
+      {...rest}
+    />
+  );
+}
+
+function Card({ card, index, layout }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef(null);
+  const { onCardClose } = useContext(CarouselContext);
+
+  useEffect(() => {
+    function onKeyDown(event) {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    }
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  useEffect(() => {
+    function handleClick(event) {
+      if (!containerRef.current || containerRef.current.contains(event.target)) {
+        return;
+      }
+      handleClose();
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClick);
+      document.addEventListener("touchstart", handleClick);
+      return () => {
+        document.removeEventListener("mousedown", handleClick);
+        document.removeEventListener("touchstart", handleClick);
+      };
+    }
+  }, [open]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    onCardClose(index);
+  };
+
+  return (
+    <>
+      <AnimatePresence>
+        {open && (
+          <div className="apple-modal-overlay">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="apple-modal-bg"
+            />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              ref={containerRef}
+              className="apple-modal-content"
+            >
+              <button
+                className="apple-modal-close"
+                onClick={handleClose}
+              >
+                ×
+              </button>
+              <motion.p className="apple-modal-category">
+                {card.category}
+              </motion.p>
+              <motion.p className="apple-modal-title">
+                {card.title}
+              </motion.p>
+              <div className="apple-modal-body">{card.content}</div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      <motion.button
+        onClick={handleOpen}
+        className="apple-card"
+      >
+        <div className="apple-card-gradient" />
+        <div className="apple-card-content">
+          <motion.p className="apple-card-category">
+            {card.category}
+          </motion.p>
+          <motion.p className="apple-card-title">
+            {card.title}
+          </motion.p>
+        </div>
+        <BlurImage
+          src={card.src}
+          alt={card.title}
+          className="apple-card-img"
+        />
+      </motion.button>
+    </>
+  );
+}
+
+// DummyContent and data
+function DummyContent() {
+  return (
+    <>
+      {[...new Array(3).fill(1)].map((_, index) => (
+        <div
+          key={"dummy-content" + index}
+          className="apple-dummy-content"
+        >
+          <p className="apple-dummy-text">
+            <span className="apple-dummy-bold">
+              The first rule of Apple club is that you boast about Apple club.
+            </span>{" "}
+            Keep a journal, quickly jot down a grocery list, and take amazing
+            class notes. Want to convert those notes to text? No problem.
+            Langotiya jeetu ka mara hua yaar is ready to capture every
+            thought.
+          </p>
+          <img
+            src="https://assets.aceternity.com/macbook.png"
+            alt="Macbook mockup from Aceternity UI"
+            height="500"
+            width="500"
+            className="apple-dummy-img"
+          />
+        </div>
+      ))}
+    </>
+  );
+}
+
+const appleCardsData = [
+  {
+    category: "Artificial Intelligence",
+    title: "You can do more with AI.",
+    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Productivity",
+    title: "Enhance your productivity.",
+    src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Product",
+    title: "Launching the new Apple Vision Pro.",
+    src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Product",
+    title: "Maps for your iPhone 15 Pro Max.",
+    src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "iOS",
+    title: "Photography just got better.",
+    src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Hiring",
+    title: "Hiring for a Staff Software Engineer",
+    src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+];
+
+const appleCards = appleCardsData.map((card, index) => (
+  <Card key={card.src} card={card} index={index} layout={true} />
+));
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -75,92 +358,18 @@ const Gallery = () => {
 
   return (
     <section id="gallery" className="gallery-section">
-      <div className="container">        <div 
-          className="section-header"
-        >
+      <div className="container">
+        <div className="section-header">
           <h2 className="section-title">Gallery</h2>
           <p className="section-subtitle">
             Explore our laboratory, projects, and research in action
           </p>
         </div>
-
-        <div className="gallery-filters">
-          {GALLERY_CATEGORIES.map((category) => (
-            <button
-              key={category.id}
-              className={`filter-btn ${activeCategory === category.id ? 'active' : ''}`}
-              onClick={() => handleCategoryChange(category.id)}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
-
-        <div ref={galleryRef} className="gallery-grid">
-          {filteredItems.map((item, index) => (            <div
-              key={item.id}
-              ref={el => itemsRef.current[index] = el}
-              className={`gallery-item ${item.type}`}
-              onClick={() => openLightbox(item)}
-            >
-              <div className="gallery-item-content">
-                {item.type === 'video' ? (
-                  <div className="video-thumbnail">
-                    <img src={item.thumbnail} alt={item.title} />
-                    <div className="play-button">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </div>
-                  </div>
-                ) : (
-                  <img src={item.thumbnail} alt={item.title} />
-                )}
-                
-                <div className="gallery-item-overlay">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>                  <div className="item-category">{item.category}</div>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* Apple Cards Carousel Integration */}
+        <div style={{ marginBottom: 60 }}>
+          <Carousel items={appleCards} />
         </div>
       </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxItem && (          <div
-            className="lightbox-overlay"
-            onClick={closeLightbox}
-          >
-            <div
-              className="lightbox-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button className="lightbox-close" onClick={closeLightbox}>
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                </svg>
-              </button>
-              
-              <div className="lightbox-media">
-                {lightboxItem.type === 'video' ? (
-                  <video controls autoPlay>
-                    <source src={lightboxItem.src} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <img src={lightboxItem.src} alt={lightboxItem.title} />
-                )}
-              </div>
-              
-              <div className="lightbox-info">
-                <h3>{lightboxItem.title}</h3>                <p>{lightboxItem.description}</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

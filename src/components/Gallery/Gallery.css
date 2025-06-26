@@ -141,190 +141,219 @@
 .gallery-item:hover img {
   transform: scale(1.1);
 }
-
-/* Video Thumbnail */
-.video-thumbnail {
+/* Apple Cards Carousel Styles */
+.apple-carousel-container {
+  width: 100%;
   position: relative;
+  margin: 0 auto;
+}
+.apple-carousel-scroll {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 2rem 0;
+}
+.apple-carousel-track {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding-left: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.apple-carousel-card-wrapper {
+  border-radius: 1.5rem;
+  padding-right: 1rem;
+}
+.apple-carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-right: 2.5rem;
+}
+.apple-carousel-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #f3f3f3;
+  border: none;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  opacity: 1;
+  transition: background 0.2s;
+}
+.apple-carousel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.apple-card {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #f3f3f3;
+  width: 14rem;
+  height: 20rem;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .apple-card {
+    width: 24rem;
+    height: 40rem;
+  }
+}
+.apple-card-gradient {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 60%, transparent 100%);
+  height: 100%;
+}
+.apple-card-content {
+  position: relative;
+  z-index: 40;
+  padding: 2rem;
+}
+.apple-card-category {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.apple-card-title {
+  margin-top: 0.5rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  max-width: 16rem;
+}
+@media (min-width: 768px) {
+  .apple-card-title {
+    font-size: 2rem;
+  }
+}
+.apple-card-img {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  object-fit: cover;
   width: 100%;
   height: 100%;
 }
-
-.video-thumbnail img {
+.apple-blur-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: filter 0.3s;
 }
-
-.play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: rgba(100, 108, 255, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+.apple-blur {
+  filter: blur(8px);
 }
-
-.play-button svg {
-  width: 24px;
-  height: 24px;
-  margin-left: 3px;
-}
-
-.gallery-item:hover .play-button {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: rgba(100, 108, 255, 1);
-}
-
-/* Gallery Item Overlay */
-.gallery-item-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-  padding: 40px 20px 20px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
-}
-
-.gallery-item:hover .gallery-item-overlay {
-  transform: translateY(0);
-}
-
-.gallery-item-overlay h3 {
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.gallery-item-overlay p {
-  color: #a0a0a0;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin-bottom: 10px;
-}
-
-.item-category {
-  display: inline-block;
-  background: linear-gradient(135deg, #646cff 0%, #00ffff 100%);
-  color: #ffffff;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Lightbox */
-.lightbox-overlay {
+.apple-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  animation: fadeIn 0.3s ease;
+  inset: 0;
+  z-index: 50;
+  height: 100vh;
+  overflow: auto;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.apple-modal-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(8px);
 }
-
-.lightbox-content {
-  max-width: 90vw;
-  max-height: 90vh;
+.apple-modal-content {
   position: relative;
-  animation: slideIn 0.3s ease;
+  z-index: 60;
+  margin: 2.5rem auto;
+  max-width: 48rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  padding: 1rem;
+  font-family: sans-serif;
 }
-
-@keyframes slideIn {
-  from { 
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to { 
-    opacity: 1;
-    transform: scale(1);
+@media (min-width: 768px) {
+  .apple-modal-content {
+    padding: 2.5rem;
   }
 }
-
-.lightbox-close {
+.apple-modal-close {
   position: absolute;
-  top: -50px;
-  right: 0;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: #ffffff;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-}
-
-.lightbox-close svg {
-  width: 20px;
-  height: 20px;
-}
-
-.lightbox-media {
+  top: 1rem;
+  right: 1rem;
   background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 100;
 }
-
-.lightbox-media img,
-.lightbox-media video {
+.apple-modal-category {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000;
+}
+.apple-modal-title {
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+@media (min-width: 768px) {
+  .apple-modal-title {
+    font-size: 3rem;
+  }
+}
+.apple-modal-body {
+  padding: 2.5rem 0 0 0;
+}
+.apple-dummy-content {
+  background: #f5f5f7;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .apple-dummy-content {
+    padding: 3.5rem;
+  }
+}
+.apple-dummy-text {
+  color: #666;
+  font-size: 1rem;
+  font-family: sans-serif;
+  max-width: 40rem;
+  margin: 0 auto 1rem auto;
+}
+@media (min-width: 768px) {
+  .apple-dummy-text {
+    font-size: 1.25rem;
+  }
+}
+.apple-dummy-bold {
+  font-weight: bold;
+  color: #222;
+}
+.apple-dummy-img {
   width: 100%;
   height: auto;
-  max-height: 70vh;
-  object-fit: contain;
-  display: block;
-}
-
-.lightbox-info {
-  text-align: center;
-  color: #ffffff;
-}
-
-.lightbox-info h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.lightbox-info p {
-  color: #a0a0a0;
-  line-height: 1.6;
-  max-width: 600px;
+  max-width: 20rem;
   margin: 0 auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* Responsive Design */
