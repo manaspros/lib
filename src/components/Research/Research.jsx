@@ -46,6 +46,19 @@ const Research = () => {
                     ))}
                   </div>
                 </div>
+                
+                {area.projects && area.projects.length > 0 && (
+                  <div className="projects-section">
+                    <h4>Current Projects:</h4>
+                    <ul className="projects-list">
+                      {area.projects.map((project, projectIndex) => (
+                        <li key={projectIndex} className="project-item">
+                          {project}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
               
               <div className="card-footer">

@@ -54,38 +54,65 @@ export const TEAM_DATA = {
     }
   ]
 };
-
 // Research areas - Updated to match BIRD Lab focus
 export const RESEARCH_AREAS = [
   {
     title: "Bio-inspired Mechanisms",
-    description: "Developing robotic systems that mimic biological structures and behaviors for enhanced functionality and adaptability.",
+    description: "Human-like fingers, Artificial muscle, Prosthetic Limbs, actuations, sensors, etc.",
     icon: "🦋",
-    technologies: ["Biomimetics", "Morphological Design", "Adaptive Structures", "Nature-Inspired Materials"]
+    technologies: ["Biomimetics", "Morphological Design", "Adaptive Structures", "Nature-Inspired Materials"],
+    projects: [
+      "Bio-inspired Muscles-TSA",
+      "Artificial muscle-based robotic finger",
+      "Artificial muscle-based Robotic hand",
+      "Hawk Gripper",
+      "Bio-inspired Cat-Leap Parkour Rolling Mechanism"
+    ]
   },
   {
-    title: "Wearable & Collaborative Robotics",
-    description: "Creating wearable robotic systems and collaborative robots that work seamlessly with humans.",
+    title: "Wearable Robotics (Bio-signal-controlled Robotics)",
+    description: "Soft actuators, Exoskeleton, Exosuit for assistive, rehabilitation",
     icon: "🤝",
-    technologies: ["Human-Robot Interaction", "Wearable Systems", "Collaborative Control", "Assistive Robotics"]
+    technologies: ["Human-Robot Interaction", "Wearable Systems", "Collaborative Control", "Assistive Robotics"],
+    projects: [
+      "Exoskeleton",
+      "Exosuits",
+      "Prosthetic Limbs",
+      "Supernumerary Robotic Limbs"
+    ]
   },
   {
     title: "Reconfigurable and Growing Robotics",
-    description: "Designing modular and self-reconfiguring robots that can adapt their structure and grow over time.",
+    description: "Metamorphic drone arm, Aerial Manipulation, Soft robotics, etc.",
     icon: "🔄",
-    technologies: ["Modular Robotics", "Self-Assembly", "Adaptive Architecture", "Growth Algorithms"]
+    technologies: ["Modular Robotics", "Self-Assembly", "Adaptive Architecture", "Growth Algorithms"],
+    projects: [
+      "Foldable Supernumerary Robotic Arms",
+      "Extendable Drone Arm ",
+      "Extendable Space Arm"
+    ]
   },
   {
     title: "Tele-Robotics and Haptics",
-    description: "Advancing remote robotic control systems with tactile feedback for precise manipulation tasks.",
+    description: "Bi-manual exoskeletons, haptic feedback, haptic display, etc.",
     icon: "🎮",
-    technologies: ["Haptic Feedback", "Remote Control", "Force Sensing", "Teleoperation"]
+    technologies: ["Haptic Feedback", "Remote Control", "Force Sensing", "Teleoperation"],
+    projects: [
+      "Master device",
+      "Slave Device",
+      "Haptic feedback"
+    ]
   },
   {
     title: "Applied AI in Robotics",
     description: "Implementing artificial intelligence algorithms to enhance robotic decision-making and autonomy.",
     icon: "🧠",
-    technologies: ["Machine Learning", "Neural Networks", "Reinforcement Learning", "Computer Vision"]
+    technologies: ["Machine Learning", "Neural Networks", "Reinforcement Learning", "Computer Vision"],
+    projects: [
+      "Computer Vision for Robotics",
+      "Machine Learning Models",
+      "Autonomous Decision Making"
+    ]
   }
 ];
 
