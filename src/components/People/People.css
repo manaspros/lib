@@ -97,6 +97,10 @@
   aspect-ratio: 1;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   padding: 4px;
+  /* Ensure image container takes full width on mobile */
+  width: 100%; 
+  max-width: 300px; /* Maintain max width */
+  margin: 0 auto; /* Center image on mobile */
 }
 
 .director-image img {
@@ -164,6 +168,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Ensure info takes full width on mobile */
+  width: 100%;
 }
 
 .person-name {
@@ -459,6 +465,38 @@
   .section-subtitle {
     font-size: 1.1rem;
   }
+
+  /* Director Card Mobile Adjustments */
+  .director-card {
+    grid-template-columns: 1fr; /* Stack image and info vertically */
+    gap: 2rem; /* Reduce gap */
+    padding: 2rem; /* Adjust padding */
+  }
+
+  .director-image {
+    max-width: 250px; /* Adjust max width for smaller screens */
+  }
+
+  .person-name {
+    font-size: 1.8rem; /* Adjust font size */
+  }
+
+  .person-title {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .person-bio {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .research-interests h4 {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .interest-tag {
+    font-size: 0.8rem; /* Adjust font size */
+    padding: 0.4rem 0.8rem; /* Adjust padding */
+  }
   
   .team-category-title {
     font-size: 1.6rem;
@@ -472,6 +510,12 @@
   .team-grid-horizontal {
     gap: 1.5rem;
     padding: 0 0.5rem;
+  }
+
+  /* Adjust grid for cards on smaller screens */
+  .team-grid-horizontal .card-list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Allow smaller min width */
+    gap: 1.5rem; /* Reduce gap */
   }
   
   .join-us-section {
@@ -491,6 +535,23 @@
   .join-us-actions {
     justify-content: center;
   }
+
+  /*
+   * To make the content within the individual person cards (.person-card-horizontal)
+   * stack vertically on mobile, you would typically add styles here.
+   * Assuming .person-card-horizontal uses flexbox or grid internally,
+   * you might add something like:
+   *
+   * .person-card-horizontal {
+   *   flex-direction: column; // If using flexbox
+   *   grid-template-columns: 1fr; // If using grid
+   *   align-items: center; // Center content if needed
+   * }
+   *
+   * However, the base definition for .person-card-horizontal is not
+   * present in this file, so these styles cannot be applied here.
+   * You would need to add them where .person-card-horizontal is defined.
+   */
 }
 
 @media (max-width: 480px) {
@@ -500,6 +561,41 @@
   
   .section-title {
     font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem; /* Further adjust subtitle size */
+  }
+
+  /* Director Card Small Mobile Adjustments */
+  .director-card {
+    padding: 1.5rem; /* Further adjust padding */
+    gap: 1.5rem; /* Further reduce gap */
+  }
+
+  .director-image {
+    max-width: 200px; /* Further adjust max width */
+  }
+
+  .person-name {
+    font-size: 1.6rem; /* Further adjust font size */
+  }
+
+  .person-title {
+    font-size: 0.9rem; /* Further adjust font size */
+  }
+
+  .person-bio {
+    font-size: 0.9rem; /* Further adjust font size */
+  }
+
+  .research-interests h4 {
+    font-size: 0.9rem; /* Further adjust font size */
+  }
+
+  .interest-tag {
+    font-size: 0.75rem; /* Further adjust font size */
+    padding: 0.3rem 0.6rem; /* Further adjust padding */
   }
   
   .team-category-title {
@@ -513,6 +609,12 @@
   .team-grid-horizontal {
     padding: 0 0.25rem;
     gap: 1rem;
+  }
+
+  /* Adjust grid for cards on very small screens */
+  .team-grid-horizontal .card-list {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Allow even smaller min width */
+    gap: 1rem; /* Further reduce gap */
   }
   
   .join-us-section {

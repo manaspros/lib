@@ -13,7 +13,8 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
-  z-index: 99999; /* Increased z-index */
+  z-index: 99999;
+  /* Increased z-index */
   /* Ensure backdrop is below modal but above everything else */
 }
 
@@ -27,7 +28,8 @@
   align-items: center;
   /* Corrected property name */
   justify-content: center;
-  z-index: 100000; /* Increased z-index */
+  z-index: 100000;
+  /* Increased z-index */
   /* Ensure modal container is above backdrop */
   padding: 2rem;
   pointer-events: none;
@@ -53,7 +55,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 100001; /* Increased z-index */
+  z-index: 100001;
+  /* Increased z-index */
   /* Ensure close button is on top */
   transition: all 0.2s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -70,7 +73,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--background-secondary); /* Changed to dark background */
   border-radius: 20px;
   overflow: hidden;
   max-width: 600px;
@@ -79,10 +82,14 @@
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   position: relative;
-  z-index: 100000; /* Increased z-index */
+  z-index: 100000;
+  /* Increased z-index */
   /* Ensure content is above backdrop */
-  padding: 1.5rem; /* Existing padding */
-  padding-top: 100px; /* Add padding to the top */
+  padding: 1.5rem;
+  /* Existing padding */
+  padding-top: 100px;
+  /* Add padding to the top */
+  border: 1px solid var(--border); /* Add border */
 }
 
 .modal-image-container {
@@ -104,7 +111,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 .modal-body {
@@ -126,7 +133,7 @@
 .modal-title {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-primary); /* Changed text color */
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
 }
@@ -140,7 +147,7 @@
 
 .modal-affiliation {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary); /* Changed text color */
   font-style: italic;
   margin: 0;
 }
@@ -155,20 +162,20 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: var(--primary, #2563eb);
+  background: linear-gradient(135deg, var(--primary), var(--secondary)); /* Use gradient */
   color: white;
   text-decoration: none;
   border-radius: 12px;
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.25); /* Adjust shadow color */
 }
 
 .modal-cta-btn:hover {
-  background: var(--primary-dark, #1d4ed8);
+  background: linear-gradient(135deg, var(--secondary), var(--primary)); /* Hover gradient */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 6px 20px rgba(100, 108, 255, 0.35); /* Adjust shadow color */
 }
 
 .btn-icon {
@@ -177,7 +184,7 @@
 }
 
 .modal-details {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border); /* Changed border color */
   padding-top: 1.5rem;
 }
 
@@ -202,7 +209,7 @@
 .achievements-section h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--text-primary); /* Changed text color */
   margin: 0 0 0.75rem 0;
   display: flex;
   align-items: center;
@@ -212,7 +219,7 @@
 .person-bio {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #4b5563;
+  color: var(--text-secondary); /* Changed text color */
   margin: 0;
 }
 
@@ -224,13 +231,14 @@
 
 .research-tag {
   padding: 0.4rem 0.8rem;
-  background: linear-gradient(135deg, var(--primary, #2563eb), var(--accent, #3b82f6));
-  color: white;
+  background: linear-gradient(135deg, rgba(100, 108, 255, 0.2), rgba(0, 255, 255, 0.2)); /* Use gradient */
+  color: var(--text-primary); /* Changed text color */
   border-radius: 16px;
   font-size: 0.8rem;
   font-weight: 500;
   cursor: default;
   transition: transform 0.2s ease;
+  border: 1px solid rgba(100, 108, 255, 0.3); /* Add border */
 }
 
 .research-tag:hover {
@@ -248,7 +256,7 @@
   gap: 0.75rem;
   align-items: flex-start;
   padding: 0.75rem;
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.05); /* Changed background */
   border-radius: 10px;
   border-left: 3px solid var(--primary, #2563eb);
 }
@@ -261,7 +269,7 @@
 }
 
 .degree-details {
-  color: #4b5563;
+  color: var(--text-secondary); /* Changed text color */
   line-height: 1.4;
   font-size: 0.9rem;
 }
@@ -279,14 +287,15 @@
   align-items: flex-start;
   gap: 0.5rem;
   padding: 0.75rem;
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.05); /* Changed background */
   border-radius: 8px;
   transition: background-color 0.2s ease;
+  border: 1px solid var(--border-light); /* Add border */
 }
 
 .publication-item:hover,
 .achievement-item:hover {
-  background: #f1f5f9;
+  background: rgba(255, 255, 255, 0.08); /* Hover background */
 }
 
 .achievement-icon {
@@ -301,7 +310,7 @@
 .achievement-text {
   font-size: 0.9rem;
   line-height: 1.4;
-  color: #4b5563;
+  color: var(--text-secondary); /* Changed text color */
 }
 
 .show-more-publications {
@@ -310,7 +319,7 @@
   font-weight: 500;
   font-size: 0.9rem;
   padding: 0.75rem;
-  background: #f0f7ff;
+  background: rgba(100, 108, 255, 0.1); /* Changed background */
   border-radius: 8px;
   border: 2px dashed var(--primary, #2563eb);
 }
@@ -739,12 +748,15 @@
   }
 }
 
+/* Mobile Responsiveness (Stacking layout) */
 @media (max-width: 768px) {
   .modal-content {
     max-width: 95vw;
     max-height: 85vh;
-    padding: 1rem; /* Existing padding */
-    padding-top: 80px; /* Adjust padding for smaller header */
+    padding: 1rem;
+    /* Existing padding */
+    padding-top: 80px;
+    /* Adjust padding for smaller header */
   }
 
   .modal-image-container {
@@ -763,135 +775,28 @@
     font-size: 0.95rem;
   }
 
-  .masters-section .expandable-card-item,
-  .alumni-section .expandable-card-item,
-  .graduateStudent-section .expandable-card-item,
-  .webmaster-section .expandable-card-item,
-  .others-section .expandable-card-item {
-    min-height: 240px;
-    height: 240px;
-    max-height: 240px;
-  }
-
-  .masters-section .card-info,
-  .alumni-section .card-info,
-  .graduateStudent-section .card-info,
-  .webmaster-section .card-info,
-  .others-section .card-info {
-    min-height: 240px;
-    height: 240px;
-  }
-}
-
-@media (max-width: 580px) {
-  .modal-content {
-    max-width: 90vw;
-    max-height: 80vh;
-    padding: 0.75rem; /* Existing padding */
-    padding-top: 70px; /* Adjust padding for even smaller header */
-  }
-
-  .modal-image-container {
-    height: 140px;
-  }
-
-  .modal-body {
-    padding: 0.75rem;
-  }
-
-  /* On small screens, allow height to be auto */
-
-  .masters-section .expandable-card-item,
-  .alumni-section .expandable-card-item,
-  .graduateStudent-section .expandable-card-item,
-  .webmaster-section .expandable-card-item,
-  .others-section .expandable-card-item {
-    min-height: auto;
-    height: auto;
-    max-height: none;
+  /* Apply stacking layout to all cards below 768px */
+  .expandable-card-item {
     grid-template-columns: 1fr;
     /* Stack image and info */
     gap: 1.5rem;
     padding: 1rem;
-  }
-
-  .masters-section .card-info,
-  .alumni-section .card-info,
-  .graduateStudent-section .card-info,
-  .webmaster-section .card-info,
-  .others-section .card-info {
     min-height: auto;
     height: auto;
-    justify-content: flex-start;
-    /* Reset vertical distribution */
+    max-height: none;
   }
 
-  .masters-section .card-image-container,
-  .alumni-section .card-image-container,
-  .graduateStudent-section .card-image-container,
-  .webmaster-section .card-image-container,
-  .others-section .card-image-container {
+  .card-image-container {
     width: 100%;
     height: 200px;
     /* Set a height for the stacked image */
   }
 
-  .masters-section .card-title,
-  .alumni-section .card-title,
-  .graduateStudent-section .card-title,
-  .webmaster-section .card-title,
-  .others-section .card-title {
-    font-size: 1.2rem;
-  }
-
-  .masters-section .card-title-btn,
-  .alumni-section .card-title-btn,
-  .graduateStudent-section .card-title-btn,
-  .webmaster-section .card-title-btn,
-  .others-section .card-title-btn {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-  }
-
-  .masters-section .card-expand-btn,
-  .alumni-section .card-expand-btn,
-  .graduateStudent-section .card-expand-btn,
-  .webmaster-section .card-expand-btn,
-  .others-section .card-expand-btn {
-    position: static;
-    /* Remove absolute positioning */
-    margin-top: 1rem;
-    /* Add space after content */
-    opacity: 1;
-    /* Always visible when stacked */
-    transform: none;
-    /* Remove transform */
-    align-self: center;
-    /* Center the button */
-  }
-
-  .masters-section .card-email,
-  .alumni-section .card-email,
-  .graduateStudent-section .card-email,
-  .webmaster-section .card-email,
-  .others-section .card-email {
-    margin-top: 1rem;
-    /* Add space */
-  }
-}
-
-@media (max-width: 480px) {
-  .card-list {
-    gap: 1.5rem;
-  }
-
-  .expandable-card-item {
-    padding: 0.75rem;
-    gap: 1rem;
-  }
-
-  .card-image-container {
-    height: 180px;
+  .card-info {
+    min-height: auto;
+    height: auto;
+    justify-content: flex-start;
+    /* Reset vertical distribution */
   }
 
   .card-title {
@@ -924,49 +829,87 @@
     font-size: 0.8rem;
   }
 
-  .masters-section .expandable-card-item,
-  .alumni-section .expandable-card-item,
-  .graduateStudent-section .expandable-card-item,
-  .webmaster-section .expandable-card-item,
-  .others-section .expandable-card-item {
+  .card-expand-btn {
+    position: static;
+    /* Remove absolute positioning */
+    margin-top: 1rem;
+    /* Add space after content */
+    opacity: 1;
+    /* Always visible when stacked */
+    transform: none;
+    /* Remove transform */
+    align-self: center;
+    /* Center the button */
+  }
+}
+
+@media (max-width: 580px) {
+  .modal-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    padding: 0.75rem;
+    /* Existing padding */
+    padding-top: 70px;
+    /* Adjust padding for even smaller header */
+  }
+
+  .modal-image-container {
+    height: 140px;
+  }
+
+  .modal-body {
+    padding: 0.75rem;
+  }
+
+  .card-list {
+    gap: 1.5rem;
+  }
+
+  .expandable-card-item {
     padding: 0.75rem;
     gap: 1rem;
   }
 
-  .masters-section .card-image-container,
-  .alumni-section .card-image-container,
-  .graduateStudent-section .card-image-container,
-  .webmaster-section .card-image-container,
-  .others-section .card-image-container {
+  .card-image-container {
     height: 180px;
   }
 
-  .masters-section .card-title,
-  .alumni-section .card-title,
-  .graduateStudent-section .card-title,
-  .webmaster-section .card-title,
-  .others-section .card-title {
-    font-size: 1.1rem;
+  .card-title {
+    font-size: 1.2rem;
   }
 
-  .masters-section .card-title-btn,
-  .alumni-section .card-title-btn,
-  .graduateStudent-section .card-title-btn,
-  .webmaster-section .card-title-btn,
-  .others-section .card-title-btn {
+  .card-title-btn {
     font-size: 0.65rem;
     padding: 0.25rem 0.5rem;
   }
 
-  .masters-section .card-expand-btn,
-  .alumni-section .card-expand-btn,
-  .graduateStudent-section .card-expand-btn,
-  .webmaster-section .card-expand-btn,
-  .others-section .card-expand-btn {
+  .card-affiliation {
+    font-size: 0.85rem;
+  }
+
+  .research-label {
+    font-size: 0.75rem;
+  }
+
+  .research-preview-tag,
+  .more-tag {
+    font-size: 0.7rem;
+  }
+
+  .education-text {
+    font-size: 0.85rem;
+  }
+
+  .card-email {
+    font-size: 0.75rem;
+  }
+
+  .card-expand-btn {
     font-size: 0.8rem;
     padding: 0.5rem 1rem;
   }
 }
+
 
 /* Lightbox */
 .lightbox-overlay {
@@ -995,20 +938,31 @@
   /* Increased z-index */
 }
 
-.masters-section .expandable-card-item,
-.alumni-section .expandable-card-item,
-.graduateStudent-section .expandable-card-item,
-.webmaster-section .expandable-card-item,
-.others-section .expandable-card-item {
-  min-height: auto;
-  height: auto;
-}
+/* Remove specific height overrides for compact sections on mobile */
+@media (max-width: 768px) {
 
-.masters-section .card-info,
-.alumni-section .card-info,
-.graduateStudent-section .card-info,
-.webmaster-section .card-info,
-.others-section .card-info {
-  min-height: auto;
-  height: auto;
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: auto;
+    height: auto;
+    max-height: none;
+  }
+
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: auto;
+    height: auto;
+  }
 }
+  .graduateStudent-section .card-expand-btn,
+  .webmaster-section .card-expand-btn,
+  .others-section .card-expand-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
