@@ -13,7 +13,8 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
-  z-index: 10000;
+  z-index: 99999; /* Increased z-index */
+  /* Ensure backdrop is below modal but above everything else */
 }
 
 .modal-container {
@@ -23,11 +24,21 @@
   width: 100%;
   height: 100%;
   display: flex;
-  items-center: center;
+  align-items: center;
+  /* Corrected property name */
   justify-content: center;
-  z-index: 10001;
+  z-index: 100000; /* Increased z-index */
+  /* Ensure modal container is above backdrop */
   padding: 2rem;
+  pointer-events: none;
+  /* Allow clicks to pass through container to backdrop */
 }
+
+.modal-container > * {
+  pointer-events: auto;
+  /* Re-enable pointer events for modal content */
+}
+
 
 .modal-close-btn {
   position: absolute;
@@ -42,7 +53,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10002;
+  z-index: 100001; /* Increased z-index */
+  /* Ensure close button is on top */
   transition: all 0.2s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -67,6 +79,10 @@
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   position: relative;
+  z-index: 100000; /* Increased z-index */
+  /* Ensure content is above backdrop */
+  padding: 1.5rem; /* Existing padding */
+  padding-top: 100px; /* Add padding to the top */
 }
 
 .modal-image-container {
@@ -79,6 +95,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .modal-image-overlay {
@@ -303,6 +320,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  justify-items: center;
   width: 100%;
 }
 
@@ -435,7 +453,8 @@
   font-weight: 500;
   margin: 0;
   line-height: 1.4;
-  display: none; /* Hide since we're showing it as button */
+  display: none;
+  /* Hide since we're showing it as button */
 }
 
 .card-affiliation {
@@ -467,6 +486,17 @@
   margin-top: auto;
   padding-top: 0.5rem;
   border-top: 1px solid var(--border);
+}
+
+.card-research-preview {
+  margin-top: 0.5rem;
+}
+
+.research-inline-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .research-label {
@@ -569,157 +599,6 @@
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
 }
 
-/* Compact styling for sections with multiple cards per row */
-.masters-section .expandable-card-item,
-.alumni-section .expandable-card-item,
-.graduateStudent-section .expandable-card-item,
-.webmaster-section .expandable-card-item,
-.others-section .expandable-card-item {
-  min-height: 250px;
-}
-
-.masters-section .card-title,
-.alumni-section .card-title,
-.graduateStudent-section .card-title,
-.webmaster-section .card-title,
-.others-section .card-title {
-  font-size: 1.3rem;
-  line-height: 1.2;
-}
-
-.masters-section .card-title-btn,
-.alumni-section .card-title-btn,
-.graduateStudent-section .card-title-btn,
-.webmaster-section .card-title-btn,
-.others-section .card-title-btn {
-  font-size: 0.7rem;
-  padding: 0.3rem 0.6rem;
-}
-
-.masters-section .card-affiliation,
-.alumni-section .card-affiliation,
-.graduateStudent-section .card-affiliation,
-.webmaster-section .card-affiliation,
-.others-section .card-affiliation {
-  font-size: 0.85rem;
-  padding: 0.4rem;
-}
-
-.masters-section .research-label,
-.alumni-section .research-label,
-.graduateStudent-section .research-label,
-.webmaster-section .research-label,
-.others-section .research-label {
-  font-size: 0.75rem;
-}
-
-.masters-section .research-preview-tag,
-.alumni-section .research-preview-tag,
-.graduateStudent-section .research-preview-tag,
-.webmaster-section .research-preview-tag,
-.others-section .research-preview-tag {
-  font-size: 0.7rem;
-  padding: 0.25rem 0.5rem;
-}
-
-.masters-section .more-tag,
-.alumni-section .more-tag,
-.graduateStudent-section .more-tag,
-.webmaster-section .more-tag,
-.others-section .more-tag {
-  font-size: 0.7rem;
-  padding: 0.25rem 0.5rem;
-}
-
-.masters-section .education-text,
-.alumni-section .education-text,
-.graduateStudent-section .education-text,
-.webmaster-section .education-text,
-.others-section .education-text {
-  font-size: 0.85rem;
-}
-
-.masters-section .card-email,
-.alumni-section .card-email,
-.graduateStudent-section .card-email,
-.webmaster-section .card-email,
-.others-section .card-email {
-  font-size: 0.8rem;
-}
-
-.masters-section .card-expand-btn,
-.alumni-section .card-expand-btn,
-.graduateStudent-section .card-expand-btn,
-.webmaster-section .card-expand-btn,
-.others-section .card-expand-btn {
-  font-size: 0.8rem;
-  padding: 0.5rem 1rem;
-}
-
-/* Mobile adjustments for compact sections */
-@media (max-width: 1024px) {
-  .masters-section .card-title,
-  .alumni-section .card-title,
-  .graduateStudent-section .card-title,
-  .webmaster-section .card-title,
-  .others-section .card-title {
-    font-size: 1.2rem;
-  }
-  
-  .masters-section .card-title-btn,
-  .alumni-section .card-title-btn,
-  .graduateStudent-section .card-title-btn,
-  .webmaster-section .card-title-btn,
-  .others-section .card-title-btn {
-    font-size: 0.65rem;
-    padding: 0.25rem 0.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .masters-section .card-title,
-  .alumni-section .card-title,
-  .graduateStudent-section .card-title,
-  .webmaster-section .card-title,
-  .others-section .card-title {
-    font-size: 1.1rem;
-  }
-  
-  .masters-section .card-title-btn,
-  .alumni-section .card-title-btn,
-  .graduateStudent-section .card-title-btn,
-  .webmaster-section .card-title-btn,
-  .others-section .card-title-btn {
-    font-size: 0.6rem;
-    padding: 0.2rem 0.4rem;
-  }
-}
-
-@media (max-width: 580px) {
-  .masters-section .card-title,
-  .alumni-section .card-title,
-  .graduateStudent-section .card-title,
-  .webmaster-section .card-title,
-  .others-section .card-title {
-    font-size: 1.2rem;
-  }
-}
-
-/* Expandable Card Container */
-.expandable-card-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  justify-items: center;
-  width: 100%;
-}
-
 /* Responsive grid for card list */
 @media (min-width: 768px) {
   .card-list {
@@ -739,244 +618,18 @@
   }
 }
 
-.card-research-preview {
-  margin-top: 0.5rem;
-}
-
-.research-inline-container {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.research-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  flex-shrink: 0;
-}
-
-.research-tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  flex: 1;
-}
-
-/* Card Header Styles */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.card-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.3;
-  flex: 1;
-}
-
-.card-title-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
-}
-
-.card-title-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-  background: linear-gradient(135deg, var(--primary-dark, #1d4ed8), var(--secondary));
-}
-
-.card-subtitle {
-  font-size: 1.1rem;
-  color: var(--primary, #2563eb);
-  font-weight: 500;
-  margin: 0;
-  line-height: 1.4;
-  display: none; /* Hide since we're showing it as button */
-}
-
-/* Responsive adjustments for card header */
-@media (max-width: 768px) {
-  .card-header {
-    gap: 0.75rem;
-  }
-  
-  .card-title {
-    font-size: 1.3rem;
-  }
-  
-  .card-title-btn {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.7rem;
-  }
-}
-
-@media (max-width: 580px) {
-  .card-header {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
-  }
-  
-  .card-title {
-    font-size: 1.4rem;
-    flex: none;
-  }
-  
-  .card-title-btn {
-    align-self: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .card-title {
-    font-size: 1.3rem;
-  }
-  
-  .card-title-btn {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-  }
-}
-
-/* Mobile adjustments for uniform height sections */
-@media (max-width: 1024px) {
-  .modal-content {
-    max-width: 550px;
-    max-height: 90vh;
-  }
-  
-  .modal-image-container {
-    height: 180px;
-  }
-  
-  .modal-body {
-    padding: 1.25rem;
-  }
-  
-  .masters-section .expandable-card-item,
-  .alumni-section .expandable-card-item,
-  .graduateStudent-section .expandable-card-item,
-  .webmaster-section .expandable-card-item,
-  .others-section .expandable-card-item {
-    min-height: 280px;
-    height: 280px;
-    max-height: 280px;
-  }
-  
-  .masters-section .card-info,
-  .alumni-section .card-info,
-  .graduateStudent-section .card-info,
-  .webmaster-section .card-info,
-  .others-section .card-info {
-    min-height: 280px;
-    height: 280px;
-  }
-}
-
-@media (max-width: 768px) {
-  .modal-content {
-    max-width: 95vw;
-    max-height: 85vh;
-  }
-  
-  .modal-image-container {
-    height: 160px;
-  }
-  
-  .modal-body {
-    padding: 1rem;
-  }
-  
-  .modal-title {
-    font-size: 1.4rem;
-  }
-  
-  .modal-subtitle {
-    font-size: 0.95rem;
-  }
-  
-  .masters-section .expandable-card-item,
-  .alumni-section .expandable-card-item,
-  .graduateStudent-section .expandable-card-item,
-  .webmaster-section .expandable-card-item,
-  .others-section .expandable-card-item {
-    min-height: 240px;
-    height: 240px;
-    max-height: 240px;
-  }
-  
-  .masters-section .card-info,
-  .alumni-section .card-info,
-  .graduateStudent-section .card-info,
-  .webmaster-section .card-info,
-  .others-section .card-info {
-    min-height: 240px;
-    height: 240px;
-  }
-}
-
-@media (max-width: 580px) {
-  .modal-content {
-    max-width: 90vw;
-    max-height: 80vh;
-  }
-  
-  .modal-image-container {
-    height: 140px;
-  }
-  
-  .modal-body {
-    padding: 0.75rem;
-  }
-  
-  .masters-section .expandable-card-item,
-  .alumni-section .expandable-card-item,
-  .graduateStudent-section .expandable-card-item,
-  .webmaster-section .expandable-card-item,
-  .others-section .expandable-card-item {
-    min-height: auto;
-    height: auto;
-    max-height: none;
-  }
-  
-  .masters-section .card-info,
-  .alumni-section .card-info,
-  .graduateStudent-section .card-info,
-  .webmaster-section .card-info,
-  .others-section .card-info {
-    min-height: auto;
-    height: auto;
-  }
-}
-
-/* Uniform height for specific sections */
+/* Compact styling for sections with multiple cards per row */
 .masters-section .expandable-card-item,
 .alumni-section .expandable-card-item,
 .graduateStudent-section .expandable-card-item,
 .webmaster-section .expandable-card-item,
 .others-section .expandable-card-item {
   min-height: 320px;
+  /* Set a consistent minimum height */
   height: 320px;
+  /* Set a consistent height */
   max-height: 320px;
+  /* Set a consistent maximum height */
 }
 
 /* Ensure card info fills available space uniformly */
@@ -986,9 +639,13 @@
 .webmaster-section .card-info,
 .others-section .card-info {
   min-height: 320px;
+  /* Match the card item height */
   height: 320px;
+  /* Match the card item height */
   justify-content: space-between;
+  /* Distribute content vertically */
   overflow: hidden;
+  /* Hide overflowing content */
 }
 
 /* Adjust card bio to fit within uniform height */
@@ -997,7 +654,12 @@
 .graduateStudent-section .card-bio,
 .webmaster-section .card-bio,
 .others-section .card-bio {
+  /* Use line-clamp for multi-line ellipsis if supported */
+  display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
+  /* Added standard property */
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 0.9rem;
@@ -1011,7 +673,9 @@
 .webmaster-section .card-research-preview,
 .others-section .card-research-preview {
   margin-top: auto;
+  /* Push to the bottom if space allows */
   flex-shrink: 0;
+  /* Prevent shrinking */
 }
 
 /* Adjust education preview spacing */
@@ -1031,5 +695,320 @@
 .webmaster-section .card-email,
 .others-section .card-email {
   margin-top: auto;
+  /* Push to the bottom */
   flex-shrink: 0;
+}
+
+/* Responsive adjustments for compact sections */
+@media (max-width: 1024px) {
+
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: 280px;
+    height: 280px;
+    max-height: 280px;
+  }
+
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: 280px;
+    height: 280px;
+  }
+
+  .masters-section .card-title,
+  .alumni-section .card-title,
+  .graduateStudent-section .card-title,
+  .webmaster-section .card-title,
+  .others-section .card-title {
+    font-size: 1.2rem;
+  }
+
+  .masters-section .card-title-btn,
+  .alumni-section .card-title-btn,
+  .graduateStudent-section .card-title-btn,
+  .webmaster-section .card-title-btn,
+  .others-section .card-title-btn {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95vw;
+    max-height: 85vh;
+    padding: 1rem; /* Existing padding */
+    padding-top: 80px; /* Adjust padding for smaller header */
+  }
+
+  .modal-image-container {
+    height: 160px;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: 240px;
+    height: 240px;
+    max-height: 240px;
+  }
+
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: 240px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 580px) {
+  .modal-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    padding: 0.75rem; /* Existing padding */
+    padding-top: 70px; /* Adjust padding for even smaller header */
+  }
+
+  .modal-image-container {
+    height: 140px;
+  }
+
+  .modal-body {
+    padding: 0.75rem;
+  }
+
+  /* On small screens, allow height to be auto */
+
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    min-height: auto;
+    height: auto;
+    max-height: none;
+    grid-template-columns: 1fr;
+    /* Stack image and info */
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .masters-section .card-info,
+  .alumni-section .card-info,
+  .graduateStudent-section .card-info,
+  .webmaster-section .card-info,
+  .others-section .card-info {
+    min-height: auto;
+    height: auto;
+    justify-content: flex-start;
+    /* Reset vertical distribution */
+  }
+
+  .masters-section .card-image-container,
+  .alumni-section .card-image-container,
+  .graduateStudent-section .card-image-container,
+  .webmaster-section .card-image-container,
+  .others-section .card-image-container {
+    width: 100%;
+    height: 200px;
+    /* Set a height for the stacked image */
+  }
+
+  .masters-section .card-title,
+  .alumni-section .card-title,
+  .graduateStudent-section .card-title,
+  .webmaster-section .card-title,
+  .others-section .card-title {
+    font-size: 1.2rem;
+  }
+
+  .masters-section .card-title-btn,
+  .alumni-section .card-title-btn,
+  .graduateStudent-section .card-title-btn,
+  .webmaster-section .card-title-btn,
+  .others-section .card-title-btn {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .masters-section .card-expand-btn,
+  .alumni-section .card-expand-btn,
+  .graduateStudent-section .card-expand-btn,
+  .webmaster-section .card-expand-btn,
+  .others-section .card-expand-btn {
+    position: static;
+    /* Remove absolute positioning */
+    margin-top: 1rem;
+    /* Add space after content */
+    opacity: 1;
+    /* Always visible when stacked */
+    transform: none;
+    /* Remove transform */
+    align-self: center;
+    /* Center the button */
+  }
+
+  .masters-section .card-email,
+  .alumni-section .card-email,
+  .graduateStudent-section .card-email,
+  .webmaster-section .card-email,
+  .others-section .card-email {
+    margin-top: 1rem;
+    /* Add space */
+  }
+}
+
+@media (max-width: 480px) {
+  .card-list {
+    gap: 1.5rem;
+  }
+
+  .expandable-card-item {
+    padding: 0.75rem;
+    gap: 1rem;
+  }
+
+  .card-image-container {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .card-title-btn {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .card-affiliation {
+    font-size: 0.9rem;
+  }
+
+  .research-label {
+    font-size: 0.8rem;
+  }
+
+  .research-preview-tag,
+  .more-tag {
+    font-size: 0.75rem;
+  }
+
+  .education-text {
+    font-size: 0.9rem;
+  }
+
+  .card-email {
+    font-size: 0.8rem;
+  }
+
+  .masters-section .expandable-card-item,
+  .alumni-section .expandable-card-item,
+  .graduateStudent-section .expandable-card-item,
+  .webmaster-section .expandable-card-item,
+  .others-section .expandable-card-item {
+    padding: 0.75rem;
+    gap: 1rem;
+  }
+
+  .masters-section .card-image-container,
+  .alumni-section .card-image-container,
+  .graduateStudent-section .card-image-container,
+  .webmaster-section .card-image-container,
+  .others-section .card-image-container {
+    height: 180px;
+  }
+
+  .masters-section .card-title,
+  .alumni-section .card-title,
+  .graduateStudent-section .card-title,
+  .webmaster-section .card-title,
+  .others-section .card-title {
+    font-size: 1.1rem;
+  }
+
+  .masters-section .card-title-btn,
+  .alumni-section .card-title-btn,
+  .graduateStudent-section .card-title-btn,
+  .webmaster-section .card-title-btn,
+  .others-section .card-title-btn {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .masters-section .card-expand-btn,
+  .alumni-section .card-expand-btn,
+  .graduateStudent-section .card-expand-btn,
+  .webmaster-section .card-expand-btn,
+  .others-section .card-expand-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 999999;
+  /* Increased z-index */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  animation: slideIn 0.3s ease;
+  z-index: 1000000;
+  /* Increased z-index */
+}
+
+.masters-section .expandable-card-item,
+.alumni-section .expandable-card-item,
+.graduateStudent-section .expandable-card-item,
+.webmaster-section .expandable-card-item,
+.others-section .expandable-card-item {
+  min-height: auto;
+  height: auto;
+}
+
+.masters-section .card-info,
+.alumni-section .card-info,
+.graduateStudent-section .card-info,
+.webmaster-section .card-info,
+.others-section .card-info {
+  min-height: auto;
+  height: auto;
 }

@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20000;
+  z-index: 1000; /* Reduced z-index */
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -190,30 +190,28 @@
 /* Mobile Navigation */
 .mobile-nav {
   position: fixed;
-  top: 100%;
+  top: 70px; /* Start below the header (adjust if header height changes) */
   left: 0;
   right: 0;
-  background: rgba(12, 12, 18, 0.98);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  transform: translateY(-100%);
+  height: calc(100vh - 70px); /* Fill the rest of the viewport height */
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999; /* Below header (1000) */
+  transform: translateX(100%); /* Start off-screen to the right */
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  height: calc(100vh - 80px);
-  overflow-y: auto;
-  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.2);
-  z-index: 999;
+  transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease; /* Add transitions */
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .mobile-nav.open {
-  transform: translateY(-100%);
+  transform: translateX(0); /* Slide into view */
   opacity: 1;
   visibility: visible;
 }
 
 .mobile-nav-content {
-  padding: 48px 24px;
+  padding: 20px 24px 48px; /* Adjusted padding-top */
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -298,30 +296,37 @@
   .desktop-nav {
     display: none;
   }
-  
+
   .mobile-menu-toggle {
     display: block;
   }
-  
+
   .header-content {
     padding: 16px 0;
   }
-  
+
   .header.scrolled .header-content {
     padding: 12px 0;
   }
-  
+
   .logo-text {
     font-size: 1.4rem;
   }
-  
+
   .logo-icon {
     width: 36px;
     height: 36px;
   }
-  
+
   .logo {
     padding: 6px 10px;
+  }
+
+  /* Adjust mobile nav top and height for smaller screens */
+  .mobile-nav {
+    top: 60px;
+    /* Adjust based on header height at this breakpoint */
+    height: calc(100vh - 60px);
   }
 }
 
@@ -330,25 +335,32 @@
     padding: 40px 20px;
     gap: 10px;
   }
-  
+
   .mobile-nav .nav-item {
     font-size: 1rem;
     padding: 14px 28px;
     max-width: 260px;
   }
-  
+
   .logo-text {
     font-size: 1.3rem;
   }
-  
+
   .logo-icon {
     width: 32px;
     height: 32px;
   }
-  
+
   .hamburger {
     width: 22px;
     height: 16px;
+  }
+
+  /* Adjust mobile nav top and height for smaller screens */
+  .mobile-nav {
+    top: 50px;
+    /* Adjust based on header height at this breakpoint */
+    height: calc(100vh - 50px);
   }
 }
 
@@ -382,80 +394,119 @@ html {
 .header.scrolled::after {
   opacity: 1;
 }
+
 .hamburger.open span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Mobile Navigation (Corrected and consolidated) */
 .mobile-nav {
-  display: none;
   position: fixed;
-  top: 0;
+  top: 70px;
+  /* Start below the header (adjust if header height changes) */
+  left: 0;
   right: 0;
-  width: 100%;
-  height: 100vh;
+  height: calc(100vh - 70px);
+  /* Fill the rest of the viewport height */
   background: rgba(10, 10, 10, 0.98);
   backdrop-filter: blur(20px);
   z-index: 999;
+  /* Below header (1000) */
   transform: translateX(100%);
+  /* Start off-screen to the right */
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
+  /* Add transitions */
+  overflow-y: auto;
+  /* Allow scrolling if content overflows */
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+  /* Slide into view */
+  opacity: 1;
+  visibility: visible;
 }
 
 .mobile-nav-content {
+  padding: 20px 24px 48px;
+  /* Adjusted padding-top */
   display: flex;
   flex-direction: column;
+  gap: 12px;
   align-items: center;
+  min-height: 100%;
   justify-content: center;
-  height: 100%;
-  gap: 2rem;
-  padding: 2rem;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-.nav-item {
-  color: var(--text-primary);
+.mobile-nav .nav-item {
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateX(50px);
+  letter-spacing: -0.01em;
+  padding: 16px 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
 }
 
-.nav-item:hover {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  transform: translateX(0) scale(1.05);
+.mobile-nav .nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(79, 172, 254, 0.1), transparent);
+  transition: left 0.6s ease;
 }
 
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none;
+.mobile-nav .nav-item:hover::before {
+  left: 100%;
+}
+
+.mobile-nav .nav-item:hover {
+  color: #ffffff;
+  border-color: rgba(79, 172, 254, 0.3);
+  background: rgba(79, 172, 254, 0.1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(79, 172, 254, 0.2);
+}
+
+.mobile-nav .nav-item:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Professional Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .mobile-menu-toggle {
-    display: block;
-  }
-  
-  .header-content {
-    padding: 0.75rem 0;
-  }
-  
-  .logo-text {
-    font-size: 1.1rem;
-  }
-  
-  .logo-icon {
-    width: 32px;
-    height: 32px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (max-width: 480px) {
-  .mobile-nav-content {
-    gap: 1.5rem;
-  }
-  
-  .nav-item {
-    font-size: 1.25rem;
-    padding: 0.75rem 1.5rem;
-  }
+.mobile-nav.open .nav-item {
+  animation: fadeInUp 0.4s ease forwards;
 }
+
+.mobile-nav.open .nav-item:nth-child(1) { animation-delay: 0.1s; }
+.mobile-nav.open .nav-item:nth-child(2) { animation-delay: 0.15s; }
+.mobile-nav.open .nav-item:nth-child(3) { animation-delay: 0.2s; }
+.mobile-nav.open .nav-item:nth-child(4) { animation-delay: 0.25s; }
+.mobile-nav.open .nav-item:nth-child(5) { animation-delay: 0.3s; }
+.mobile-nav.open .nav-item:nth-child(6) { animation-delay: 0.35s; }

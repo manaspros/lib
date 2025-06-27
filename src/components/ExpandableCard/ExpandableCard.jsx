@@ -32,10 +32,14 @@ const ExpandableCard = ({ cards }) => {
   const ref = useRef(null);
   const [imageErrors, setImageErrors] = useState({});
 
+  const handleClose = () => { // Define handleClose here
+    setActive(null);
+  };
+
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") {
-        setActive(null);
+        handleClose();
       }
     }
 
@@ -47,9 +51,9 @@ const ExpandableCard = ({ cards }) => {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+  }, [active, handleClose]); // Added handleClose to dependency array
 
-  useOutsideClick(ref, () => setActive(null));
+  useOutsideClick(ref, handleClose); // useOutsideClick hook already handles ref and callback dependencies
 
   const getImageSrc = (card) => {
     const cardKey = card.name;

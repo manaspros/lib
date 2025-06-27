@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GALLERY_CATEGORIES, GALLERY_ITEMS } from '../../utils/constants';
+import { GALLERY_ITEMS } from '../../utils/constants'; // Keep if GALLERY_ITEMS is still needed for appleCardsData
 import './Gallery.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,36 +14,13 @@ const CarouselContext = createContext({
 
 function Carousel({ items, initialScroll = 0 }) {
   const carouselRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (carouselRef.current) {
       carouselRef.current.scrollLeft = initialScroll;
-      checkScrollability();
     }
   }, [initialScroll]);
-
-  const checkScrollability = () => {
-    if (carouselRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-    }
-  };
-
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
-  };
 
   const handleCardClose = (index) => {
     if (carouselRef.current) {
@@ -64,7 +41,6 @@ function Carousel({ items, initialScroll = 0 }) {
         <div
           className="apple-carousel-scroll"
           ref={carouselRef}
-          onScroll={checkScrollability}
         >
           <div className="apple-carousel-track">
             {items.map((item, index) => (
@@ -99,10 +75,15 @@ function BlurImage({ src, alt, className, ...rest }) {
   );
 }
 
-function Card({ card, index, layout }) {
+function Card({ card, index }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
   const { onCardClose } = useContext(CarouselContext);
+
+  const handleClose = () => {
+    setOpen(false);
+    onCardClose(index);
+  };
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -117,7 +98,7 @@ function Card({ card, index, layout }) {
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, handleClose]);
 
   useEffect(() => {
     function handleClick(event) {
@@ -134,13 +115,9 @@ function Card({ card, index, layout }) {
         document.removeEventListener("touchstart", handleClick);
       };
     }
-  }, [open]);
+  }, [open, handleClose]);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-    onCardClose(index);
-  };
 
   return (
     <>
@@ -271,77 +248,14 @@ const appleCardsData = [
 ];
 
 const appleCards = appleCardsData.map((card, index) => (
-  <Card key={card.src} card={card} index={index} layout={true} />
+  <Card key={card.src} card={card} index={index} />
 ));
 
 const Gallery = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [lightboxItem, setLightboxItem] = useState(null);
-  const [filteredItems, setFilteredItems] = useState(GALLERY_ITEMS);
   const galleryRef = useRef(null);
-  const itemsRef = useRef([]);
-
-  useEffect(() => {
-    // Filter items based on active category
-    const filtered = activeCategory === 'all' 
-      ? GALLERY_ITEMS 
-      : GALLERY_ITEMS.filter(item => item.category === activeCategory);
-    setFilteredItems(filtered);
-  }, [activeCategory]);
-
-  useEffect(() => {
-    // GSAP animations for gallery items
-    if (itemsRef.current.length > 0) {
-      gsap.fromTo(itemsRef.current,
-        { y: 50, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: galleryRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }
-  }, [filteredItems]);
-
-  const openLightbox = (item) => {
-    setLightboxItem(item);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeLightbox = () => {
-    setLightboxItem(null);
-    document.body.style.overflow = 'auto';
-  };
-
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-    
-    // Animate category change
-    gsap.to(itemsRef.current, {
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.3,
-      onComplete: () => {
-        gsap.to(itemsRef.current, {
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          stagger: 0.05
-        });
-      }
-    });
-  };
 
   return (
-    <section id="gallery" className="gallery-section">
+    <section id="gallery" className="gallery-section" ref={galleryRef}>
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">Collaboration</h2>
