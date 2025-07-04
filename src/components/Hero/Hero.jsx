@@ -102,16 +102,6 @@ const Hero = () => {
               Pioneering the future through nature-inspired robotics research. From bio-inspired mechanisms 
               to collaborative systems, we're developing the next generation of adaptive robotics technology.
             </p>
-            <div className="hero-actions">
-              <button className="btn-primary" onClick={scrollToWelcome}>
-                <span>Explore Our Research</span>
-                <span className="btn-icon">→</span>
-              </button>
-              <button className="btn-secondary" onClick={scrollToResearch}>
-                <span className="btn-icon">🔬</span>
-                <span>View Projects</span>
-              </button>
-            </div>
             
           </div>
 
