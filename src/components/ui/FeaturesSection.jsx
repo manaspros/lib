@@ -65,10 +65,10 @@ const BentoGridItem = ({ className, title, description, header, icon }) => {
 
 const SkeletonOne = () => {
   const roboticsImages = [
-    "https://picsum.photos/400/300?random=10",
-    "https://picsum.photos/400/300?random=11",
-    "https://picsum.photos/400/300?random=12",
-    "https://picsum.photos/400/300?random=13"
+    "/assets/first2.png",
+    "/assets/first3.png",
+    "/assets/first5.png",
+    "/assets/BioinspiresTSA.png"
   ];
 
   return (
@@ -98,12 +98,12 @@ const SkeletonOne = () => {
 
 const SkeletonTwo = () => {
   const visionImages = [
-    "https://picsum.photos/200/200?random=20",
-    "https://picsum.photos/200/200?random=21", 
-    "https://picsum.photos/200/200?random=22",
-    "https://picsum.photos/200/200?random=23",
-    "https://picsum.photos/200/200?random=24",
-    "https://picsum.photos/200/200?random=25"
+    "/assets/second1.png",
+    "/assets/first2.png",
+    "/assets/first3.png",
+    "/assets/first5.png",
+    "/assets/BioinspiresTSA.png",
+    "/assets/second1.png"
   ];
 
   const aiLabels = ["Computer Vision", "Deep Learning", "Neural Networks", "Object Detection", "Image Processing", "AI Analysis"];
@@ -162,59 +162,18 @@ const SkeletonThree = () => {
 
   return (
     <div className="skeleton-three">
-      <div className="publications-container">
-        {publications.map((pub, idx) => (
-          <div
-            key={idx}
-            className="publication-card"
-            style={{ animationDelay: `${idx * 0.3}s` }}
-          >
-            <div className="publication-header">
-              <div className="publication-icon">📄</div>
-              <div className="publication-status">
-                <span className={`status-badge ${pub.status.toLowerCase().replace(' ', '-')}`}>
-                  {pub.status}
-                </span>
-              </div>
-            </div>
-            <div className="publication-body">
-              <h4 className="publication-title">{pub.title}</h4>
-              <div className="publication-meta">
-                <span className="journal">{pub.journal}</span>
-                <span className="year">{pub.year}</span>
-              </div>
-              <div className="publication-stats">
-                <div className="citations">
-                  <span className="citations-icon">📊</span>
-                  <span>{pub.citations} citations</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="research-metrics">
-        <div className="metric">
-          <div className="metric-value">50+</div>
-          <div className="metric-label">Publications</div>
-        </div>
-        <div className="metric">
-          <div className="metric-value">1.2K</div>
-          <div className="metric-label">Citations</div>
-        </div>
-      </div>
     </div>
   );
 };
 
 const SkeletonFour = () => {
   const collaborations = [
-    { name: "MIT", country: "USA", x: 20, y: 30 },
-    { name: "Oxford", country: "UK", x: 50, y: 25 },
-    { name: "Tokyo Tech", country: "Japan", x: 80, y: 35 },
-    { name: "ETH Zurich", country: "Switzerland", x: 55, y: 28 },
-    { name: "Stanford", country: "USA", x: 15, y: 40 },
-    { name: "Cambridge", country: "UK", x: 52, y: 22 }
+    { name: "Sogang", country: "South Korea", x: 32, y: 30 },
+    { name: "Khalifa University", country: "UAE", x: 55, y: 30 },
+    { name: "IIT Delhi", country: "India", x: 50, y: 15 },
+    { name: "IIT Gandhinagar", country: "India", x: 65, y: 28 },
+    { name: "University of Siena", country: "Italy", x: 40, y: 35 },
+    { name: "KAIST", country: "South Korea", x: 52, y: 22 }
   ];
 
   return (
@@ -248,16 +207,6 @@ const SkeletonFour = () => {
               style={{ animationDelay: `${idx * 0.3}s` }}
             ></div>
           ))}
-        </div>
-      </div>
-      <div className="collaboration-stats">
-        <div className="stat-item">
-          <div className="stat-number">25+</div>
-          <div className="stat-label">Countries</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-number">100+</div>
-          <div className="stat-label">Partners</div>
         </div>
       </div>
     </div>

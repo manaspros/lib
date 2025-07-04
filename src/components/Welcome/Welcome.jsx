@@ -81,38 +81,6 @@ const Welcome = () => {
 
           <FeaturesSection />
 
-          <div className="lab-highlights">
-            <div className="highlight-grid">
-              <div className="highlight-item">
-                <div className="highlight-number">
-                  <span className="counter" data-target="15">0</span>+
-                </div>
-                <div className="highlight-label">Years of Excellence</div>
-              </div>
-              
-              <div className="highlight-item">
-                <div className="highlight-number">
-                  <span className="counter" data-target="50">0</span>+
-                </div>
-                <div className="highlight-label">Research Publications</div>
-              </div>
-              
-              <div className="highlight-item">
-                <div className="highlight-number">
-                  <span className="counter" data-target="25">0</span>+
-                </div>
-                <div className="highlight-label">Active Projects</div>
-              </div>
-              
-              <div className="highlight-item">
-                <div className="highlight-number">
-                  <span className="counter" data-target="100">0</span>+
-                </div>
-                <div className="highlight-label">Collaborations</div>
-              </div>
-            </div>
-          </div>
-
           <div className="affiliation">
             <div className="affiliation-content">
               <div className="institution-logo">

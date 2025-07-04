@@ -6,86 +6,85 @@ import './Lectures.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const LECTURES_DATA = [
+const COURSES_DATA = [
   {
     id: 1,
-    title: "Introduction to Autonomous Systems",
-    date: "2024-03-15",
-    time: "14:00",
-    speaker: "Dr. Sarah Chen",
-    type: "seminar",
-    status: "upcoming",
-    description: "A comprehensive introduction to autonomous robotic systems and their applications in modern industry.",
-    location: "Main Auditorium",
-    registration: "https://example.com/register/1"
+    code: "CSL7570",
+    title: "Introduction to Augmented Reality and Virtual Reality",
+    credits: "3 (3-0-0)",
+    department: "AIDE",
+    type: "postgraduate",
+    description: "Comprehensive introduction to AR/VR technologies, their applications, and development frameworks."
   },
   {
     id: 2,
-    title: "Deep Learning for Robotics",
-    date: "2024-02-28",
-    time: "16:00",
-    speaker: "Dr. Michael Rodriguez",
-    type: "workshop",
-    status: "past",
-    description: "Hands-on workshop covering deep learning techniques specifically designed for robotic applications.",
-    location: "Lab 301",
-    videoUrl: "https://example.com/videos/deep-learning-robotics"
+    code: "MEL7080",
+    title: "Robotics",
+    credits: "3-0-2",
+    department: "IDRP-RMS",
+    type: "postgraduate",
+    description: "Advanced robotics concepts covering kinematics, dynamics, control systems, and robot programming."
   },
   {
     id: 3,
-    title: "Bio-inspired Navigation Systems",
-    date: "2024-04-10",
-    time: "15:30",
-    speaker: "Guest: Prof. Jane Smith",
-    type: "guest",
-    status: "upcoming",
-    description: "Exploring how biological systems inspire navigation algorithms in autonomous robots.",
-    location: "Conference Room A",
-    registration: "https://example.com/register/3"
+    code: "RML6010",
+    title: "Introduction to Robotics",
+    credits: "3 (3-0-0)",
+    department: "IDRP-RMS",
+    type: "undergraduate",
+    description: "Fundamental concepts of robotics including robot anatomy, sensors, actuators, and basic programming."
   },
   {
     id: 4,
-    title: "Swarm Robotics Fundamentals",
-    date: "2024-01-20",
-    time: "13:00",
-    speaker: "Alex Thompson",
-    type: "educational",
-    status: "past",
-    description: "Understanding the principles of swarm intelligence and collective robotic behavior.",
-    location: "Virtual Event",
-    videoUrl: "https://example.com/videos/swarm-robotics"
+    code: "SHL7350",
+    title: "Wearable Devices",
+    credits: "2",
+    department: "MedTech",
+    type: "postgraduate",
+    description: "Design and development of wearable technology for healthcare and fitness monitoring applications."
+  },
+  {
+    id: 5,
+    code: "MEL6080",
+    title: "Mechatronics",
+    credits: "3 (2-0-2)",
+    department: "ME",
+    type: "undergraduate",
+    description: "Integration of mechanical, electrical, and computer engineering in automated systems design."
+  },
+  {
+    id: 6,
+    code: "RML7360",
+    title: "Tele Robotics",
+    credits: "3",
+    department: "IDRP-RMS",
+    type: "postgraduate",
+    description: "Remote control and operation of robotic systems, including telepresence and teleoperation technologies."
   }
 ];
 
 const Lectures = () => {
-  const [lectures] = useState(LECTURES_DATA);
-  const [filteredLectures, setFilteredLectures] = useState(LECTURES_DATA);
+  const [courses] = useState(COURSES_DATA);
+  const [filteredCourses, setFilteredCourses] = useState(COURSES_DATA);
   const [selectedType, setSelectedType] = useState('all');
-  const [selectedStatus, setSelectedStatus] = useState('all');
+  const [selectedDepartment, setSelectedDepartment] = useState('all');
   const lecturesRef = useRef(null);
   const cardsRef = useRef([]);
 
   useEffect(() => {
-    // Filter lectures
-    let filtered = lectures;
+    // Filter courses
+    let filtered = courses;
 
     if (selectedType !== 'all') {
-      filtered = filtered.filter(lecture => lecture.type === selectedType);
+      filtered = filtered.filter(course => course.type === selectedType);
     }
 
-    if (selectedStatus !== 'all') {
-      filtered = filtered.filter(lecture => lecture.status === selectedStatus);
+    if (selectedDepartment !== 'all') {
+      filtered = filtered.filter(course => course.department === selectedDepartment);
     }
 
-    // Sort by date (upcoming first, then by date)
-    filtered.sort((a, b) => {
-      if (a.status === 'upcoming' && b.status === 'past') return -1;
-      if (a.status === 'past' && b.status === 'upcoming') return 1;
-      return new Date(b.date) - new Date(a.date);
-    });
-
-    setFilteredLectures(filtered);
-  }, [lectures, selectedType, selectedStatus]);
+    setFilteredCourses(filtered);
+  }, [courses, selectedType, selectedDepartment]);
 
   useEffect(() => {
     // GSAP animations
@@ -107,153 +106,126 @@ const Lectures = () => {
         }
       );
     }
-  }, [filteredLectures]);
+  }, [filteredCourses]);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const getTypeIcon = (type) => {
+  const getDepartmentIcon = (department) => {
     const icons = {
-      seminar: '📊',
-      workshop: '🔧',
-      guest: '🎤',
-      educational: '📚'
+      'AIDE': '🤖',
+      'IDRP-RMS': '🔬',
+      'MedTech': '⚕️',
+      'ME': '⚙️'
     };
-    return icons[type] || '📋';
+    return icons[department] || '📚';
   };
 
-  const getStatusColor = (status) => {
-    return status === 'upcoming' ? '#00ffff' : '#646cff';
-  };
-
-  const handleRegister = (registrationUrl) => {
-    window.open(registrationUrl, '_blank');
-  };
-
-  const handleWatchVideo = (videoUrl) => {
-    window.open(videoUrl, '_blank');
+  const getTypeColor = (type) => {
+    return type === 'postgraduate' ? '#00ffff' : '#646cff';
   };
 
   return (
     <section id="lectures" className="lectures-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Lectures & Events</h2>
+          <h2 className="section-title">Courses & Curriculum</h2>
           <p className="section-subtitle">
-            Join our seminars, workshops, and educational events to advance your knowledge in robotics
+            Explore our comprehensive course offerings in robotics, mechatronics, and related technologies
           </p>
         </div>
 
         {/* Filters */}
         <div className="lectures-filters">
           <div className="filter-group">
-            <label>Event Type:</label>
+            <label>Course Level:</label>
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
               className="filter-select"
             >
-              <option value="all">All Types</option>
-              <option value="seminar">Seminars</option>
-              <option value="workshop">Workshops</option>
-              <option value="guest">Guest Lectures</option>
-              <option value="educational">Educational</option>
+              <option value="all">All Levels</option>
+              <option value="undergraduate">Undergraduate</option>
+              <option value="postgraduate">Postgraduate</option>
             </select>
           </div>
 
           <div className="filter-group">
-            <label>Status:</label>
+            <label>Department:</label>
             <select
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
               className="filter-select"
             >
-              <option value="all">All Events</option>
-              <option value="upcoming">Upcoming</option>
-              <option value="past">Past Events</option>
+              <option value="all">All Departments</option>
+              <option value="AIDE">AIDE</option>
+              <option value="IDRP-RMS">IDRP-RMS</option>
+              <option value="MedTech">MedTech</option>
+              <option value="ME">ME</option>
             </select>
           </div>
         </div>
 
-        {/* Lectures Timeline with TracingBeam */}
+        {/* Courses Timeline with TracingBeam */}
         <TracingBeam className="lectures-tracing-beam">
           <div ref={lecturesRef} className="lectures-timeline-content">
-            {filteredLectures.map((lecture, index) => (
+            {filteredCourses.map((course, index) => (
               <div
-                key={lecture.id}
+                key={course.id}
                 ref={el => cardsRef.current[index] = el}
-                className={`lecture-item ${lecture.status}`}
+                className={`lecture-item course`}
               >
                 <div className="lecture-badge">
                   <span className="lecture-type-badge">
-                    {getTypeIcon(lecture.type)} {lecture.type.charAt(0).toUpperCase() + lecture.type.slice(1)}
+                    {getDepartmentIcon(course.department)} {course.department}
                   </span>
                   <span 
-                    className={`lecture-status-badge ${lecture.status}`}
+                    className={`lecture-status-badge ${course.type}`}
+                    style={{ backgroundColor: getTypeColor(course.type) }}
                   >
-                    {lecture.status.charAt(0).toUpperCase() + lecture.status.slice(1)}
+                    {course.type.charAt(0).toUpperCase() + course.type.slice(1)}
                   </span>
                 </div>
 
                 <div className="lecture-content-card">
                   <div className="lecture-header">
-                    <div className="lecture-date-time">
-                      <div className="lecture-date">{formatDate(lecture.date)}</div>
-                      <div className="lecture-time">{lecture.time}</div>
+                    <div className="course-code-credits">
+                      <div className="course-code">{course.code}</div>
+                      <div className="course-credits">{course.credits} Credits</div>
                     </div>
                   </div>
 
-                  <h3 className="lecture-title">{lecture.title}</h3>
+                  <h3 className="lecture-title">{course.title}</h3>
                   
                   <div className="lecture-meta-info">
                     <div className="lecture-speaker">
                       <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
                       </svg>
-                      {lecture.speaker}
+                      {course.department}
                     </div>
 
                     <div className="lecture-location">
                       <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
                       </svg>
-                      {lecture.location}
+                      {course.type.charAt(0).toUpperCase() + course.type.slice(1)} Level
                     </div>
                   </div>
 
-                  <p className="lecture-description">{lecture.description}</p>
+                  <p className="lecture-description">{course.description}</p>
 
                   <div className="lecture-actions">
-                    {lecture.status === 'upcoming' && lecture.registration && (
-                      <button
-                        onClick={() => handleRegister(lecture.registration)}
-                        className="action-btn register-btn"
-                      >
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                        </svg>
-                        Register
-                      </button>
-                    )}
+                    <button className="action-btn register-btn">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                      </svg>
+                      Course Details
+                    </button>
                     
-                    {lecture.status === 'past' && lecture.videoUrl && (
-                      <button
-                        onClick={() => handleWatchVideo(lecture.videoUrl)}
-                        className="action-btn video-btn"
-                      >
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
-                        Watch Recording
-                      </button>
-                    )}
+                    <button className="action-btn video-btn">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 8.12,16.5 8.91,15.71C9.71,14.93 10.59,14.29 11.5,13.82C9.91,13.05 8.83,11.36 8.83,9.4C8.83,6.95 10.8,4.96 13.26,4.96C15.72,4.96 17.69,6.95 17.69,9.4A4.54,4.54 0 0,1 13.26,13.95C14.17,14.29 15.05,14.93 15.84,15.71C16.64,16.5 17.26,17.38 17.69,18.28C16.89,19.23 15.73,19.94 14.42,20.34C13.95,20.47 13.46,20.54 12.95,20.54C12.44,20.54 11.95,20.47 11.48,20.34C10.17,19.94 9.01,19.23 8.21,18.28H7.07Z"/>
+                      </svg>
+                      Enrollment
+                    </button>
                   </div>
                 </div>
               </div>
@@ -261,9 +233,9 @@ const Lectures = () => {
           </div>
         </TracingBeam>
 
-        {filteredLectures.length === 0 && (
+        {filteredCourses.length === 0 && (
           <div className="no-results">
-            <p>No lectures found matching your criteria.</p>
+            <p>No courses found matching your criteria.</p>
           </div>
         )}
       </div>

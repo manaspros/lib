@@ -181,34 +181,17 @@ function Card({ card, index }) {
 function DummyContent() {
   return (
     <>
-      {[...new Array(3).fill(1)].map((_, index) => (
-        <div
-          key={"dummy-content" + index}
-          className="apple-dummy-content"
-        >
-          <p className="apple-dummy-text">
-            <span className="apple-dummy-bold">
-              The first rule of Apple club is that you boast about Apple club.
-            </span>{" "}
-            Keep a journal, quickly jot down a grocery list, and take amazing
-            class notes. Want to convert those notes to text? No problem.
-            Langotiya jeetu ka mara hua yaar is ready to capture every
-            thought.
-          </p>
-          <img
-            src="https://assets.aceternity.com/macbook.png"
-            alt="Macbook mockup from Aceternity UI"
-            height="500"
-            width="500"
-            className="apple-dummy-img"
-          />
-        </div>
-      ))}
     </>
   );
 }
 
 const appleCardsData = [
+  {
+    category: "Collaboration",
+    title: "Sogang", // Updated title
+    src: "/assets/Sogang.png",
+    content: <DummyContent />,
+  },
   {
     category: "Collaboration",
     title: "Khalifa University", // Updated title
@@ -241,6 +224,12 @@ const appleCardsData = [
   },
   {
     category: "Collaboration",
+    title: "CNU, Korea", // Updated title
+    src: "/assets/CNU.png",
+    content: <DummyContent />,
+  },
+  {
+    category: "Industry Collaboration",
     title: "Jaipur Foot", // Updated title
     src: "/assets/JaipurFoot.png",
     content: <DummyContent />,
@@ -264,7 +253,7 @@ const Gallery = () => {
           </p>
         </div>
         {/* Apple Cards Carousel Integration */}
-        <div style={{ marginBottom: 60 }}>
+        <div style={{ marginBottom: 20 }}> {/* Reduced from 60 */}
           <Carousel items={appleCards} />
         </div>
       </div>
