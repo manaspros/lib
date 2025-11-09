@@ -1,14 +1,13 @@
 /* People Section */
 .people {
-  padding: 8rem 0 6rem 0; /* Added more top padding */
-  background: var(--bg-secondary);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  z-index: 2;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    /* increase top padding so content sits below fixed header and avoid vertical centering */
+    padding: 12rem 0 6rem 0;
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    /* remove flex centering so content flows naturally under the header */
+    display: block;
 }
 
 .people::before {
@@ -31,9 +30,8 @@
   margin: 0 auto;
   padding: 0 2rem;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* content should align to start (normal flow) */
+  display: block;
 }
 
 /* Section Header */
@@ -106,7 +104,8 @@
 .director-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;      /* show the whole image */
+  object-position: center top; /* align contained image to top-center if extra space */
   border-radius: 12px;
   transition: transform 0.3s ease;
 }
