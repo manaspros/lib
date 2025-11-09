@@ -6,9 +6,10 @@ export const NAV_ITEMS = [
   { label: 'Publications', href: '/publications', section: 'publications' },
   { label: 'Lectures', href: '/lectures', section: 'lectures' },
   { label: 'Collaboration', href: '/gallery', section: 'gallery' },
+  { label: 'Facilities', href: '/facilities', section: 'facilities' },
   { label: 'Open Positions', href: '/positions', section: 'positions' },
-  { label: 'Contact', href: '/contact', section: 'contact' },
-    { label: 'Facilities', href: '/facilities', section: 'facilities' }
+  { label: 'Contact', href: '/contact', section: 'contact' }
+    
 ];
 
 // Team data
