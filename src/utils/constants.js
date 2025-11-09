@@ -7,7 +7,8 @@ export const NAV_ITEMS = [
   { label: 'Lectures', href: '/lectures', section: 'lectures' },
   { label: 'Collaboration', href: '/gallery', section: 'gallery' },
   { label: 'Open Positions', href: '/positions', section: 'positions' },
-  { label: 'Contact', href: '/contact', section: 'contact' }
+  { label: 'Contact', href: '/contact', section: 'contact' },
+    { label: 'Facilities', href: '/facilities', section: 'facilities' }
 ];
 
 // Team data

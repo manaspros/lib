@@ -14,6 +14,7 @@ import Gallery from './components/Gallery/Gallery';
 import Positions from './components/Positions/Positions';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
+import Facilities from './components/Facilities/Facilities';
 
 import './App.css';
 
@@ -52,6 +53,7 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/positions" element={<Positions />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/facilities" element={<Facilities />} />
           </Routes>
         </main>
         <Footer />

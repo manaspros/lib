@@ -1,0 +1,80 @@
+﻿.facilities-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #0f0f1e 0%, #0a0a0a 100%);
+    color: #fff;
+    min-height: 60vh;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.section-title {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.section-subtitle {
+    color: #b8b8c8;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.facilities-content {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.pdf-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+.pdf-frame {
+    width: 100%;
+    height: 72vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.pdf-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(100,108,255,0.15);
+    border: 1px solid rgba(100,108,255,0.2);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(100,108,255,0.12);
+    }
+
+.download-btn {
+    background: linear-gradient(135deg, #646cff 0%, #00ffff 100%);
+    color: #0b0b12;
+    border: none;
+}
