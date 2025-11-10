@@ -147,6 +147,177 @@ export const GALLERY_ITEMS = [
   }
 ];
 
+// Facilities data
+export const FACILITIES = [
+  {
+    id: 1,
+    name: "Bamboo Labs X1 E",
+    category: "3D Printing",
+    image: "/facilities/bamboo-labs-x1e.jpg",
+    thumbnail: "/facilities/bamboo-labs-x1e.jpg",
+    specifications: [
+      { label: "Input", value: "100–240 V AC, 50/60 Hz" },
+      { label: "Build volume", value: "256 × 256 × 256 mm" },
+      { label: "Max power", value: "1400 W @ 220 V / 750 W @ 110 V" },
+      { label: "Lidar sensor", value: "For calibration and surface scan" },
+      { label: "Camera", value: "1080p for monitoring" },
+      { label: "Connectivity", value: "Wi-Fi + Ethernet" },
+      { label: "Network", value: "WPA2-Enterprise support, Offline LAN mode" },
+      { label: "Materials Supported", value: "PLA, PETG, TPU, PVA, BVOH, ABS, ASA, PC, PA, PET" }
+    ]
+  },
+  {
+    id: 2,
+    name: "Pratham 3.0",
+    category: "3D Printing",
+    image: "/facilities/pratham-3.jpg",
+    thumbnail: "/facilities/pratham-3.jpg",
+    specifications: [
+      { label: "Build volume", value: "300 × 300 × 300 mm" },
+      { label: "Filament diameter", value: "1.75 mm" },
+      { label: "Nozzle diameter", value: "0.4 mm (standard)" },
+      { label: "Max nozzle temperature", value: "280 °C" },
+      { label: "Max bed temperature", value: "120 °C" },
+      { label: "Materials Supported", value: "PLA, ABS, PETG, TPU, composites" },
+      { label: "Layer resolution", value: "0.08 – 0.4 mm" },
+      { label: "Dimensional accuracy", value: "±0.1 mm" },
+      { label: "Print speed", value: "40 – 120 mm/s" },
+      { label: "Connectivity", value: "USB" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Phrozen Sonic Mega 8K V2 Resin 3D Printer",
+    category: "3D Printing",
+    image: "/facilities/phrozen-sonic.jpg",
+    thumbnail: "/facilities/phrozen-sonic.jpg",
+    specifications: [
+      { label: "Build volume", value: "330 × 185 × 400 mm" },
+      { label: "XY resolution", value: "43 µm (0.043 mm)" },
+      { label: "Layer thickness", value: "0.01 – 0.30 mm" },
+      { label: "Screen", value: "15″ mono 8K LCD" },
+      { label: "Speed", value: "~400 layers/hr" },
+      { label: "Features", value: "Auto resin feed + air purifier" },
+      { label: "Connectivity", value: "USB, Ethernet" },
+      { label: "Software", value: "ChiTuBox compatible" },
+      { label: "Power", value: "100–240 V" }
+    ]
+  },
+  {
+    id: 4,
+    name: "Anycubic Kobra 2 Neo 3D Printer",
+    category: "3D Printing",
+    image: "/facilities/anycubic-kobra.jpg",
+    thumbnail: "/facilities/anycubic-kobra.jpg",
+    specifications: [
+      { label: "Build volume", value: "250 × 220 × 220 mm" },
+      { label: "Print speed", value: "Up to 250 mm/s" },
+      { label: "Nozzle temp", value: "Max 260 °C (0.4 mm nozzle)" },
+      { label: "Bed temp", value: "Max 110 °C" },
+      { label: "Auto leveling", value: "LeviQ 2.0 (25-point mesh + Z-offset)" },
+      { label: "Size", value: "485 × 440 × 440 mm" },
+      { label: "Materials", value: "PLA, ABS, PETG, TPU" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Scientech 827 Workbench",
+    category: "Electronics",
+    image: "/facilities/scientech-827.jpg",
+    thumbnail: "/facilities/scientech-827.jpg",
+    specifications: [
+      { label: "Function generator", value: "10 MHz AM/FM with 40 MHz frequency counter" },
+      { label: "Oscilloscope", value: "50 MHz, 1 GSa/s, 4-channel digital storage" },
+      { label: "Power supply", value: "Dual-tracking DC supply" },
+      { label: "Multimeter", value: "3¾-digit digital multimeter" },
+      { label: "Soldering/desoldering", value: "Station included" },
+      { label: "Power", value: "Single AC input with MCB protection" },
+      { label: "Size", value: "~1800 mm (W) × 820 mm (D)" },
+      { label: "Features", value: "Mobile workbench with lockable wheels" }
+    ]
+  },
+  {
+    id: 6,
+    name: "ESD Workstation",
+    category: "Electronics",
+    image: "/facilities/esd-workstation.jpg",
+    thumbnail: "/facilities/esd-workstation.jpg",
+    specifications: [
+      { label: "Type", value: "Electrostatic Discharge Protected Workstation" },
+      { label: "Purpose", value: "Safe handling of sensitive electronic components" }
+    ]
+  },
+  {
+    id: 7,
+    name: "Electric Wheelchair and Treadmill",
+    category: "Rehabilitation",
+    image: "/facilities/wheelchair-treadmill.jpg",
+    thumbnail: "/facilities/wheelchair-treadmill.jpg",
+    specifications: [
+      { label: "Treadmill", value: "Adjustable speeds with movable side supports" },
+      { label: "Side supports", value: "Two movable supports" },
+      { label: "Linear actuator", value: "For Exoskeleton Harness support" },
+      { label: "Max load", value: "6000" },
+      { label: "Power Rating", value: "24V DC" },
+      { label: "Current Rating", value: "3.5A" },
+      { label: "Battery - Charging Voltage", value: "24V" },
+      { label: "Battery - Capacity", value: "12Ah" }
+    ]
+  },
+  {
+    id: 8,
+    name: "Myrio 1900",
+    category: "Control Systems",
+    image: "/facilities/myrio-1900.jpg",
+    thumbnail: "/facilities/myrio-1900.jpg",
+    specifications: [
+      { label: "Processor", value: "Dual-core ARM Cortex-A9 (Xilinx Zynq-7010 SoC)" },
+      { label: "FPGA", value: "Integrated Xilinx Zynq-7010 FPGA" },
+      { label: "Memory", value: "DDR3 RAM + onboard flash" },
+      { label: "Wi-Fi", value: "IEEE 802.11 b/g/n (2.4 GHz)" },
+      { label: "Analog Inputs", value: "±10 V (12-bit)" },
+      { label: "Analog Outputs", value: "±10 V (12-bit)" },
+      { label: "Digital I/O", value: "40 lines (PWM, SPI, I²C, UART supported)" },
+      { label: "Other I/O", value: "USB Host/Device, Audio In/Out, Accelerometer" },
+      { label: "Power", value: "6 – 16 V DC, ~14 W max" },
+      { label: "Operating Temp", value: "0 – 40 °C" }
+    ]
+  },
+  {
+    id: 9,
+    name: "CubeMars AK Series Actuators",
+    category: "Actuators",
+    image: "/facilities/cubemars-actuators.jpg",
+    thumbnail: "/facilities/cubemars-actuators.jpg",
+    description: "AK series motor actuators are high-torque BLDC units used in exoskeletons and robotics. They combine a brushless motor with a gearbox to provide strong torque and precise motion control. These actuators are commonly used for joint movement and load support in wearable and robotic systems.",
+    specifications: [
+      { label: "Model AK 10-9 KV60 - Voltage", value: "24V/48V" },
+      { label: "Model AK 10-9 KV60 - Peak Torque", value: "48 Nm" },
+      { label: "Model AK 10-9 KV60 - Rated Current", value: "10.6 A" },
+      { label: "Model AK 80-64 - Voltage", value: "24V/48V" },
+      { label: "Model AK 80-64 - Peak Torque", value: "120 Nm" },
+      { label: "Model AK 80-64 - Rated Current", value: "7 A" },
+      { label: "Model AK 80-6 - Voltage", value: "48V" },
+      { label: "Model AK 80-6 - Peak Torque", value: "12 Nm" },
+      { label: "Model AK 80-6 - Rated Current", value: "9.7 A" },
+      { label: "Model AK 60-6 - Voltage", value: "24V" },
+      { label: "Model AK 60-6 - Peak Torque", value: "9 Nm" },
+      { label: "Model AK 60-6 - Rated Current", value: "3.8 A" }
+    ]
+  },
+  {
+    id: 10,
+    name: "Metallic Breadboard",
+    category: "Electronics",
+    image: "/facilities/metallic-breadboard.jpg",
+    thumbnail: "/facilities/metallic-breadboard.jpg",
+    specifications: [
+      { label: "Type", value: "Metallic prototyping breadboard" },
+      { label: "Purpose", value: "Circuit prototyping and testing" }
+    ]
+  }
+];
+
 // Contact information - Updated for BIRD Lab
 export const CONTACT_INFO = {
   address: {
