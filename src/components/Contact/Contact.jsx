@@ -337,12 +337,12 @@ const Contact = () => {
                 <div className="contact-details">
                   <h4>Follow Us</h4>
                   <div className="social-links">
-                    <a href={CONTACT_INFO.social.twitter} target="_blank" rel="noopener noreferrer">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-                      </svg>
-                      Twitter
-                    </a>
+                    {/*<a href={CONTACT_INFO.social.twitter} target="_blank" rel="noopener noreferrer">*/}
+                    {/*  <svg viewBox="0 0 24 24" fill="currentColor">*/}
+                    {/*    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>*/}
+                    {/*  </svg>*/}
+                    {/*  Twitter*/}
+                    {/*</a>*/}
                     <a href={CONTACT_INFO.social.linkedin} target="_blank" rel="noopener noreferrer">
                       <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
@@ -350,12 +350,12 @@ const Contact = () => {
                       </svg>
                       LinkedIn
                     </a>
-                    <a href={CONTACT_INFO.social.github} target="_blank" rel="noopener noreferrer">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
-                      </svg>
-                      GitHub
-                    </a>
+                    {/*<a href={CONTACT_INFO.social.github} target="_blank" rel="noopener noreferrer">*/}
+                    {/*  <svg viewBox="0 0 24 24" fill="currentColor">*/}
+                    {/*    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>*/}
+                    {/*  </svg>*/}
+                    {/*  GitHub*/}
+                    {/*</a>*/}
                     <a href={CONTACT_INFO.social.youtube} target="_blank" rel="noopener noreferrer">
                       <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M23 6.5a2.5 2.5 0 00-2.5-2.5H3.5A2.5 2.5 0 001 6.5v11A2.5 2.5 0 003.5 20h17a2.5 2.5 0 002.5-2.5v-11zM9 16V8l7 4-7 4z"/>
