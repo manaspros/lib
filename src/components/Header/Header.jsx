@@ -29,7 +29,7 @@ const Header = () => {
   const scrollToSection = (sectionId) => {
     // Only scroll to sections that exist on the home page
     const homeSections = ['hero', 'welcome', 'research'];
-    
+
     if (location.pathname === '/' && sectionId && homeSections.includes(sectionId)) {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -38,20 +38,9 @@ const Header = () => {
     }
   };
 
-  return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="container">
-        <div className="header-content">
-          <Link to="/" className="logo">
-            <div className="logo-icon">
-              <img src="/birdlablogo.png" alt="Bird Lab Logo" style={{ height: 40, width: 40 }} />
-            </div>
-            <span className="logo-text">BIRD</span>
-          </Link>
-
-          <nav className="desktop-nav">
-            {NAV_ITEMS.map((item) => (
-              <Link
+    const renderDesktopLinks = () => {
+        return NAV_ITEMS.map((item) => (
+            <Link
                 key={item.label}
                 to={item.href}
                 className={`nav-link ${location.pathname === item.href ? 'active' : ''}`}
@@ -87,9 +76,8 @@ const Header = () => {
                 <div className="header-content">
                     <Link to="/" className="logo">
                         <div className="logo-icon">
-                            {/* Use the public assets folder; hide image on error so text logo remains */}
                             <img
-                                src="/assets/birdlablogo.jpg"
+                                src="/logo.jpeg"
                                 alt="Bird Lab Logo"
                                 style={{ height: 40, width: 40 }}
                                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
