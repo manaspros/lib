@@ -81,28 +81,6 @@ const Welcome = () => {
 
           <FeaturesSection />
 
-          <div className="affiliation">
-            <div className="affiliation-content">
-              <div className="institution-logo">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="10" y="20" width="80" height="60" stroke="currentColor" strokeWidth="3" fill="none"/>
-                  <rect x="20" y="30" width="15" height="20" fill="currentColor"/>
-                  <rect x="42.5" y="30" width="15" height="20" fill="currentColor"/>
-                  <rect x="65" y="30" width="15" height="20" fill="currentColor"/>
-                  <rect x="20" y="55" width="60" height="8" fill="currentColor"/>
-                  <triangle points="50,5 20,20 80,20" fill="currentColor"/>
-                </svg>
-              </div>
-              <div className="institution-info">
-                <h4>Bio-Inspired Robotics Design Lab</h4>
-                <p>Department of Robotics and Bio-Engineering</p>
-                <div className="accreditation">
-                  <span className="badge">ABET Accredited</span>
-                  <span className="badge">Bio-Robotics Excellence</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

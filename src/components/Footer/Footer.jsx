@@ -19,7 +19,6 @@ const Footer = () => {
           <div className="footer-section">
             <div className="footer-logo">
               <h3>BIRD Lab</h3>
-              <div className="logo-icon">🦋</div>
             </div>
             <p className="footer-description">
               Advancing bio-inspired robotics through innovative research, 
@@ -84,7 +83,6 @@ const Footer = () => {
                 </svg>
                 <span>
                   {CONTACT_INFO.address.building}<br/>
-                  {CONTACT_INFO.address.city}
                 </span>
               </div>
               <div className="contact-item">

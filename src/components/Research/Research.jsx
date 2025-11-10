@@ -8,7 +8,7 @@ const Research = () => {
   const sectionRef = useRef(null);
   const [selectedResearchArea, setSelectedResearchArea] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [expandedProjects, setExpandedProjects] = useState({});
+  const [expandedCards, setExpandedCards] = useState({});
 
   const openModal = (area) => {
     setSelectedResearchArea(area);
@@ -20,11 +20,10 @@ const Research = () => {
     setSelectedResearchArea(null);
   };
 
-  const toggleProject = (areaIndex, projectIndex) => {
-    const key = `${areaIndex}-${projectIndex}`;
-    setExpandedProjects(prev => ({
+  const toggleExpand = (index) => {
+    setExpandedCards(prev => ({
       ...prev,
-      [key]: !prev[key]
+      [index]: !prev[index]
     }));
   };
 
@@ -56,73 +55,28 @@ const Research = () => {
               </div>
               
               <div className="card-content">
-                <p className="research-description">{area.description}</p>
-                
-                <div className="tech-stack">
-                  <h4>Key Technologies:</h4>
-                  <div className="tech-tags">
-                    {area.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="tech-tag">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-              {/*  {area.projects && area.projects.length > 0 && (*/}
-              {/*    <div className="projects-section">*/}
-              {/*      <h4>Current Projects:</h4>*/}
-              {/*      <ul className="projects-list">*/}
-              {/*        {area.projects.map((project, projectIndex) => (*/}
-              {/*          <li key={projectIndex} className="project-item">*/}
-              {/*            {project}*/}
-              {/*          </li>*/}
-              {/*        ))}*/}
-              {/*      </ul>*/}
-              {/*    </div>*/}
-              {/*  )}*/}
-                {area.projects && area.projects.length > 0 && (
-                  <div className="projects-section">
-                    <h4>Current Projects:</h4>
-                    <div className="projects-list">
-                      {area.projects.map((project, projectIndex) => {
-                        const projectKey = `${index}-${projectIndex}`;
-                        const isExpanded = expandedProjects[projectKey];
-
-                        return (
-                          <div
-                            key={projectIndex}
-                            className={`project-item ${isExpanded ? 'expanded' : ''}`}
-                            onClick={() => toggleProject(index, projectIndex)}
-                          >
-                            <div className="project-header">
-                              <span className="project-name">{project.name}</span>
-                              <svg
-                                className="expand-icon"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M19 9l-7 7-7-7"
-                                />
-                              </svg>
-                            </div>
-                            {isExpanded && (
-                              <div className="project-description">
-                                {project.description}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
+                <p className={`research-description ${!expandedCards[index] ? 'collapsed' : ''}`}>
+                  {area.description}
+                </p>
+                <button
+                  className={`show-more-btn ${expandedCards[index] ? 'expanded' : ''}`}
+                  onClick={() => toggleExpand(index)}
+                >
+                  {expandedCards[index] ? 'Show Less' : 'Show More'}
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
           ))}

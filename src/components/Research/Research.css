@@ -61,8 +61,10 @@
   padding: 2rem;
   transition: all 0.4s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
 }
 
 .research-card::before {
@@ -123,13 +125,55 @@
 }
 
 .card-content {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .research-description {
-  color: #a0a0a0;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  color: #d0d0d0;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.research-description.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.show-more-btn {
+  background: transparent;
+  color: #00ffff;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.show-more-btn:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: #00ffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+}
+
+.show-more-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.show-more-btn.expanded svg {
+  transform: rotate(180deg);
 }
 
 .tech-stack h4 {
