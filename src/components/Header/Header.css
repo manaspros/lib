@@ -8,7 +8,12 @@
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                transform 0.3s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -21,10 +26,17 @@
 /* Lower header z-index when modal is open to ensure modal appears above */
 body.modal-open .header {
   z-index: 1 !important;
+  opacity: 0.5;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
+              transform 0.4s ease;
 }
 
 body.modal-open .header.scrolled {
   z-index: 1 !important;
+  opacity: 0.5;
 }
 
 body.modal-open .mobile-nav {
