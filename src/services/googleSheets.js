@@ -60,6 +60,7 @@ export const transformSheetData = (rawData) => {
     research: headers.indexOf('Research Interests/Project'),
     email: headers.indexOf('Email'),
     postAffiliation: headers.indexOf('Post & Current Affiliation'),
+    linkedin: headers.indexOf('LinkedIn'),
     
     // Education columns - PhD
     phdDegree: headers.indexOf('Education (PhD)'),
@@ -172,6 +173,7 @@ export const transformSheetData = (rawData) => {
       research: parseResearch(getCellValue(row, headerMap.research)),
       email: getCellValue(row, headerMap.email),
       postAffiliation: getCellValue(row, headerMap.postAffiliation),
+      linkedin: getCellValue(row, headerMap.linkedin),
       education: {
         phd: buildEducation(row, headerMap.phdDegree, headerMap.phdInstitution, headerMap.phdYear),
         masters: buildEducation(row, headerMap.mastersDegree, headerMap.mastersInstitution, headerMap.mastersYear),

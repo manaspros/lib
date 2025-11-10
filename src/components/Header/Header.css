@@ -18,6 +18,19 @@
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
 }
 
+/* Lower header z-index when modal is open to ensure modal appears above */
+body.modal-open .header {
+  z-index: 1 !important;
+}
+
+body.modal-open .header.scrolled {
+  z-index: 1 !important;
+}
+
+body.modal-open .mobile-nav {
+  z-index: 1 !important;
+}
+
 .header-content {
   display: flex;
   align-items: center;

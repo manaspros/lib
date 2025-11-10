@@ -48,7 +48,7 @@ const Header = () => {
         <div className="header-content">
           <Link to="/" className="logo">
             <div className="logo-icon">
-              <img src="/birdlablogo.png" alt="Bird Lab Logo" style={{ height: 40, width: 40 }} />
+              <img src="/logo.jpeg" alt="Bird Lab Logo" style={{ height: 40, width: 40 }} />
             </div>
             <span className="logo-text">BIRD</span>
           </Link>

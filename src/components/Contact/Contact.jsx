@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import emailjs from '@emailjs/browser';
 import { CONTACT_INFO } from '../../utils/constants';
 import './Contact.css';
 
@@ -88,17 +89,33 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // In a real implementation, you would send the data to your backend
-      console.log('Form submitted:', formData);
-      
+      // EmailJS Configuration
+      // Replace these with your actual EmailJS credentials from https://www.emailjs.com/
+      const SERVICE_ID = 'YOUR_SERVICE_ID';
+      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+      const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+      // Send email using EmailJS
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'bhivraj@iitj.ac.in', // Lab contact email
+        },
+        PUBLIC_KEY
+      );
+
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
+
       // Reset status after 5 seconds
-      setTimeout(() => setSubmitStatus(null), 5000);    } catch {
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
@@ -116,10 +133,31 @@ const Contact = () => {
     <section id="contact" className="contact-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Contact Us</h2>
+          <h2 className="section-title">Contact Us & Open Positions</h2>
           <p className="section-subtitle">
             Get in touch with our research team for collaborations, questions, or opportunities
           </p>
+        </div>
+
+        {/* Open Positions Banner */}
+        <div className="positions-banner">
+          <div className="banner-content">
+            <div className="banner-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+              </svg>
+            </div>
+            <div className="banner-text">
+              <h3>Open Research Positions Available</h3>
+              <p>We are accepting applications for <strong>Undergraduate Internships, Master's/Ph.D. Programs, Post-Doctoral Positions, and Research Positions</strong>. Use the form below to apply or inquire about opportunities.</p>
+              <div className="banner-contact">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <span>Contact: Dr. Bhivraj Suthar - <a href="mailto:bhivraj@iitj.ac.in">bhivraj@iitj.ac.in</a></span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div ref={contactRef} className="contact-content">
@@ -167,11 +205,18 @@ const Contact = () => {
                   required
                 >
                   <option value="">Select a subject</option>
-                  <option value="research">Research Collaboration</option>
-                  <option value="position">Job Opportunities</option>
-                  <option value="internship">Internship Inquiry</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="media">Media & Press</option>
+                  <optgroup label="Open Positions">
+                    <option value="Undergraduate Internship">Undergraduate Internship Application</option>
+                    <option value="Master's Program">Master's Program Inquiry</option>
+                    <option value="Ph.D. Program">Ph.D. Program Inquiry</option>
+                    <option value="Post-Doctoral Position">Post-Doctoral Position</option>
+                    <option value="Research Position">Research Position</option>
+                  </optgroup>
+                  <optgroup label="General Inquiries">
+                    <option value="Research Collaboration">Research Collaboration</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Media & Press">Media & Press</option>
+                  </optgroup>
                 </select>
               </div>
 

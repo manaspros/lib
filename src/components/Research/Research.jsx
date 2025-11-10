@@ -8,6 +8,7 @@ const Research = () => {
   const sectionRef = useRef(null);
   const [selectedResearchArea, setSelectedResearchArea] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expandedProjects, setExpandedProjects] = useState({});
 
   const openModal = (area) => {
     setSelectedResearchArea(area);
@@ -17,6 +18,14 @@ const Research = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedResearchArea(null);
+  };
+
+  const toggleProject = (areaIndex, projectIndex) => {
+    const key = `${areaIndex}-${projectIndex}`;
+    setExpandedProjects(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
   };
 
   useEffect(() => {
@@ -63,13 +72,43 @@ const Research = () => {
                 {area.projects && area.projects.length > 0 && (
                   <div className="projects-section">
                     <h4>Current Projects:</h4>
-                    <ul className="projects-list">
-                      {area.projects.map((project, projectIndex) => (
-                        <li key={projectIndex} className="project-item">
-                          {project}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="projects-list">
+                      {area.projects.map((project, projectIndex) => {
+                        const projectKey = `${index}-${projectIndex}`;
+                        const isExpanded = expandedProjects[projectKey];
+
+                        return (
+                          <div
+                            key={projectIndex}
+                            className={`project-item ${isExpanded ? 'expanded' : ''}`}
+                            onClick={() => toggleProject(index, projectIndex)}
+                          >
+                            <div className="project-header">
+                              <span className="project-name">{project.name}</span>
+                              <svg
+                                className="expand-icon"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M19 9l-7 7-7-7"
+                                />
+                              </svg>
+                            </div>
+                            {isExpanded && (
+                              <div className="project-description">
+                                {project.description}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
               </div>

@@ -62,11 +62,26 @@ export const RESEARCH_AREAS = [
     icon: "🦋",
     technologies: ["Biomimetics", "Morphological Design", "Adaptive Structures", "Nature-Inspired Materials"],
     projects: [
-      "Bio-inspired Muscles-TSA",
-      "Artificial muscle-based robotic finger",
-      "Artificial muscle-based Robotic hand",
-      "Hawk Gripper",
-      "Bio-inspired Cat-Leap Parkour Rolling Mechanism"
+      {
+        name: "Bio-inspired Muscles-TSA",
+        description: "Developing twisted and coiled actuators that mimic natural muscle behavior, providing high force-to-weight ratios and efficient energy conversion for robotic applications."
+      },
+      {
+        name: "Artificial muscle-based robotic finger",
+        description: "Creating dexterous robotic fingers using artificial muscle actuators to achieve human-like grasping capabilities with compliant and adaptive force control."
+      },
+      {
+        name: "Artificial muscle-based Robotic hand",
+        description: "A fully articulated robotic hand powered by artificial muscles, enabling natural grasping motions and tactile feedback for prosthetic and manipulation tasks."
+      },
+      {
+        name: "Hawk Gripper",
+        description: "Bird-inspired gripper design that mimics hawk talons, allowing secure grasping of various objects with adaptive grip strength and passive locking mechanisms."
+      },
+      {
+        name: "Bio-inspired Cat-Leap Parkour Rolling Mechanism",
+        description: "Robotic mobility system inspired by feline agility, incorporating dynamic leaping and rolling mechanisms for navigating complex terrains and obstacles."
+      }
     ]
   },
   {
@@ -75,10 +90,22 @@ export const RESEARCH_AREAS = [
     icon: "🤝",
     technologies: ["Human-Robot Interaction", "Wearable Systems", "Collaborative Control", "Assistive Robotics"],
     projects: [
-      "Exoskeleton",
-      "Exosuits",
-      "Prosthetic Limbs",
-      "Supernumerary Robotic Limbs"
+      {
+        name: "Exoskeleton",
+        description: "Rigid wearable robotic frameworks designed to enhance human strength and endurance, providing support for rehabilitation, industrial tasks, and mobility assistance."
+      },
+      {
+        name: "Exosuits",
+        description: "Soft, lightweight wearable systems that assist human movement using flexible actuators, ideal for rehabilitation therapy and augmenting physical performance."
+      },
+      {
+        name: "Prosthetic Limbs",
+        description: "Advanced artificial limbs controlled by bio-signals (EMG/EEG) that restore mobility and function for amputees with natural, intuitive control interfaces."
+      },
+      {
+        name: "Supernumerary Robotic Limbs",
+        description: "Additional robotic limbs that extend human capabilities beyond natural limitations, enabling multitasking and enhanced manipulation in complex scenarios."
+      }
     ]
   },
   {
@@ -87,9 +114,18 @@ export const RESEARCH_AREAS = [
     icon: "🔄",
     technologies: ["Modular Robotics", "Self-Assembly", "Adaptive Architecture", "Growth Algorithms"],
     projects: [
-      "Foldable Supernumerary Robotic Arms",
-      "Extendable Drone Arm ",
-      "Extendable Space Arm"
+      {
+        name: "Foldable Supernumerary Robotic Arms",
+        description: "Compact, deployable robotic arms that fold for storage and extend when needed, providing additional manipulation capabilities for wearable or mobile platforms."
+      },
+      {
+        name: "Extendable Drone Arm",
+        description: "Telescopic robotic arm integrated with aerial drones for extended reach manipulation, enabling inspection, grasping, and interaction tasks in hard-to-reach areas."
+      },
+      {
+        name: "Extendable Space Arm",
+        description: "Growing robotic manipulator designed for space applications, capable of extending its length for satellite servicing, assembly tasks, and exploration missions."
+      }
     ]
   },
   {
@@ -98,9 +134,18 @@ export const RESEARCH_AREAS = [
     icon: "🎮",
     technologies: ["Haptic Feedback", "Remote Control", "Force Sensing", "Teleoperation"],
     projects: [
-      "Master device",
-      "Slave Device",
-      "Haptic feedback"
+      {
+        name: "Master Device",
+        description: "Haptic control interface worn by the operator, capturing hand movements and providing force feedback for intuitive remote control of robotic systems."
+      },
+      {
+        name: "Slave Device",
+        description: "Remote robotic system that replicates operator movements from the master device, enabling precise manipulation in hazardous or distant environments."
+      },
+      {
+        name: "Haptic Feedback",
+        description: "Advanced force and tactile feedback systems that transmit touch sensations from remote robots to operators, enhancing telepresence and control precision."
+      }
     ]
   },
   {
@@ -109,9 +154,18 @@ export const RESEARCH_AREAS = [
     icon: "🧠",
     technologies: ["Machine Learning", "Neural Networks", "Reinforcement Learning", "Computer Vision"],
     projects: [
-      "Computer Vision for Robotics",
-      "Machine Learning Models",
-      "Autonomous Decision Making"
+      {
+        name: "Computer Vision for Robotics",
+        description: "Deep learning-based vision systems for object detection, recognition, and scene understanding, enabling robots to perceive and navigate complex environments."
+      },
+      {
+        name: "Machine Learning Models",
+        description: "Training neural networks for robotic tasks including motion planning, trajectory optimization, and adaptive control in dynamic scenarios."
+      },
+      {
+        name: "Autonomous Decision Making",
+        description: "Reinforcement learning algorithms that enable robots to make intelligent decisions, learn from experience, and adapt to new situations without human intervention."
+      }
     ]
   }
 ];

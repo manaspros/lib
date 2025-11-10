@@ -3,30 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import './ExpandableCard.css';
 
-const CloseIcon = () => {
-  return (
-    <motion.svg
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.05 } }}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="close-icon"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M18 6l-12 12" />
-      <path d="M6 6l12 12" />
-    </motion.svg>
-  );
-};
-
 const ExpandableCard = ({ cards }) => {
   const [active, setActive] = useState(null);
   const ref = useRef(null);
@@ -45,8 +21,10 @@ const ExpandableCard = ({ cards }) => {
 
     if (active) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add('modal-open');
     } else {
       document.body.style.overflow = "auto";
+      document.body.classList.remove('modal-open');
     }
 
     window.addEventListener("keydown", onKeyDown);
@@ -144,18 +122,6 @@ const ExpandableCard = ({ cards }) => {
       <AnimatePresence>
         {active ? (
           <div className="modal-container">
-            <motion.button
-              key={`button-${active.name}`}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.05 } }}
-              className="modal-close-btn"
-              onClick={() => setActive(null)}
-            >
-              <CloseIcon />
-            </motion.button>
-            
             <motion.div
               layoutId={`card-${active.name}`}
               ref={ref}
@@ -165,18 +131,61 @@ const ExpandableCard = ({ cards }) => {
               exit={{ scale: 0.8 }}
               transition={{ type: "spring", duration: 0.5 }}
             >
-              <motion.div layoutId={`image-${active.name}`} className="modal-image-container">
-                <img
-                  src={getImageSrc(active)}
-                  alt={active.name}
-                  className="modal-image"
-                  onError={() => handleImageError(active.name)}
-                />
-                <div className="modal-image-overlay">
-                  <div className="image-gradient"></div>
-                </div>
-              </motion.div>
+              {/* Two-column layout: Left = Image + Social, Right = Details */}
+              <div className="modal-grid">
+                {/* Left Column: Image and Social Links */}
+                <div className="modal-left-column">
+                  <motion.div layoutId={`image-${active.name}`} className="modal-image-container">
+                    <img
+                      src={getImageSrc(active)}
+                      alt={active.name}
+                      className="modal-image"
+                      onError={() => handleImageError(active.name)}
+                    />
+                  </motion.div>
 
+                  {/* Social Links Section */}
+                  <div className="modal-social-links">
+                    {active.linkedin && (
+                      <motion.a
+                        href={active.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-btn linkedin-btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <svg className="btn-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                      </motion.a>
+                    )}
+
+                    {active.email && (
+                      <motion.a
+                        href={`mailto:${active.email}`}
+                        className="social-btn email-btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        <svg className="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Email
+                      </motion.a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right Column: Scrollable Details */}
+                <div className="modal-right-column">
               <div className="modal-body">
                 <div className="modal-header">
                   <div className="modal-header-info">
@@ -193,7 +202,7 @@ const ExpandableCard = ({ cards }) => {
                       {active.title}
                     </motion.p>
                     {active.postAffiliation && (
-                      <motion.p 
+                      <motion.p
                         className="modal-affiliation"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -201,23 +210,6 @@ const ExpandableCard = ({ cards }) => {
                       >
                         {active.postAffiliation}
                       </motion.p>
-                    )}
-                  </div>
-
-                  <div className="modal-actions">
-                    {active.email && (
-                      <motion.a
-                        layoutId={`button-${active.name}`}
-                        href={`mailto:${active.email}`}
-                        className="modal-cta-btn"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <svg className="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        Contact
-                      </motion.a>
                     )}
                   </div>
                 </div>
@@ -364,6 +356,8 @@ const ExpandableCard = ({ cards }) => {
                       )}
                     </div>
                   </motion.div>
+                </div>
+              </div>
                 </div>
               </div>
             </motion.div>
