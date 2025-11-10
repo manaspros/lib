@@ -65,7 +65,7 @@ const BentoGridItem = ({ className, title, description, header, icon }) => {
 
 const SkeletonOne = () => {
   const roboticsImages = [
-    "/assets/first2.png",
+    "/assets/pic1.jpg",
     "/assets/Picture3.png",
     "/assets/Picture1.png",
     "/assets/Picture2.png",
