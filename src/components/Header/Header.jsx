@@ -83,7 +83,7 @@ const Header = () => {
                                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
                             />
                         </div>
-                        <span className="logo-text">BIRD</span>
+                        <span className="logo-text">BIRDLab</span>
                     </Link>
 
                     <nav className="desktop-nav" aria-label="Primary">

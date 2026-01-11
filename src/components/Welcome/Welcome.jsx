@@ -24,7 +24,7 @@ const Welcome = () => {
     <section id="welcome" className="section welcome" ref={sectionRef}>
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Welcome to BIRD Lab</h2>
+          <h2 className="section-title">Welcome to BIRD Lab for your research</h2>
           <p className="section-subtitle">
             Leading the advancement of bio-inspired robotics through innovative research, 
             nature-inspired design, and cutting-edge technology solutions

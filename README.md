@@ -1,4 +1,4 @@
-# BIRD Lab Website
+# BIRD Lab
 
 A modern, responsive website for the Bio-Inspired Robotics Design Lab built with React and Vite.
 
