@@ -8,8 +8,9 @@ export const NAV_ITEMS = [
   { label: 'Collaboration', href: '/gallery', section: 'gallery' },
   { label: 'Facilities', href: '/facilities', section: 'facilities' },
   { label: 'Open Positions', href: '/positions', section: 'positions' },
-  { label: 'Contact', href: '/contact', section: 'contact' }
-    
+  { label: 'Events', href: '/events', section: 'events' },
+  // { label: 'Contact', href: '/contact', section: 'contact' }
+
 ];
 
 // Team data

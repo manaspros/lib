@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { staggerAnimation, animateCounter } from '../../utils/gsapAnimations';
 import FeaturesSection from '../ui/FeaturesSection';
+import ImageCarousel from '../ImageCarousel/ImageCarousel';
+import carouselImages from '../ImageCarousel/carouselData';
 import './Welcome.css';
 
 const Welcome = () => {
@@ -26,10 +28,12 @@ const Welcome = () => {
         <div className="section-header">
           <h2 className="section-title">Welcome to BIRD Lab for your research</h2>
           <p className="section-subtitle">
-            Leading the advancement of bio-inspired robotics through innovative research, 
+            Leading the advancement of bio-inspired robotics through innovative research,
             nature-inspired design, and cutting-edge technology solutions
           </p>
         </div>
+
+        <ImageCarousel images={carouselImages} interval={3000} />
 
         <div className="welcome-content">
           <div className="welcome-grid">

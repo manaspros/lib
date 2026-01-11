@@ -60,7 +60,7 @@ export const transformSheetData = (rawData) => {
     research: headers.indexOf('Research Interests/Project'),
     email: headers.indexOf('Email'),
     postAffiliation: headers.indexOf('Post & Current Affiliation'),
-    linkedin: headers.indexOf('LinkedIn'),
+    linkedin: headers.indexOf('Linkedin'),
     
     // Education columns - PhD
     phdDegree: headers.indexOf('Education (PhD)'),

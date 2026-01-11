@@ -524,6 +524,34 @@
   flex-shrink: 0;
 }
 
+.card-linkedin {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.linkedin-icon {
+  width: 18px;
+  height: 18px;
+  color: #0077b5;
+  flex-shrink: 0;
+}
+
+.card-linkedin a {
+  color: #0077b5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.card-linkedin a:hover {
+  color: #005582;
+  text-decoration: underline;
+}
+
 .card-email {
   display: flex;
   align-items: center;
@@ -735,7 +763,12 @@
   flex-shrink: 0;
 }
 
-/* Ensure email section stays at bottom */
+/* Ensure linkedin section stays at bottom */
+.masters-section .card-linkedin,
+.alumni-section .card-linkedin,
+.graduateStudent-section .card-linkedin,
+.webmaster-section .card-linkedin,
+.others-section .card-linkedin,
 .masters-section .card-email,
 .alumni-section .card-email,
 .graduateStudent-section .card-email,
@@ -890,6 +923,10 @@
     font-size: 0.9rem;
   }
 
+  .card-linkedin {
+    font-size: 0.8rem;
+  }
+
   .card-email {
     font-size: 0.8rem;
   }
@@ -969,6 +1006,10 @@
 
   .education-text {
     font-size: 0.85rem;
+  }
+
+  .card-linkedin {
+    font-size: 0.75rem;
   }
 
   .card-email {
